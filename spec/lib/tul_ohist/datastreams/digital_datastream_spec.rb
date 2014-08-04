@@ -3,8 +3,8 @@ describe "DigitalDatastream" do
   before do
     @datastream = TulOhist::Datastreams::DigitalDatastream.new
     @datastream.content = <<EODS
-<foxml:datastream ID="creationMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-  <foxml:datastreamVersion ID="digitalMetadata.0" LABEL="Digital metadata" MIMETYPE="text/xml">
+<foxml:datastream ID="digitalMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+  <foxml:datastreamVersion ID="digitalMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
       <fields>
         <file_name>sample.pdf</file_name>
