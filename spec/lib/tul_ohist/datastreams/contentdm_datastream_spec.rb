@@ -1,4 +1,4 @@
-fdescribe "ContentdmDatastream" do
+describe "ContentdmDatastream" do
 
   before do
     @datastream = TulOhist::Datastreams::ContentdmDatastream.new
