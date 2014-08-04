@@ -52,13 +52,8 @@ describe 'List CONTENTdm collections' do
     end
   end
 
-  RSpec::Matchers.define :have_tag do |tag|
-    match do |doc|
-      doc.search(tag).any?
-    end
-  end
-
   describe 'convert' do
+    include TagMatchers
     let (:source_file_name) { collection_name + '.xml' }
 
     after :each do
