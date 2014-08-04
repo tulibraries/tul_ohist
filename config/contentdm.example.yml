@@ -1,0 +1,6 @@
+cdm_server: "https://SERVER.DOMAIN"
+cdm_xpath: "/collections/collection/alias/text()"
+cdm_user: "USER"
+cdm_password: "SECRET"
+cdm_download_dir: "/PATH/TO/SAVE/DOWNLOADED/FILES"
+cdm_foxml_dir: "/PATH/TO/SAVE/FOXML/FILES"
