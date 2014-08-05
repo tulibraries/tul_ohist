@@ -1,4 +1,4 @@
-module TulOhist
+module TulOhist::Models
   class Base < ActiveFedora::Base
     has_metadata "contentdm", type: TulOhist::Datastreams::ContentdmDatastream
     has_metadata "base", type: TulOhist::Datastreams::BaseDatastream

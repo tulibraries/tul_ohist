@@ -1,5 +1,5 @@
 describe 'Base' do
-  subject { TulOhist::Base.new }
+  subject { TulOhist::Models::Base.new }
 
   it { is_expected.to have_datastream_of_type("contentdm", TulOhist::Datastreams::ContentdmDatastream) }
   it { is_expected.to have_datastream_of_type("base", TulOhist::Datastreams::BaseDatastream) }
