@@ -6,5 +6,6 @@ module TulOhist
     has_metadata "notations", type: TulOhist::Datastreams::NotationsDatastream
     has_metadata "physical", type: TulOhist::Datastreams::PhysicalDatastream
     has_metadata "rights", type: TulOhist::Datastreams::RightsDatastream
+    has_metadata "creation", type: TulOhist::Datastreams::CreationDatastream
   end
 end
