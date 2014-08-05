@@ -52,4 +52,5 @@ end
 
 group :development, :test do
   gem "jettywrapper"
+  gem "pry"
 end
