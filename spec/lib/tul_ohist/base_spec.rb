@@ -1,18 +1,10 @@
-module MetadataMatchers
-  RSpec::Matchers.define :have_datastream_with_type do |name, datastreamClass|
-    match do |target|
-      target.datastreams.has_key?(name) &&
-        target.datastreams[name].class == datastreamClass 
-    end
-  end
-
-end
-
 describe 'Base' do
   subject { TulOhist::Base.new }
 
-  it "should have metadata ContentDM Datastream" do
-    expect(subject).to have_datastream_with_type("contentdm", TulOhist::Datastreams::ContentdmDatastream)
-  end
-
+  it { is_expected.to have_datastream_with_type("contentdm", TulOhist::Datastreams::ContentdmDatastream) }
+  it { is_expected.to have_datastream_with_type("base", TulOhist::Datastreams::BaseDatastream) }
+  it { is_expected.to have_datastream_with_type("geographic", TulOhist::Datastreams::GeographicDatastream) }
+  it { is_expected.to have_datastream_with_type("notations", TulOhist::Datastreams::NotationsDatastream) }
+  it { is_expected.to have_datastream_with_type("physical", TulOhist::Datastreams::PhysicalDatastream) }
+  it { is_expected.to have_datastream_with_type("rights", TulOhist::Datastreams::RightsDatastream) }
 end
