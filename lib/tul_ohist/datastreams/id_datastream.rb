@@ -8,9 +8,7 @@ module TulOhist
         t.root(path: "fields")
         t.doi index_as: :stored_searchable
         t.permanent_url index_as: :displayable
-        t.prefix index_as: :displayable
-        t.secondary_prefix index_as: :displayable
-        t.accompanies index_as: :displayable
+        t.master_identifier index_as: :displayable
       end 
 
       def self.xml_template

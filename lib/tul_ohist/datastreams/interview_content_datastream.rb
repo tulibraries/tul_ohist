@@ -8,6 +8,9 @@ module TulOhist
         t.root(path: "fields")
         t.transcript index_as: :displayable
         t.document_content index_as: :displayable
+        t.narrator index_as: :displayable
+        t.interviewer index_as: :displayable
+        t.ocr_note index_as: :displayable
       end 
 
       def self.xml_template

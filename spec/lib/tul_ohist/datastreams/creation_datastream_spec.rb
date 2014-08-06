@@ -7,8 +7,8 @@ describe "CreationDatastream" do
   <foxml:datastreamVersion ID="creationMetadata.0" LABEL="Creation metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
       <fields>
-        <created>amanuensis</created>
-        <creator>tgcreator</creator>
+        <created>John Doe</created>
+        <condition_note>Tapes were decaying at time of digital conversion.</condition_note>
       </fields>
     </foxml:xmlContent>
   </foxml:datastreamVersion>
@@ -20,8 +20,8 @@ EODS
     expect(@datastream).to have_term(:created)
   end
 
-  it "should have term creator" do
-    expect(@datastream).to have_term(:creator)
+  it "should have term condition_note" do
+    expect(@datastream).to have_term(:condition_note)
   end
 
 end
