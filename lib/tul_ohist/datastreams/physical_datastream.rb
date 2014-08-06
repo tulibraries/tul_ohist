@@ -8,7 +8,6 @@ module TulOhist
         t.root(path: "fields")
         t.folder index_as: :stored_searchable
         t.physical_description index_as: :stored_searchable
-        t.location index_as: :stored_searchable
       end 
 
       def self.xml_template
