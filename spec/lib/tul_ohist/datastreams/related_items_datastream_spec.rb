@@ -10,6 +10,7 @@ describe "RelatedItemsDatastream" do
         <repository_collection>John W. Mosley Photograph Collection</repository_collection>
         <finding_aid>http://sample.library.temple.edu/c-rg1-s1-findingaid.html</finding_aid>
         <online_exhibit>http://exhibits.library.temple.edu/sample</online_exhibit>
+        <catalog_record>http://catalog.library.temple.edu/sample_record</catalog_record>
       </fields>
     </foxml:xmlContent>
   </foxml:datastreamVersion>
@@ -27,6 +28,10 @@ EODS
 
   it "should have term online_exhibit" do
     expect(@datastream).to have_term(:online_exhibit)
+  end
+
+  it "should have term catalog_record" do
+    expect(@datastream).to have_term(:catalog_record)
   end
 
 end
