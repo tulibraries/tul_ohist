@@ -4,12 +4,14 @@ describe "DigitalDatastream" do
     @datastream = TulOhist::Datastreams::DigitalDatastream.new
     @datastream.content = <<EODS
 <foxml:datastream ID="digitalMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-  <foxml:datastreamVersion ID="digitalMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
+  <foxml:datastreamVersion ID="digitalMetadata.0" LABEL="digital metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
       <fields>
-        <file_name>sample.pdf</file_name>
-        <documentContent>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</documentContent>
-        <digitizationSpecifications>300ppi</digitizationSpecifications>
+        <digitization_specifications>MPEG 1/2 layer III</digitization_specifications>
+        <original_recording_specifications>mode 2, 32 kHz/16 bits, linear</original_recording_specifications>
+        <transcript_filename>UA0001.pdf</transcript_filename>
+        <audio_filename>UA0001.mp3</audio_filename>
+        <photograph_filename>UA0001.tif</photograph_filename>
       </fields>
     </foxml:xmlContent>
   </foxml:datastreamVersion>
@@ -17,16 +19,24 @@ describe "DigitalDatastream" do
 EODS
   end
 
-  it "should have term file_name" do
-    expect(@datastream).to have_term(:file_name)
+  it "should have term digitization_specifications" do
+    expect(@datastream).to have_term(:digitization_specifications)
   end
 
-  it "should have term documentContent" do
-    expect(@datastream).to have_term(:documentContent)
+  it "should have term original_recording_specifications" do
+    expect(@datastream).to have_term(:original_recording_specifications)
   end
 
-  it "should have term digitizationSpecifications" do
-    expect(@datastream).to have_term(:digitizationSpecifications)
+  it "should have term transcript_filename" do
+    expect(@datastream).to have_term(:transcript_filename)
+  end
+
+  it "should have term audio_filename" do
+    expect(@datastream).to have_term(:audio_filename)
+  end
+
+  it "should have term photograph_filename" do
+    expect(@datastream).to have_term(:photograph_filename)
   end
 
 end

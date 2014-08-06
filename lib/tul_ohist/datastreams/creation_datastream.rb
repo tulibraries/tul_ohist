@@ -6,8 +6,8 @@ module TulOhist
 
       set_terminology do |t|
         t.root(path: "fields")
-        t.created index_as: :stored_searchable
-        t.creator index_as: :stored_searchable
+        t.created index_as: :displayable #digitizer
+        t.condition_note index_as: :displayable
       end 
 
       def self.xml_template
