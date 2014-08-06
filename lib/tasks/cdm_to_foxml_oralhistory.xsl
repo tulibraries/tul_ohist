@@ -85,8 +85,8 @@
                                                                   </xsl:element>
                                                           </xsl:for-each>
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Publisher">  
-                                                                  <xsl:element name="publisher">  
+                                                          <xsl:for-each select="Digital_Publisher">  
+                                                                  <xsl:element name="digital_publisher">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each>
@@ -111,6 +111,18 @@
                                                           <xsl:text>&#xa;</xsl:text>
                                                           <xsl:for-each select="Language">  
                                                                   <xsl:element name="language">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each>
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Subject">  
+                                                                  <xsl:element name="subject">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each>
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Digital_Collection">  
+                                                                  <xsl:element name="digital_collection">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each>
@@ -191,8 +203,8 @@
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Creator">  
-                                                                  <xsl:element name="creator">  
+                                                          <xsl:for-each select="Condition_Note">  
+                                                                  <xsl:element name="condition_note">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
@@ -208,14 +220,32 @@
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="File_name">  
-                                                                  <xsl:element name="intersection">  
+                                                          <xsl:for-each select="Digital_Specifications">  
+                                                                  <xsl:element name="digital_specifications">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Digitization_specifications">  
-                                                                  <xsl:element name="digitization_specifications">  
+                                                          <xsl:for-each select="Original_Recording_Specifications">  
+                                                                  <xsl:element name="original_recording_specifications">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Transcript_Filename">  
+                                                                  <xsl:element name="transcript_filename">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Audio_Filename">  
+                                                                  <xsl:element name="audio_filename">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Photograph_Filename">  
+                                                                  <xsl:element name="photograph_filename">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
@@ -231,13 +261,13 @@
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Geographic_subject">  
+                                                          <xsl:for-each select="Geographic_Subject">  
                                                                   <xsl:element name="geographic_subject">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Organization_building">  
+                                                          <xsl:for-each select="Organization_Building">  
                                                                   <xsl:element name="organization_building">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
@@ -260,8 +290,26 @@
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Personal_names">  
+                                                          <xsl:for-each select="Personal_Names">  
                                                                   <xsl:element name="personal_names">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Biographical_History_Note">  
+                                                                  <xsl:element name="biographical_history_note">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Content_Summary">  
+                                                                  <xsl:element name="content_summary">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Collection_Description">  
+                                                                  <xsl:element name="collection_description">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
@@ -283,13 +331,7 @@
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Location">  
-                                                                  <xsl:element name="location">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each> 
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Physical_description">  
+                                                          <xsl:for-each select="Physical_Description">  
                                                                   <xsl:element name="physical_description">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
@@ -312,8 +354,8 @@
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Click_through">  
-                                                                  <xsl:element name="Click_through">  
+                                                          <xsl:for-each select="Click_Through">  
+                                                                  <xsl:element name="click_through">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
@@ -335,8 +377,26 @@
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Document_content">  
+                                                          <xsl:for-each select="Document_Content">  
                                                                   <xsl:element name="document_content">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Narrator">  
+                                                                  <xsl:element name="narrator">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Interviewer">  
+                                                                  <xsl:element name="interviewer">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="OCR_Note">  
+                                                                  <xsl:element name="ocr_note">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
@@ -352,20 +412,26 @@
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Repository_collection">  
+                                                          <xsl:for-each select="Repository_Collection">  
                                                                   <xsl:element name="repository_collection">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Finding_aid">  
+                                                          <xsl:for-each select="Finding_Aid">  
                                                                   <xsl:element name="finding_aid">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Online_exhibit">  
+                                                          <xsl:for-each select="Online_Exhibit">  
                                                                   <xsl:element name="online_exhibit">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Catalog_Record">  
+                                                                  <xsl:element name="catalog_record">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
@@ -381,20 +447,20 @@
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Prefix">  
-                                                                  <xsl:element name="prefix">  
+                                                          <xsl:for-each select="DOI">  
+                                                                  <xsl:element name="doi">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Secondary_prefix">  
-                                                                  <xsl:element name="secondary_prefix">  
+                                                          <xsl:for-each select="Permanent_URL">  
+                                                                  <xsl:element name="permanent_url">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Accompanies">  
-                                                                  <xsl:element name="accompanies">  
+                                                          <xsl:for-each select="Master_Identifier">  
+                                                                  <xsl:element name="master_identifier">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
