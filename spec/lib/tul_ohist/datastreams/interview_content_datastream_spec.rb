@@ -8,7 +8,10 @@ describe "InterviewContentDatastream" do
     <foxml:xmlContent>
       <fields>
         <transcript>Text of supplied transcript</transcript>
-        <document_content>Text from document</document_content>
+        <document_content>OCR text from document</document_content>
+        <narrator>Bernyce DeVaughn</narrator>
+        <interviewer>John Smith</interviewer>
+        <ocr_note>This text is machine-generated. Contact us for a good copy.</ocr_note>
       </fields>
     </foxml:xmlContent>
   </foxml:datastreamVersion>
@@ -22,6 +25,18 @@ EODS
 
   it "should have term document_content" do
     expect(@datastream).to have_term(:document_content)
+  end
+
+  it "should have term narrator" do
+    expect(@datastream).to have_term(:narrator)
+  end
+
+  it "should have term interviewer" do
+    expect(@datastream).to have_term(:interviewer)
+  end
+
+  it "should have term ocr_note" do
+    expect(@datastream).to have_term(:ocr_note)
   end
 
 end
