@@ -7,7 +7,7 @@ module TulOhist
       set_terminology do |t|
         t.root(path: "fields")
         t.notes index_as: :stored_searchable
-        t.personal_names index_as: :stored_searchable
+        t.personal_names(:index_as=>[:facetable, :stored_searchable], :type=>:string) 
         t.biographical_history_note index_as: :stored_searchable
         t.content_summary index_as: :stored_searchable
         t.collection_description index_as: :stored_searchable

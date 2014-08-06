@@ -6,8 +6,8 @@ module TulOhist
 
       set_terminology do |t|
         t.root(path: "fields")
-        t.geographic_subject index_as: :stored_searchable
-        t.organization_building index_as: :stored_searchable
+        t.geographic_subject(:index_as=>[:facetable, :stored_searchable], :type=>:string) 
+        t.organization_building(:index_as=>[:facetable, :stored_searchable], :type=>:string) 
       end 
 
       def self.xml_template
