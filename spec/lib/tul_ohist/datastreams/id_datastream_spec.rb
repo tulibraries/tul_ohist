@@ -9,9 +9,7 @@ describe "IdDatastream" do
       <fields>
         <doi>doi:00.00.00:temple0000</doi>
         <permanent_url>http://sample.com/pid</permanent_url>
-        <prefix>mainOralHistoryPrefix</prefix>
-        <secondary_prefix>relationshipWithinOralHistoryPrefix</secondary_prefix>
-        <accompanies>Another Oral History Collection</accompanies>
+        <master_identifier>UA0001_06042014jsmith</master_identifier>
       </fields>
     </foxml:xmlContent>
   </foxml:datastreamVersion>
@@ -27,16 +25,9 @@ EODS
     expect(@datastream).to have_term(:permanent_url)
   end
 
-  it "should have term prefix" do
-    expect(@datastream).to have_term(:prefix)
+  it "should have term master_identifier" do
+    expect(@datastream).to have_term(:master_identifier)
   end
 
-  it "should have term secondary_prefix" do
-    expect(@datastream).to have_term(:secondary_prefix)
-  end
-
-  it "should have term accompanies" do
-    expect(@datastream).to have_term(:accompanies)
-  end
 
 end

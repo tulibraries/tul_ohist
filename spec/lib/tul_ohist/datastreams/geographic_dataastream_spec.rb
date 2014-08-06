@@ -4,7 +4,7 @@ describe "GeographicDatastream" do
     @datastream = TulOhist::Datastreams::GeographicDatastream.new
     @datastream.content = <<EODS
 <foxml:datastream ID="geographicMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-  <foxml:datastreamVersion ID="geographicMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
+  <foxml:datastreamVersion ID="geographicMetadata.0" LABEL="geographic metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
       <fields>
         <geographic_subject>Philadelphia (Pa.)</geographic_subject>

@@ -10,10 +10,16 @@ describe "BaseDatastream" do
         <title>Alphonso Deal</title>
         <date>1954-07-17</date>
         <contact>scrc@temple.edu</contact>
-        <publisher>Philadelphia Evening Bulletin</publisher>
+        <digital_publisher>Philadelphia PA: Temple University Libraries</digital_publisher>
         <repository>Temple University Libraries, Urban Archives</repository>
         <format>image/jp2</format>
-        <Type>photographs</Type>
+        <type>photograph</type>
+        <language>English</language>
+        <subject>Schools</subject>
+        <subject>Segregation</subject>
+        <subject>Demonstrations</subject>
+        <subject>Civil rights</subject>
+        <digital_collection>John W. Mosley Photographs</digital_collection>
       </fields>
     </foxml:xmlContent>
   </foxml:datastreamVersion>
@@ -33,8 +39,8 @@ EODS
     expect(@datastream).to have_term(:contact)
   end
 
-  it "should have term publisher" do
-    expect(@datastream).to have_term(:publisher)
+  it "should have term digital_publisher" do
+    expect(@datastream).to have_term(:digital_publisher)
   end
 
   it "should have term repository" do
@@ -45,8 +51,20 @@ EODS
     expect(@datastream).to have_term(:format)
   end
 
-  it "should have term Type" do
-    expect(@datastream).to have_term(:Type)
+  it "should have term type" do
+    expect(@datastream).to have_term(:type)
+  end
+
+  it "should have term language" do
+    expect(@datastream).to have_term(:language)
+  end
+
+  it "should have term subject" do
+    expect(@datastream).to have_term(:subject)
+  end
+
+  it "should have term digital_collection" do
+    expect(@datastream).to have_term(:digital_collection)
   end
 
 end
