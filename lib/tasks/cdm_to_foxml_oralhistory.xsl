@@ -15,15 +15,14 @@
   </xsl:variable>
                 <xsl:for-each select="record">
 
-                        <xsl:variable name="uppercase" select="ABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
-                        <xsl:variable name="lowercase" select="abcdefghijklmnopqrstuvwxyz"/>
+                        
 
                         <xsl:variable name="cdmfile">
                                 <xsl:value-of select="concat($collection,'x',CONTENTdm_number)"/>
                         </xsl:variable>
 
                         <xsl:variable name="pidPrefix">
-                                <xsl:value-of select="translate(Type, $uppercase, $lowercase)"/>
+                                <xsl:value-of select="translate(Type, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
                         </xsl:variable>
 
                         <xsl:variable name="MID">
@@ -31,11 +30,11 @@
                         </xsl:variable>
 
                         <xsl:variable name="pidMiddle">
-                                <xsl:value-of select="concat($pidPrefix,$MID)" />
+                                <xsl:value-of select="concat($pidPrefix,':',$MID)" />
                         </xsl:variable>
                         
                         <xsl:variable name="pid">
-                                <xsl:value-of select="concat($pidMiddle,$cdmfile)" />
+                                <xsl:value-of select="concat($pidMiddle,':',$cdmfile)" />
                         </xsl:variable>
                         <xsl:variable name="bodyTextSize">10pt</xsl:variable>
                         <exsl:document method="xml" href="{$foxmlDir}/{$cdmfile}.xml">
