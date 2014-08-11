@@ -54,3 +54,9 @@ group :development, :test do
   gem "jettywrapper"
   gem "pry"
 end
+
+group :development do
+  gem "pry-rails"
+end
+
+gem 'thin'
