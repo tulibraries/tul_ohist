@@ -4,6 +4,7 @@ describe 'List CONTENTdm collections' do
 
   let (:config) { YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__)) }
   let (:collection_name) { "p16002coll21" }
+  let (:private_collection_name) { "p16002coll11" }
   let (:cdm_data_root) { "#{Rails.root}/spec/fixtures/fedora/cdm" }
   let (:schema_url) { "http://www.fedora.info/definitions/1/0/foxml1-1.xsd" }
   let (:download_directory) { config['cdm_download_dir'] }
@@ -32,6 +33,15 @@ describe 'List CONTENTdm collections' do
         doc = Nokogiri::XML(File.read(file))
         # Tests for both metadata and attempted access to private collection
         expect(['metadata', 'getfile']).to include doc.child.name
+      end
+    end
+
+    it "should not download a private collection" do
+      VCR.use_cassette "cdm-util-download/should_not_harvest_a_private_ContentDM_file" do
+        downloaded = CDMUtils.download_one_collection(config, private_collection_name)
+        expect(downloaded).to eq(0)
+        file_count = Dir[File.join(download_directory, '*.xml')].count { |file| File.file?(file) }
+        expect(file_count).to eq(0)
       end
     end
 

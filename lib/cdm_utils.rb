@@ -37,6 +37,7 @@ module CDMUtils
       xml = Nokogiri::XML(open(cdm_url))
       FileUtils::mkdir_p config['cdm_download_dir']
       all_aliases = xml.xpath("/collections/collection/alias/text()")
+      harvested_count = 0
       all_aliases.length.times do |i|
         new_coll = all_aliases[i].to_s
         if coll.nil? or new_coll.include?(coll)
@@ -47,8 +48,10 @@ module CDMUtils
           file = File.read source_url
           File.open(Rails.root + xmlFilePath, 'w') { |f| f.write(file) }	
           puts "Successfully harvested #{new_coll}"
+          harvested_count += 1
         end
       end 
+      harvested_count
     end
   end
 

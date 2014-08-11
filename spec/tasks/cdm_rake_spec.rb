@@ -5,6 +5,7 @@ describe 'Execute the tu_cdm rake tests' do
 
   let (:config) { YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__)) }
   let (:download_collection) { "p16002coll21" }
+  let (:private_collection) { "p16002coll11" }
   let (:download_file_name) { "#{download_collection}.xml" }
   let (:cdm_data_root) { "#{Rails.root}/spec/fixtures/fedora/cdm" }
 
@@ -17,7 +18,7 @@ describe 'Execute the tu_cdm rake tests' do
 
   describe 'tu_cdm:download' do
 
-    let (:download_file_count) { 33 }
+    let (:download_file_count) { 34 }
 
     after :each do
       Rake::Task['tu_cdm:download'].reenable
@@ -26,7 +27,10 @@ describe 'Execute the tu_cdm rake tests' do
 
     it "should harvest a single CONTENTdm collections" do
       VCR.use_cassette "tu_cdm-download/should_harvest_a_single_ContentDM_file" do
-        Rake::Task['tu_cdm:download'].invoke(download_collection)
+        output = capture(:stdout) do
+          Rake::Task['tu_cdm:download'].invoke(download_collection)
+        end
+        expect(output).to include '1 file downloaded'
         file_count = Dir[File.join(@download_directory, '*.xml')].count { |file| File.file?(file) }
         expect(file_count).to eq(1)
         file = File.join(@download_directory, download_file_name)
@@ -36,9 +40,23 @@ describe 'Execute the tu_cdm rake tests' do
       end
     end
 
+    it "should not harvest a private CONTENTdm collections" do
+      VCR.use_cassette "tu_cdm-download/should_not_harvest_a_private_ContentDM_file" do
+        output = capture(:stdout) do
+          Rake::Task['tu_cdm:download'].invoke(private_collection)
+        end
+        expect(output).to include '0 files downloaded'
+        file_count = Dir[File.join(@download_directory, '*.xml')].count { |file| File.file?(file) }
+        expect(file_count).to eq(0)
+      end
+    end
+
     xit "should harvest ContentDM files" do
       VCR.use_cassette "tu_cdm-download/should_harvest_ContentDM_files" do
-        Rake::Task['tu_cdm:download'].invoke
+        output = capture(:stdout) do
+          Rake::Task['tu_cdm:download'].invoke
+        end
+        expect(output).to include "#{download_file_count} files downloaded"
         file_count = Dir[File.join(@download_directory, '*.xml')].count { |file| File.file?(file) }
         expect(file_count).to be >= download_file_count
         Dir.glob(File.join(@download_directory, '**', '*.xml')).each do |file|

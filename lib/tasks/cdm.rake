@@ -21,10 +21,11 @@ namespace :tu_cdm do
   task :download, [:collection_name] => :environment do |t, args|
     args.download(:collection_name => nil)
     if args[:collection_name]
-      converted = CDMUtils.download_one_collection(config, args[:collection_name])
+      downloaded = CDMUtils.download_one_collection(config, args[:collection_name])
     else
-      converted = CDMUtils.download_all_collections(config)
+      downloaded = CDMUtils.download_all_collections(config)
     end
+    puts "#{downloaded} #{'file'.pluralize(downloaded)} downloaded"
   end
 
 
