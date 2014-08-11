@@ -14,13 +14,27 @@
     <xsl:value-of select="manifest/foxml_dir" />
   </xsl:variable>
                 <xsl:for-each select="record">
-                        <xsl:variable name="cdmfile">
+
                         
+
+                        <xsl:variable name="cdmfile">
                                 <xsl:value-of select="concat($collection,'x',CONTENTdm_number)"/>
+                        </xsl:variable>
+
+                        <xsl:variable name="pidPrefix">
+                                <xsl:value-of select="translate(Type, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
+                        </xsl:variable>
+
+                        <xsl:variable name="MID">
+                                <xsl:value-of select="Master_Identifier"/>
+                        </xsl:variable>
+
+                        <xsl:variable name="pidMiddle">
+                                <xsl:value-of select="concat($pidPrefix,':',$MID)" />
                         </xsl:variable>
                         
                         <xsl:variable name="pid">
-                                <xsl:value-of select="concat('photograph:',$cdmfile)" />
+                                <xsl:value-of select="concat($pidMiddle,':',$cdmfile)" />
                         </xsl:variable>
                         <xsl:variable name="bodyTextSize">10pt</xsl:variable>
                         <exsl:document method="xml" href="{$foxmlDir}/{$cdmfile}.xml">
@@ -79,14 +93,20 @@
                                                                   </xsl:element>
                                                           </xsl:for-each>
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Subject">  
-                                                                  <xsl:element name="subject">  
+                                                          <xsl:for-each select="Contact">  
+                                                                  <xsl:element name="contact">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each>
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Description">  
-                                                                  <xsl:element name="description">  
+                                                          <xsl:for-each select="Digital_Publisher">  
+                                                                  <xsl:element name="digital_publisher">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each>
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Repository">  
+                                                                  <xsl:element name="repository">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each>
@@ -103,56 +123,20 @@
                                                                   </xsl:element>
                                                           </xsl:for-each>
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Publisher">  
-                                                                  <xsl:element name="publisher">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each>
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Digital_Collection">  
-                                                                  <xsl:element name="digital_collection">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each>
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Digital_Publisher">  
-                                                                  <xsl:element name="digital_publisher">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each>
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Digital_Specifications">  
-                                                                  <xsl:element name="digital_specifications">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each>
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Contact">  
-                                                                  <xsl:element name="contact">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each>
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Repository">  
-                                                                  <xsl:element name="repository">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each>
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Repository_Collection">  
-                                                                  <xsl:element name="repository_collection">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each>
-                                                          <xsl:text>&#xa;</xsl:text>
                                                           <xsl:for-each select="Language">  
                                                                   <xsl:element name="language">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each>
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Identifier">  
-                                                                  <xsl:element name="identifier">  
+                                                          <xsl:for-each select="Subject">  
+                                                                  <xsl:element name="subject">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each>
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Digital_Collection">  
+                                                                  <xsl:element name="digital_collection">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each>
@@ -217,49 +201,77 @@
                                                               <xsl:value-of select="$collection" />
                                                           </xsl:element>
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:element name="path_to_thumbnail">
-                                                              <xsl:value-of select="concat('http://cdm15037.contentdm.oclc.org/utils/getthumbnail/collection/',$collection,'/id/',CONTENTdm_number)" />
-                                                          </xsl:element>
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:element name="reference_url">
-                                                              <xsl:value-of select="concat('/catalog/',$pid)" />
-                                                          </xsl:element>
-                                                          <xsl:text>&#xa;</xsl:text>
                                                   </fields>
                                                   </foxml:xmlContent>
                                                 </foxml:datastreamVersion>
                                         </foxml:datastream>
                                         
-                                        <foxml:datastream ID="descMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-                                          <foxml:datastreamVersion ID="descMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
+                                        <foxml:datastream ID="creationMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="creationMetadata.0" LABEL="creation metadata" MIMETYPE="text/xml">
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Intersection">  
-                                                                  <xsl:element name="intersection">  
+                                                          <xsl:for-each select="Created">  
+                                                                  <xsl:element name="created">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Original_Notes">  
-                                                                  <xsl:element name="original_notes">  
+                                                          <xsl:for-each select="Condition_Note">  
+                                                                  <xsl:element name="condition_note">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Photographer">  
-                                                                  <xsl:element name="photographer">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each> 
-                                                          <xsl:text>&#xa;</xsl:text> 
                                                   </fields>
                                                   </foxml:xmlContent>
                                                 </foxml:datastreamVersion>
                                         </foxml:datastream>
                                         <xsl:text>&#xa;</xsl:text>
+
+                                        <foxml:datastream ID="digitalMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="digitalMetadata.0" LABEL="digital metadata" MIMETYPE="text/xml">
+                                            <foxml:xmlContent>
+                                              <fields>
+                                                 <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Digital_Specifications">  
+                                                                  <xsl:element name="digital_specifications">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Original_Recording_Specifications">  
+                                                                  <xsl:element name="original_recording_specifications">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Transcript_Filename">  
+                                                                  <xsl:element name="transcript_filename">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Audio_Filename">  
+                                                                  <xsl:element name="audio_filename">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Photograph_Filename">  
+                                                                  <xsl:element name="photograph_filename">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                  </fields>
+                                                  </foxml:xmlContent>
+                                                </foxml:datastreamVersion>
+                                        </foxml:datastream>
+                                        <xsl:text>&#xa;</xsl:text>
+
                                         <foxml:datastream ID="geographicMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-                                          <foxml:datastreamVersion ID="geographicMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
+                                          <foxml:datastreamVersion ID="geographicMetadata.0" LABEL="geographic metadata" MIMETYPE="text/xml">
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
@@ -267,30 +279,66 @@
                                                                   <xsl:element name="geographic_subject">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
-                                                          </xsl:for-each>
+                                                          </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
                                                           <xsl:for-each select="Organization_Building">  
                                                                   <xsl:element name="organization_building">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
-                                                          </xsl:for-each>
-                                                <xsl:text>&#xa;</xsl:text>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
                                                   </fields>
                                                   </foxml:xmlContent>
                                                 </foxml:datastreamVersion>
                                         </foxml:datastream>
                                         <xsl:text>&#xa;</xsl:text>
-                                        <foxml:datastream ID="physicalMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-                                          <foxml:datastreamVersion ID="physicalMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
+
+                                        <foxml:datastream ID="notationsMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="notationsMetadata.0" LABEL="notations metadata" MIMETYPE="text/xml">
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Folder">  
-                                                                  <xsl:element name="folder">  
+                                                          <xsl:for-each select="Notes">  
+                                                                  <xsl:element name="notes">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Personal_Names">  
+                                                                  <xsl:element name="personal_names">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Biographical_History_Note">  
+                                                                  <xsl:element name="biographical_history_note">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Content_Summary">  
+                                                                  <xsl:element name="content_summary">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Collection_Description">  
+                                                                  <xsl:element name="collection_description">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                  </fields>
+                                                  </foxml:xmlContent>
+                                                </foxml:datastreamVersion>
+                                        </foxml:datastream>
+                                        <xsl:text>&#xa;</xsl:text>
+
+                                        <foxml:datastream ID="physicalMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="physicalMetadata.0" LABEL="physical metadata" MIMETYPE="text/xml">
+                                            <foxml:xmlContent>
+                                              <fields>
+                                                 <xsl:text>&#xa;</xsl:text>
                                                           <xsl:for-each select="Location">  
                                                                   <xsl:element name="location">  
                                                                           <xsl:value-of select="." />  
@@ -302,41 +350,43 @@
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
-                                                <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:text>&#xa;</xsl:text>
                                                   </fields>
                                                   </foxml:xmlContent>
                                                 </foxml:datastreamVersion>
                                         </foxml:datastream>
                                         <xsl:text>&#xa;</xsl:text>
-                                        <foxml:datastream ID="notationsMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-                                          <foxml:datastreamVersion ID="notationsMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
+
+                                        <foxml:datastream ID="rightsMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="rightsMetadata.0" LABEL="rights metadata" MIMETYPE="text/xml">
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="notes">  
-                                                                  <xsl:element name="notes">  
+                                                          <xsl:for-each select="Rights">  
+                                                                  <xsl:element name="rights">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="personal_names">  
-                                                                  <xsl:element name="personal_names">  
+                                                          <xsl:for-each select="Click_Through">  
+                                                                  <xsl:element name="click_through">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
-                                                <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:text>&#xa;</xsl:text>
                                                   </fields>
                                                   </foxml:xmlContent>
                                                 </foxml:datastreamVersion>
                                         </foxml:datastream>
                                         <xsl:text>&#xa;</xsl:text>
-                                        <foxml:datastream ID="digitalMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-                                          <foxml:datastreamVersion ID="digitalMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
+
+                                        <foxml:datastream ID="interviewContentMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="interviewContentMetadata.0" LABEL="interview content metadata" MIMETYPE="text/xml">
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="File_Name">  
-                                                                  <xsl:element name="file_name">  
+                                                          <xsl:for-each select="Transcript">  
+                                                                  <xsl:element name="transcript">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
@@ -346,33 +396,111 @@
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
-                                                <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Narrator">  
+                                                                  <xsl:element name="narrator">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Interviewer">  
+                                                                  <xsl:element name="interviewer">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="OCR_Note">  
+                                                                  <xsl:element name="ocr_note">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
                                                   </fields>
                                                   </foxml:xmlContent>
                                                 </foxml:datastreamVersion>
                                         </foxml:datastream>
                                         <xsl:text>&#xa;</xsl:text>
-                                        <foxml:datastream ID="creationMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-                                          <foxml:datastreamVersion ID="creationMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
+
+                                        <foxml:datastream ID="relatedItemsMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="relatedItemsMetadata.0" LABEL="related items metadata" MIMETYPE="text/xml">
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Created">  
-                                                                  <xsl:element name="created">  
+                                                          <xsl:for-each select="Repository_Collection">  
+                                                                  <xsl:element name="repository_collection">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
-                                                          </xsl:for-each>
+                                                          </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Creator">  
-                                                                  <xsl:element name="creator">  
+                                                          <xsl:for-each select="Finding_Aid">  
+                                                                  <xsl:element name="finding_aid">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
-                                                          </xsl:for-each>
-                                                <xsl:text>&#xa;</xsl:text>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Online_Exhibit">  
+                                                                  <xsl:element name="online_exhibit">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Catalog_Record">  
+                                                                  <xsl:element name="catalog_record">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
                                                   </fields>
                                                   </foxml:xmlContent>
                                                 </foxml:datastreamVersion>
                                         </foxml:datastream>
+                                        <xsl:text>&#xa;</xsl:text>
+
+                                        <foxml:datastream ID="IdMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="IdMetadata.0" LABEL="ID metadata" MIMETYPE="text/xml">
+                                            <foxml:xmlContent>
+                                              <fields>
+                                                 <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="DOI">  
+                                                                  <xsl:element name="doi">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Permanent_URL">  
+                                                                  <xsl:element name="permanent_url">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Master_Identifier">  
+                                                                  <xsl:element name="master_identifier">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                  </fields>
+                                                  </foxml:xmlContent>
+                                                </foxml:datastreamVersion>
+                                        </foxml:datastream>
+                                        <xsl:text>&#xa;</xsl:text>
+
+                                        <foxml:datastream ID="displayMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="displayMetadata.0" LABEL="display metadata" MIMETYPE="text/xml">
+                                            <foxml:xmlContent>
+                                              <fields>
+                                                 <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Weight">  
+                                                                  <xsl:element name="weight">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each>
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                  </fields>
+                                                  </foxml:xmlContent>
+                                                </foxml:datastreamVersion>
+                                        </foxml:datastream>
+                                        <xsl:text>&#xa;</xsl:text>
                                     <xsl:text>&#xa;</xsl:text>
                                 </xsl:element>
                                 
