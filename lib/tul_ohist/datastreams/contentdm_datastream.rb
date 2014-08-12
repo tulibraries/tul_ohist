@@ -1,12 +1,8 @@
 module TulOhist
-
   module Datastreams
-  
     class ContentdmDatastream < ActiveFedora::OmDatastream
-
       set_terminology do |t|
         t.root(path: "fields")
-        t.item_url index_as: :displayable
         t.oclc_number index_as: :displayable
         t.date_created index_as: :displayable
         t.date_modified index_as: :displayable
@@ -23,9 +19,10 @@ module TulOhist
       def prefix
         ""
       end
-    
+
     end
 
   end
+
 end
 
