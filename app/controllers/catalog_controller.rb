@@ -101,18 +101,6 @@ class CatalogController < ApplicationController
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
 
-    #config.add_search_field('title') do |field|
-      # :solr_local_parameters will be sent using Solr LocalParams
-      # syntax, as eg {! qf=$title_qf }. This is neccesary to use
-      # Solr parameter de-referencing like $title_qf.
-      # See: http://wiki.apache.org/solr/LocalParams
-    #   field.solr_local_parameters = {
-    #     :qf => '$title_qf',
-    #     :pf => '$title_pf'
-    #   }
-    # end
-
-
     # Specifying a :qt only to show it's possible, and so our internal automated
     # tests can test it. In this case it's the same as
     # config[:default_solr_parameters][:qt], so isn't actually neccesary.
@@ -125,13 +113,30 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.add_search_field('People Mentioned') do |field|
+      solr_name = solr_name("personal_names_tesim", :stored_searchable, type: :string)
+      field.qt = 'search'
+      field.solr_local_parameters = {
+        :qf => 'personal_names_tesim',
+        :pf => '$personal_names_pf'
+      }
+    end
+
+    config.add_search_field('Interview Content') do |field|
+      solr_name = solr_name("document_content_tesim", :stored_searchable, type: :string)
+      field.qt = 'search'
+      field.solr_local_parameters = {
+        :qf => 'document_content_tesim',
+        :pf => '$document_content_pf'
+      }
+    end
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
     config.add_sort_field 'score desc, pub_date_dtsi desc, title_tesi asc', :label => 'relevance'
-    config.add_sort_field 'pub_date_dtsi desc, title_tesi asc', :label => 'year'
-    config.add_sort_field 'author_tesi asc, title_tesi asc', :label => 'author'
+    config.add_sort_field 'narrator_tesi asc, title_tesi asc', :label => 'narrator'
     config.add_sort_field 'title_tesi asc, pub_date_dtsi desc', :label => 'title'
 
     # If there are more than this many search results, no spelling ("did you
