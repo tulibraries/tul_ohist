@@ -1,10 +1,10 @@
-describe "IdDatastream" do
+describe "IdentifierDatastream" do
 
   before do
-    @datastream = TulOhist::Datastreams::IdDatastream.new
+    @datastream = TulOhist::Datastreams::IdentifierDatastream.new
     @datastream.content = <<EODS
-<foxml:datastream ID="idMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-  <foxml:datastreamVersion ID="idMetadata.0" LABEL="ID metadata" MIMETYPE="text/xml">
+<foxml:datastream ID="identifierMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+  <foxml:datastreamVersion ID="identifierMetadata.0" LABEL="Identifier metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
       <fields>
         <doi>doi:00.00.00:temple0000</doi>

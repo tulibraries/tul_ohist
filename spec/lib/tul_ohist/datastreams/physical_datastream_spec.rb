@@ -6,7 +6,7 @@ describe "PhysicalDatastream" do
   <foxml:datastreamVersion ID="physicalMetadata.0" LABEL="physical metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
       <fields>
-        <folder>Box 8, Folder 5</folder>
+        <location>Box 8, Folder 5</location>
         <physical_description>1 photograph:b&amp;w</physical_description>
       </fields>
     </foxml:xmlContent>
@@ -15,8 +15,8 @@ describe "PhysicalDatastream" do
 EODS
   end
 
-  it "should have term folder" do
-    expect(@datastream).to have_term(:folder)
+  it "should have term location" do
+    expect(@datastream).to have_term(:location)
   end
 
   it "should have term physical_description" do
