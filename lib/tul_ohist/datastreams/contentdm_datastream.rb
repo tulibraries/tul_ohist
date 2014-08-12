@@ -21,7 +21,7 @@ module TulOhist
       end
 
       def prefix
-        "#{dsid.underscore}__"
+        ""
       end
     
     end
