@@ -13,14 +13,14 @@ class CatalogController < ApplicationController
 
   configure_blacklight do |config|
     config.default_solr_params = {
-      :qf => 'title_tesim date_tesim repository_tesim format_tesim type_tesim language_tesim geographic_subjection_tesim organization_building_tesim notes_tesim personal_names_tesim location_tesim physical_description_tesim transcript_tesim doi_tesim digital_collection_tesim',
+      :qf => 'title_tesim date_tesim repository_tesim format_tesim type_tesim language_tesim geographic_subject_tesim organization_building_tesim notes_tesim personal_names_tesim location_tesim physical_description_tesim document_content_tesim doi_tesim digital_collection_tesim',
       :qt => 'search',
       :rows => 10
     }
 
     # solr field configuration for search results/index views
     config.index.title_field = 'title_tesim'
-    config.index.display_type_field = 'has_model_ssim'
+    config.index.display_type_field = 'active_fedora_model_ssi'
 
 
     # solr fields that will be treated as facets by the blacklight application
@@ -43,6 +43,7 @@ class CatalogController < ApplicationController
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
 
+    config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => true
     config.add_facet_field solr_name('type', :facetable), :label => 'Type', :limit => true
     config.add_facet_field solr_name('language', :facetable), :label => 'Language', :limit => true
     config.add_facet_field solr_name('format', :facetable), :label => 'Format', :limit => true
@@ -64,7 +65,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     config.add_show_field solr_name('title', :stored_searchable, type: :string), :label => 'Title:'
-    config.add_show_field solr_name('subject', :stored_searchable, type: :string), :label => 'Subject:', :link_to_search => :subject_sim
+    config.add_show_field solr_name('subject', :stored_searchable, type: :string), :label => 'Subject:', :link_to_search => 'subject_sim'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -111,20 +112,15 @@ class CatalogController < ApplicationController
     #   }
     # end
 
-    config.add_search_field('author') do |field|
-      field.solr_local_parameters = {
-        :qf => '$author_qf',
-        :pf => '$author_pf'
-      }
-    end
 
     # Specifying a :qt only to show it's possible, and so our internal automated
     # tests can test it. In this case it's the same as
     # config[:default_solr_parameters][:qt], so isn't actually neccesary.
     config.add_search_field('subject') do |field|
+      solr_name = solr_name("subject_tesim", :stored_searchable, type: :string)
       field.qt = 'search'
       field.solr_local_parameters = {
-        :qf => '$subject_qf',
+        :qf => 'subject_tesim',
         :pf => '$subject_pf'
       }
     end
