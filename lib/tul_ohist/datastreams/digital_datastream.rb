@@ -16,6 +16,10 @@ module TulOhist
       def self.xml_template
         Nokogiri::XML.parse("<fields/>")
       end
+
+      def prefix
+        "#{dsid.underscore}__"
+      end
     
     end
 
