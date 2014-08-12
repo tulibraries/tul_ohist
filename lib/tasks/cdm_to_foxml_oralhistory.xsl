@@ -7,9 +7,9 @@
         <xsl:output method="xml" indent="yes"/>
         <xsl:template match="metadata">
         <xsl:copy>
-	<xsl:variable name="collection">
-	  <xsl:value-of select="manifest/contentdm_collection_id" />
-	</xsl:variable>
+  <xsl:variable name="collection">
+    <xsl:value-of select="manifest/contentdm_collection_id" />
+  </xsl:variable>
   <xsl:variable name="foxmlDir">
     <xsl:value-of select="manifest/foxml_dir" />
   </xsl:variable>
@@ -34,7 +34,7 @@
                         </xsl:variable>
                         
                         <xsl:variable name="pid">
-                                <xsl:value-of select="concat($pidMiddle,':',$cdmfile)" />
+                                <xsl:value-of select="concat($pidMiddle,'x',$cdmfile)" />
                         </xsl:variable>
                         <xsl:variable name="bodyTextSize">10pt</xsl:variable>
                         <exsl:document method="xml" href="{$foxmlDir}/{$cdmfile}.xml">
