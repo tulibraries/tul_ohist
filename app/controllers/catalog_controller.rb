@@ -13,14 +13,14 @@ class CatalogController < ApplicationController
 
   configure_blacklight do |config|
     config.default_solr_params = {
-      :qf => 'title_tesim',
+      :qf => 'title_tesim date_tesim repository_tesim format_tesim type_tesim language_tesim geographic_subject_tesim organization_building_tesim notes_tesim personal_names_tesim location_tesim physical_description_tesim document_content_tesim doi_tesim digital_collection_tesim',
       :qt => 'search',
       :rows => 10
     }
 
     # solr field configuration for search results/index views
     config.index.title_field = 'title_tesim'
-    config.index.display_type_field = 'has_model_ssim'
+    config.index.display_type_field = 'active_fedora_model_ssi'
 
 
     # solr fields that will be treated as facets by the blacklight application
@@ -42,13 +42,11 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
-    config.add_facet_field solr_name('object_type', :facetable), :label => 'Format'
-    config.add_facet_field solr_name('pub_date', :facetable), :label => 'Publication Year'
-    config.add_facet_field solr_name('subject_topic', :facetable), :label => 'Topic', :limit => 20
+
+    config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => true
+    config.add_facet_field solr_name('type', :facetable), :label => 'Type', :limit => true
     config.add_facet_field solr_name('language', :facetable), :label => 'Language', :limit => true
-    config.add_facet_field solr_name('lc1_letter', :facetable), :label => 'Call Number'
-    config.add_facet_field solr_name('subject_geo', :facetable), :label => 'Region'
-    config.add_facet_field solr_name('subject_era', :facetable), :label => 'Era'
+    config.add_facet_field solr_name('format', :facetable), :label => 'Format', :limit => true
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -61,31 +59,13 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('title', :stored_searchable, type: :string), :label => 'Title:'
-    config.add_index_field solr_name('title_vern', :stored_searchable, type: :string), :label => 'Title:'
-    config.add_index_field solr_name('author', :stored_searchable, type: :string), :label => 'Author:'
-    config.add_index_field solr_name('author_vern', :stored_searchable, type: :string), :label => 'Author:'
-    config.add_index_field solr_name('format', :symbol), :label => 'Format:'
-    config.add_index_field solr_name('language', :stored_searchable, type: :string), :label => 'Language:'
-    config.add_index_field solr_name('published', :stored_searchable, type: :string), :label => 'Published:'
-    config.add_index_field solr_name('published_vern', :stored_searchable, type: :string), :label => 'Published:'
-    config.add_index_field solr_name('lc_callnum', :stored_searchable, type: :string), :label => 'Call number:'
+    config.add_index_field solr_name('subject', :stored_searchable, type: :string), :label => 'Subject:'
+
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     config.add_show_field solr_name('title', :stored_searchable, type: :string), :label => 'Title:'
-    config.add_show_field solr_name('title_vern', :stored_searchable, type: :string), :label => 'Title:'
-    config.add_show_field solr_name('subtitle', :stored_searchable, type: :string), :label => 'Subtitle:'
-    config.add_show_field solr_name('subtitle_vern', :stored_searchable, type: :string), :label => 'Subtitle:'
-    config.add_show_field solr_name('author', :stored_searchable, type: :string), :label => 'Author:'
-    config.add_show_field solr_name('author_vern', :stored_searchable, type: :string), :label => 'Author:'
-    config.add_show_field solr_name('format', :symbol), :label => 'Format:'
-    config.add_show_field solr_name('url_fulltext_tsim', :stored_searchable, type: :string), :label => 'URL:'
-    config.add_show_field solr_name('url_suppl_tsim', :stored_searchable, type: :string), :label => 'More Information:'
-    config.add_show_field solr_name('language', :stored_searchable, type: :string), :label => 'Language:'
-    config.add_show_field solr_name('published', :stored_searchable, type: :string), :label => 'Published:'
-    config.add_show_field solr_name('published_vern', :stored_searchable, type: :string), :label => 'Published:'
-    config.add_show_field solr_name('lc_callnum', :stored_searchable, type: :string), :label => 'Call number:'
-    config.add_show_field solr_name('isbn', :stored_searchable, type: :string), :label => 'ISBN:'
+    config.add_show_field solr_name('subject', :stored_searchable, type: :string), :label => 'Subject:', :link_to_search => 'subject_sim'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -107,37 +87,47 @@ class CatalogController < ApplicationController
 
     config.add_search_field 'all_fields', :label => 'All Fields'
 
+    #THIS WORKS -- DO WE NEED pf SOLR NAME?  
+    config.add_search_field('Title') do |field|
+      solr_name = solr_name("title_tesim", :stored_searchable, type: :string)
+      field.solr_local_parameters = {
+        :qf => 'title_tesim',
+        :pf => solr_name
+      }
+    end
+
 
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
 
-    config.add_search_field('title') do |field|
-      # :solr_local_parameters will be sent using Solr LocalParams
-      # syntax, as eg {! qf=$title_qf }. This is neccesary to use
-      # Solr parameter de-referencing like $title_qf.
-      # See: http://wiki.apache.org/solr/LocalParams
-      field.solr_local_parameters = {
-        :qf => '$title_qf',
-        :pf => '$title_pf'
-      }
-    end
-
-    config.add_search_field('author') do |field|
-      field.solr_local_parameters = {
-        :qf => '$author_qf',
-        :pf => '$author_pf'
-      }
-    end
-
     # Specifying a :qt only to show it's possible, and so our internal automated
     # tests can test it. In this case it's the same as
     # config[:default_solr_parameters][:qt], so isn't actually neccesary.
     config.add_search_field('subject') do |field|
+      solr_name = solr_name("subject_tesim", :stored_searchable, type: :string)
       field.qt = 'search'
       field.solr_local_parameters = {
-        :qf => '$subject_qf',
+        :qf => 'subject_tesim',
         :pf => '$subject_pf'
+      }
+    end
+
+    config.add_search_field('People Mentioned') do |field|
+      solr_name = solr_name("personal_names_tesim", :stored_searchable, type: :string)
+      field.qt = 'search'
+      field.solr_local_parameters = {
+        :qf => 'personal_names_tesim',
+        :pf => '$personal_names_pf'
+      }
+    end
+
+    config.add_search_field('Interview Content') do |field|
+      solr_name = solr_name("document_content_tesim", :stored_searchable, type: :string)
+      field.qt = 'search'
+      field.solr_local_parameters = {
+        :qf => 'document_content_tesim',
+        :pf => '$document_content_pf'
       }
     end
 
@@ -146,8 +136,7 @@ class CatalogController < ApplicationController
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
     config.add_sort_field 'score desc, pub_date_dtsi desc, title_tesi asc', :label => 'relevance'
-    config.add_sort_field 'pub_date_dtsi desc, title_tesi asc', :label => 'year'
-    config.add_sort_field 'author_tesi asc, title_tesi asc', :label => 'author'
+    config.add_sort_field 'narrator_tesi asc, title_tesi asc', :label => 'narrator'
     config.add_sort_field 'title_tesi asc, pub_date_dtsi desc', :label => 'title'
 
     # If there are more than this many search results, no spelling ("did you

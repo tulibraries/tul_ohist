@@ -60,6 +60,7 @@ group :development do
 end
 
 gem 'thin'
+gem 'blacklight_advanced_search'
 
 group :development, :test do
 end
