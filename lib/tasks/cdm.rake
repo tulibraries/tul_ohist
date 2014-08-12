@@ -25,7 +25,9 @@ namespace :tu_cdm do
     else
       downloaded = CDMUtils.download_all_collections(config)
     end
-    puts "#{downloaded} #{'file'.pluralize(downloaded)} downloaded"
+
+    message = "#{downloaded} #{'file'.pluralize(downloaded)} downloaded"
+    puts downloaded == 0 ?  "Warning: #{message}".colorize(:red) : message
   end
 
 

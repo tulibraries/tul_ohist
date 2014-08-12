@@ -44,19 +44,6 @@ describe 'List CONTENTdm collections' do
         expect(file_count).to eq(0)
       end
     end
-
-    xit "should download all collections" do
-      VCR.use_cassette "cdm-util-download/should_harvest_all_ContentDM_files" do
-        downloaded = CDMUtils.download_all_collections(config)
-        file_count = Dir[File.join(download_directory, '*.xml')].count { |file| File.file?(file) }
-        expect(file_count).to be >= download_file_count
-        Dir.glob(File.join(download_directory, '**', '*.xml')).each do |file|
-          doc = Nokogiri::XML(File.read(file))
-          # Tests for both metadata and attempted access to private collection
-          expect(['metadata', 'getfile']).to include doc.child.name
-        end
-      end
-    end
   end
 
   describe 'convert' do

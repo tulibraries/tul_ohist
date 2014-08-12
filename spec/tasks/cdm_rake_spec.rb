@@ -33,6 +33,7 @@ describe 'Execute the tu_cdm rake tests' do
         expect(output).to include '1 file downloaded'
         file_count = Dir[File.join(@download_directory, '*.xml')].count { |file| File.file?(file) }
         expect(file_count).to eq(1)
+        expect(output.colorized?).to_not be
         file = File.join(@download_directory, download_file_name)
         doc = Nokogiri::XML(File.read(file))
         # Tests for both metadata and attempted access to private collection
@@ -45,27 +46,13 @@ describe 'Execute the tu_cdm rake tests' do
         output = capture(:stdout) do
           Rake::Task['tu_cdm:download'].invoke(private_collection)
         end
-        expect(output).to include '0 files downloaded'
+        expect(output).to include 'Warning: 0 files downloaded'
+        expect(output.colorized?).to be
         file_count = Dir[File.join(@download_directory, '*.xml')].count { |file| File.file?(file) }
         expect(file_count).to eq(0)
       end
     end
 
-    xit "should harvest ContentDM files" do
-      VCR.use_cassette "tu_cdm-download/should_harvest_ContentDM_files" do
-        output = capture(:stdout) do
-          Rake::Task['tu_cdm:download'].invoke
-        end
-        expect(output).to include "#{download_file_count} files downloaded"
-        file_count = Dir[File.join(@download_directory, '*.xml')].count { |file| File.file?(file) }
-        expect(file_count).to be >= download_file_count
-        Dir.glob(File.join(@download_directory, '**', '*.xml')).each do |file|
-          doc = Nokogiri::XML(File.read(file))
-          # Tests for both metadata and attempted access to private collection
-          expect(['metadata', 'getfile']).to include doc.child.name
-        end
-      end
-    end
   end
 
   describe 'tu_cdm:convert' do
