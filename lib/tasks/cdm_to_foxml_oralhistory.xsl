@@ -141,6 +141,16 @@
                                                                   </xsl:element>
                                                           </xsl:for-each>
                                                           <xsl:text>&#xa;</xsl:text>
+                                                          <doi />
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <permanent_url />
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Master_Identifier">  
+                                                                  <xsl:element name="master_identifier">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
                                                   </fields>
                                                   <xsl:text>&#xa;</xsl:text>
                                                   </foxml:xmlContent>
@@ -446,35 +456,6 @@
                                                           <xsl:text>&#xa;</xsl:text>
                                                           <xsl:for-each select="Catalog_Record">  
                                                                   <xsl:element name="catalog_record">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each> 
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                  </fields>
-                                                  </foxml:xmlContent>
-                                                </foxml:datastreamVersion>
-                                        </foxml:datastream>
-                                        <xsl:text>&#xa;</xsl:text>
-
-                                        <foxml:datastream ID="IdMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-                                          <foxml:datastreamVersion ID="IdMetadata.0" LABEL="ID metadata" MIMETYPE="text/xml">
-                                            <foxml:xmlContent>
-                                              <fields>
-                                                 <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="DOI">  
-                                                                  <xsl:element name="doi">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each> 
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Permanent_URL">  
-                                                                  <xsl:element name="permanent_url">  
-                                                                          <xsl:value-of select="." />  
-                                                                  </xsl:element>
-                                                          </xsl:for-each> 
-                                                          <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Master_Identifier">  
-                                                                  <xsl:element name="master_identifier">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 

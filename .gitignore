@@ -17,5 +17,5 @@ config/contentdm.yml
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-jetty
+/jetty
 spec/fixtures/
