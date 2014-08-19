@@ -53,6 +53,7 @@ end
 group :development, :test do
   gem "jettywrapper"
   gem "pry"
+  gem "byebug"
 end
 
 group :development do
