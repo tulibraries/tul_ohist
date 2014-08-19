@@ -1,0 +1,33 @@
+<h1>Listing photographs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Date</th>
+      <th>Creator</th>
+      <th>Digital publisher</th>
+      <th>Format</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @photographs.each do |photograph| %>
+      <tr>
+        <td><%= photograph.title %></td>
+        <td><%= photograph.date %></td>
+        <td><%= photograph.creator %></td>
+        <td><%= photograph.digital_publisher %></td>
+        <td><%= photograph.format %></td>
+        <td><%= link_to 'Show', photograph %></td>
+        <td><%= link_to 'Edit', edit_photograph_path(photograph) %></td>
+        <td><%= link_to 'Destroy', photograph, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Photograph', new_photograph_path %>
