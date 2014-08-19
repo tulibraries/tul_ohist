@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @transcript.title %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @transcript.date %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= theme_contact_field(@transcript.contact) %>
+</p>
+
+<p>
+  <strong>Digital publisher:</strong>
+  <%= @transcript.digital_publisher %>
+</p>
+
+<%= link_to 'Edit', edit_transcript_path(@transcript) %> |
+<%= link_to 'Back', transcripts_path %>
