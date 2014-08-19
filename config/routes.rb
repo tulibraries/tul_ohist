@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  get "ohist/show"
   resources :transcripts
 
   root :to => "catalog#index"
   blacklight_for :catalog
   devise_for :users
+
+  get "/ohist/display/:master_identifier" => "compound_objects#show"  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
