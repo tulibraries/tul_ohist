@@ -37,6 +37,12 @@
                                 <xsl:value-of select="concat($pidMiddle,'x',$cdmfile)" />
                         </xsl:variable>
                         <xsl:variable name="bodyTextSize">10pt</xsl:variable>
+                        <xsl:variable name="rdfAbout">
+                          <xsl:value-of select="concat('info:fedora/', $pid)" />
+                        </xsl:variable>
+                        <xsl:variable name="rdfResource">
+                          <xsl:value-of select="concat('info:fedora/afmodel:', $MID)" />
+                        </xsl:variable>
                         <exsl:document method="xml" href="{$foxmlDir}/{$cdmfile}.xml">
                                 
                                 <xsl:element name="foxml:digitalObject"
@@ -73,6 +79,22 @@
                                                   <xsl:text>&#xa;</xsl:text>
                                         </foxml:objectProperties>                                        
                                         <xsl:text>&#xa;</xsl:text>
+                                        <foxml:datastream ID="RELS-EXT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="RELS-EXT.0" LABEL="Fedora Object-to-Object Relationship Metadata" MIMETYPE="application/rdf+xml" >
+                                            <foxml:xmlContent>
+                                              <xsl:text>&#xa;</xsl:text>
+                                              <rdf:RDF xmlns:ns0="info:fedora/fedora-system:def/model#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                                                <xsl:element name="rdf:Description">
+                                                  <xsl:attribute name="rdf:about"><xsl:value-of select="$rdfAbout"/></xsl:attribute>
+                                                  <xsl:element name="ns0:hasModel">
+                                                    <xsl:attribute name="rdf:resource"><xsl:value-of select="$rdfResource"/></xsl:attribute>
+                                                  </xsl:element>
+                                                </xsl:element>
+                                              </rdf:RDF>
+                                              <xsl:text>&#xa;</xsl:text>
+                                            </foxml:xmlContent>
+                                          </foxml:datastreamVersion>
+                                        </foxml:datastream>
                                         <foxml:datastream ID="objectMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
                                         <xsl:text>&#xa;</xsl:text>
                                           <foxml:datastreamVersion ID="objectMetadata.0" LABEL="Object metadata" MIMETYPE="text/xml">
