@@ -7,6 +7,6 @@ require_relative 'datastreams/notations_datastream'
 require_relative 'datastreams/physical_datastream'
 require_relative 'datastreams/rights_datastream'
 
-module Datastream
+module TulOhist::Datastreams
 end
 
