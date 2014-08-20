@@ -21,10 +21,13 @@ namespace :tu_cdm do
   task :download, [:collection_name] => :environment do |t, args|
     args.download(:collection_name => nil)
     if args[:collection_name]
-      converted = CDMUtils.download_one_collection(config, args[:collection_name])
+      downloaded = CDMUtils.download_one_collection(config, args[:collection_name])
     else
-      converted = CDMUtils.download_all_collections(config)
+      downloaded = CDMUtils.download_all_collections(config)
     end
+
+    message = "#{downloaded} #{'file'.pluralize(downloaded)} downloaded"
+    puts downloaded == 0 ?  "Warning: #{message}".colorize(:red) : message
   end
 
 
@@ -73,24 +76,9 @@ namespace :tu_cdm do
       CDMUtils.index(Photograph)
     end
     
-    desc 'Index all Poster objects in Fedora repo.'
-    task :posters => :environment do
-      CDMUtils.index(Poster)
-    end
-    
-    desc 'Index all Pamphlets objects in Fedora repo.'
-    task :pamphlets => :environment do
-      CDMUtils.index(Pamphlet)
-    end
-    
-    desc 'Index all Manuscript objects in Fedora repo.'
-    task :manuscripts => :environment do
-      CDMUtils.index(Manuscript)
-    end
-    
-    desc 'Index all Sheet Music objects in Fedora repo.'
-    task :sheetmusic => :environment do
-      CDMUtils.index(SheetMusic)
+    desc 'Index all Transcript objects in Fedora repo.'
+    task :transcripts => :environment do
+      CDMUtils.index(Transcript)
     end
   end
 end

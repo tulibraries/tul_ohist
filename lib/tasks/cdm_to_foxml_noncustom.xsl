@@ -5,24 +5,14 @@
         xmlns:exsl="http://exslt.org/common"
         extension-element-prefixes="exsl">
         <xsl:output method="xml" indent="yes"/>
-        
- 
-        
         <xsl:template match="metadata">
-        <xsl:variable name="baseURI">
-          <xsl:value-of select="tokenize(base-uri(.), '/')[last()]" />
-        </xsl:variable>
-<xsl:variable name="filenamepart">
-<xsl:value-of select="tokenize($baseURI, '\.xml')" />
-</xsl:variable>
-
-<xsl:variable name="collection">
-<xsl:value-of select="normalize-space($filenamepart[1])"/>
-</xsl:variable>
-
-<xsl:variable name="foxmlDir">
-  <xsl:value-of select="manifest/foxml_dir" />
-</xsl:variable>
+        <xsl:copy>
+  <xsl:variable name="collection">
+    <xsl:value-of select="manifest/contentdm_collection_id" />
+  </xsl:variable>
+  <xsl:variable name="foxmlDir">
+    <xsl:value-of select="manifest/foxml_dir" />
+  </xsl:variable>
                 <xsl:for-each select="record">
                         <xsl:variable name="cdmfile">
                         
@@ -243,6 +233,6 @@
                                 </xsl:element>
                         </exsl:document>
                 </xsl:for-each>
-
+</xsl:copy>
         </xsl:template>
 </xsl:stylesheet>

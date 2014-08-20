@@ -3,14 +3,14 @@ require 'nokogiri'
 describe 'List CONTENTdm collections' do
 
   let (:config) { YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__)) }
-  let (:collection_name) { "p15037coll10" }
+  let (:collection_name) { "p16002coll21" }
+  let (:private_collection_name) { "p16002coll11" }
   let (:cdm_data_root) { "#{Rails.root}/spec/fixtures/fedora/cdm" }
   let (:schema_url) { "http://www.fedora.info/definitions/1/0/foxml1-1.xsd" }
   let (:download_directory) { config['cdm_download_dir'] }
   let (:converted_directory) { config['cdm_foxml_dir'] }
   let (:number_of_collections) { 33 }
   let (:download_file_count) { 33 }
-  let (:xml_file_count) { 85 }
 
   describe 'list' do
     it "should list ContentDM collections" do
@@ -20,8 +20,6 @@ describe 'List CONTENTdm collections' do
   end
 
   describe 'download' do
-    let (:download_file_name) { "p15037coll10.xml" }
-
     after :each do
       FileUtils.rm Dir.glob "#{download_directory}/*.xml"
     end
@@ -38,27 +36,18 @@ describe 'List CONTENTdm collections' do
       end
     end
 
-    it "should download all collections" do
-      VCR.use_cassette "cdm-util-download/should_harvest_all_ContentDM_files" do
-        downloaded = CDMUtils.download_all_collections(config)
+    it "should not download a private collection" do
+      VCR.use_cassette "cdm-util-download/should_not_harvest_a_private_ContentDM_file" do
+        downloaded = CDMUtils.download_one_collection(config, private_collection_name)
+        expect(downloaded).to eq(0)
         file_count = Dir[File.join(download_directory, '*.xml')].count { |file| File.file?(file) }
-        expect(file_count).to be >= download_file_count
-        Dir.glob(File.join(download_directory, '**', '*.xml')).each do |file|
-          doc = Nokogiri::XML(File.read(file))
-          # Tests for both metadata and attempted access to private collection
-          expect(['metadata', 'getfile']).to include doc.child.name
-        end
+        expect(file_count).to eq(0)
       end
     end
   end
 
-  RSpec::Matchers.define :have_tag do |tag|
-    match do |doc|
-      doc.search(tag).any?
-    end
-  end
-
   describe 'convert' do
+    include TagMatchers
     let (:source_file_name) { collection_name + '.xml' }
 
     after :each do
@@ -91,6 +80,7 @@ describe 'List CONTENTdm collections' do
         downloaded = CDMUtils.download_one_collection(config, collection_name)
         CDMUtils.convert_file(File.join(download_directory, collection_name + '.xml'), converted_directory)
         file_count = Dir[File.join(converted_directory, '*.xml')].count { |file| File.file?(file) }
+        xml_file_count = `grep -ic "<record>" tmp/tu_cdm/downloads/*`.to_i
         expect(file_count).to eq(xml_file_count)
         xsd = Nokogiri::XML::Schema(open(schema_url))
         Dir.glob(File.join(converted_directory, '**', '*.xml')).each do |file|

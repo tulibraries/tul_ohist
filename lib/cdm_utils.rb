@@ -37,6 +37,7 @@ module CDMUtils
       xml = Nokogiri::XML(open(cdm_url))
       FileUtils::mkdir_p config['cdm_download_dir']
       all_aliases = xml.xpath("/collections/collection/alias/text()")
+      harvested_count = 0
       all_aliases.length.times do |i|
         new_coll = all_aliases[i].to_s
         if coll.nil? or new_coll.include?(coll)
@@ -47,8 +48,10 @@ module CDMUtils
           file = File.read source_url
           File.open(Rails.root + xmlFilePath, 'w') { |f| f.write(file) }	
           puts "Successfully harvested #{new_coll}"
+          harvested_count += 1
         end
       end 
+      harvested_count
     end
   end
 
@@ -118,50 +121,8 @@ module CDMUtils
 	
       case fname
         #audio
-        when 'p16002coll1'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_audio.xsl #{file_name}`
-        
-        #clipping
-        when 'p15037coll7'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_clipping.xsl #{file_name}`
-        
-        #ephemera
-        when 'p16002coll6', 'p16002coll7'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_ephemera.xsl #{file_name}`
-
-        #photograph
-        when 'p15037coll5', 'p245801coll13', 'p15037coll17', 'p15037coll10', 'p15037coll3', 'p15037coll15', 'p245801coll0', 'p16002coll3', 'p16002coll2', 'p15037coll8', 'p16002coll13', 'p16002coll17', 'p16002coll19'
-
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_photograph.xsl #{file_name}`
-        
-        #manuscript
-        when 'p15037coll18', 'p16002coll4', 'p15037coll19', 'p16002coll14'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_manuscript.xsl #{file_name}`
-
-        #pamphlet
-        when 'p16002coll5', 'p15037coll14'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_pamphlet.xsl #{file_name}`
-        
-        #periodical
-        when 'p15037coll4', 'p15037coll9', 'p15037coll6', 'p16002coll8', 'p245801coll12'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_periodical.xsl #{file_name}`
-        
-        #poster
-        when 'p16002coll9'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_poster.xsl #{file_name}`
-        
-        #scholarship
-        when 'p15037coll12', 'p245801coll10'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_scholarship.xsl #{file_name}`
-        
-        #sheet music
-        when 'p15037coll1'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_sheetmusic.xsl #{file_name}`
-        
-        #video
-        when 'p15037coll2'
-          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_video.xsl #{file_name}`
-         
+        when 'p16002coll21'
+          `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_oralhistory.xsl #{file_name}`
         else
           `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_noncustom.xsl #{file_name}`
       end
@@ -197,10 +158,7 @@ module CDMUtils
     def self.find(type_str, pid)
       case type_str
       when 'photograph' then object = Photograph.find(pid)
-      when 'poster' then object = Poster.find(pid)
-      when 'pamphlet' then object = Pamphlet.find(pid)
-      when 'manuscript' then object = Manuscript.find(pid)
-      when 'sheetMusic' then object = SheetMusic.find(pid)
+      when 'transcript' then object = Transcript.find(pid)
       else nil
       end
     end
