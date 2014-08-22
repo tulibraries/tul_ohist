@@ -1,0 +1,3 @@
+[submodule "vendor/assets/javascripts/PDFObject"]
+	path = vendor/assets/javascripts/PDFObject
+	url = https://github.com/pipwerks/PDFObject.git

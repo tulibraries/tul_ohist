@@ -1,3 +1,18 @@
 // Place all the styles related to the Transcripts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#transcript-pdf {
+	width:  877px;
+	height: 470px;
+	margin: 2em auto;
+
+	p {
+      padding: 1em;
+    }
+
+    object {
+      display: block;
+      border: solid 1px #a6c9e2
+    }
+}

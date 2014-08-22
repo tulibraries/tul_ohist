@@ -29,10 +29,17 @@
       <dt class="blacklight-contact">Contact:</dt>
       <dd class="blacklight-contact"><%= theme_contact_field(document["contact_ssm"].to_sentence) %></dd>
   </dl>
-  <div id="pdf">
-    <object data="<%= transcript_pdf %> type="application/pdf" width="100%" height="1000px">
-      <p>This page includes the transcript PDF document. <a href="<%= transcript_pdf %>">Click here to download the PDF file.</a></p>
-    </object>
-  </div>
+
+  <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
+
 </div>
 
+<script type='text/javascript'>
+    function embedPDF(){
+      var myPDF = new PDFObject({
+        url: '<%= transcript_pdf %>',
+        pdfOpenParams: { scrollbars: '1', toolbar: '1', messages: '1', navpanes: '1' }
+      }).embed('transcript-pdf');
+    }
+    window.onload = embedPDF; //Feel free to replace window.onload if needed.
+</script>
