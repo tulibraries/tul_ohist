@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-<dl class="defList">
-  <% document_show_fields.each do |solr_fname, field| -%>
-    <% if document.has? solr_fname %>
-      <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_label :field => solr_fname %></dt>
-      <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
-    <% end -%>
-  <% end -%>
-</dl>
-=======
+<div class="portrait">
+<%= render_photo(document["master_identifier_ssim"]) %>
+</div>
 <div class="transcript collection-description">
 	<h2>About this Collection</h2>
 	<%= document['collection_description_tesim'].to_sentence %>
@@ -37,4 +30,3 @@
   </dl>
 </div>
 
->>>>>>> ad76c100e680a287b0489aac5ec7cdd7f2f2bff9
