@@ -1,4 +1,5 @@
 cdm_server: "https://SERVER.DOMAIN"
+cdm_archive: "https://ARCHIVE.SERVER.DOMAIN"
 cdm_xpath: "/collections/collection/alias/text()"
 cdm_user: "USER"
 cdm_password: "SECRET"

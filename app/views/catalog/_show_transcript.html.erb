@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-<dl class="defList">
-  <% document_show_fields.each do |solr_fname, field| -%>
-    <% if document.has? solr_fname %>
-      <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_label :field => solr_fname %></dt>
-      <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
-    <% end -%>
-  <% end -%>
-</dl>
-=======
+<% transcript_pdf = contentdm_file_url(document['contentdm_collection_id_ssm'].to_sentence,
+                                    document['contentdm_number_ssm'].to_sentence,
+                                    document['contentdm_file_name_ssm'].to_sentence) %>
+
 <div class="transcript collection-description">
 	<h2>About this Collection</h2>
 	<%= document['collection_description_tesim'].to_sentence %>
@@ -26,8 +20,8 @@
 <div class="transcript solr-fields">
 	<h2>Record Details</h2>
   <dl class="defList">
-    <% document_show_fields.each do |solr_fname, field| -%>
-      <% if document.has? solr_fname %>
+  <% document_show_fields.each do |solr_fname, field| -%>
+    <% if document.has? solr_fname %>
         <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_label :field => solr_fname %></dt>
         <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
       <% end -%>
@@ -35,6 +29,17 @@
       <dt class="blacklight-contact">Contact:</dt>
       <dd class="blacklight-contact"><%= theme_contact_field(document["contact_ssm"].to_sentence) %></dd>
   </dl>
+
+  <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
+
 </div>
 
->>>>>>> ad76c100e680a287b0489aac5ec7cdd7f2f2bff9
+<script type='text/javascript'>
+    function embedPDF(){
+      var myPDF = new PDFObject({
+        url: '<%= transcript_pdf %>',
+        pdfOpenParams: { scrollbars: '1', toolbar: '1', messages: '1', navpanes: '1' }
+      }).embed('transcript-pdf');
+    }
+    window.onload = embedPDF; //Feel free to replace window.onload if needed.
+</script>
