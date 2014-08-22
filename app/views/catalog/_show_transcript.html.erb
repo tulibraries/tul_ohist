@@ -29,4 +29,8 @@
       <dd class="blacklight-contact"><%= theme_contact_field(document["contact_ssm"].to_sentence) %></dd>
   </dl>
 </div>
+<div class="rights">
+  <h2><%= t('tul_ohist.rights_title') %></h2>
+  <%= document['rights_ssm'].to_sentence %>
+</div>
 

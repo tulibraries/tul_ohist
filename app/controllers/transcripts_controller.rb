@@ -1,4 +1,5 @@
 class TranscriptsController < ApplicationController
+
   before_action :set_transcript, only: [:show, :edit, :update, :destroy]
 
   # GET /transcripts
@@ -50,6 +51,8 @@ class TranscriptsController < ApplicationController
       end
     end
   end
+
+  
 
   # DELETE /transcripts/1
   # DELETE /transcripts/1.json

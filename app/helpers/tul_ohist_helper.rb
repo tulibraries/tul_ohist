@@ -16,6 +16,11 @@ module TulOhistHelper
     output.html_safe
   end
 
+  ##
+  #
+  # Grab photos related to the transcript
+  # 
+  ##
   def render_photo(master_identifier)
     b = ActiveFedora::Base.where(master_identifier_ssim: master_identifier).to_a
     
@@ -38,12 +43,25 @@ module TulOhistHelper
 
        intermed_date = object.date.first
        (dates ||= []) << intermed_date
-       (img ||= []) << image_tag("http://digital.library.temple.edu/utils/getfile/collection/p16002coll21/id/4/filename/6.jpg", :alt => intermed_title)
+       image_url = get_image_url(pid)
+       (img ||= []) << image_tag(image_url, :alt => intermed_title)
      end
 
     end
     
     return img.to_sentence
+
+  end
+
+  def get_image_url(pid)
+  	object = Photograph.find(pid)
+  	filename = object.contentdm_file_name
+    cdm_pointer = object.contentdm_number
+    cdm_alias = object.contentdm_collection_id
+
+    image_url = "http://digital.library.temple.edu/utils/getfile/collection/#{cdm_alias}/id/#{cdm_pointer}/filename/#{filename}"
+
+  return image_url
 
   end
 
