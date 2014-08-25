@@ -1,3 +1,16 @@
+<script type='text/javascript'>
+    function embedPDF(){
+      var myPDF = new PDFObject({
+        url: '<%= transcript_pdf %>',
+        pdfOpenParams: { scrollbars: '1', toolbar: '1', messages: '1', navpanes: '1' }
+      }).embed('transcript-pdf');
+    }
+    window.onload = embedPDF; //Feel free to replace window.onload if needed.
+</script>
+
+<div class="portrait">
+<%= render_photo(document["master_identifier_ssim"]) %>
+</div>
 <% transcript_pdf = contentdm_file_url(document['contentdm_collection_id_ssm'].to_sentence,
                                     document['contentdm_number_ssm'].to_sentence,
                                     document['contentdm_file_name_ssm'].to_sentence) %>
@@ -33,13 +46,7 @@
   <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
 
 </div>
-
-<script type='text/javascript'>
-    function embedPDF(){
-      var myPDF = new PDFObject({
-        url: '<%= transcript_pdf %>',
-        pdfOpenParams: { scrollbars: '1', toolbar: '1', messages: '1', navpanes: '1' }
-      }).embed('transcript-pdf');
-    }
-    window.onload = embedPDF; //Feel free to replace window.onload if needed.
-</script>
+<div class="rights">
+  <h2><%= t('tul_ohist.rights_title') %></h2>
+  <%= document['rights_ssm'].to_sentence %>
+</div>

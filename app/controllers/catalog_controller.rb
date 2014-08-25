@@ -45,9 +45,15 @@ class CatalogController < ApplicationController
     # facet bar
 
     config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => true
+    config.add_facet_field solr_name('narrator', :facetable), :label => 'Narrator', :limit => true
     config.add_facet_field solr_name('type', :facetable), :label => 'Type', :limit => true
     config.add_facet_field solr_name('language', :facetable), :label => 'Language', :limit => true
     config.add_facet_field solr_name('format', :facetable), :label => 'Format', :limit => true
+    config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true
+    config.add_facet_field solr_name('geographic_subject', :facetable), :label => 'Geographic Subject', :limit => true
+    config.add_facet_field solr_name('organization_building', :facetable), :label => 'Organization / Building', :limit => true
+
+
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -67,6 +73,24 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field solr_name('title', :stored_searchable, type: :string), :label => 'Title'
     config.add_show_field solr_name('subject', :stored_searchable, type: :string), :label => 'Subject', :link_to_search => 'subject_sim'
+    config.add_show_field solr_name('narrator', :stored_searchable, type: :string), :label => 'Narrator'
+    config.add_show_field solr_name('date', :stored_searchable, type: :string), :label => 'Date'
+    config.add_show_field solr_name('language', :stored_searchable, type: :string), :label => 'Language'
+    config.add_show_field solr_name('permanent_url', :displayable, type: :string), :label => 'Permanent URL'
+    config.add_show_field solr_name('created', :displayable, type: :string), :label => 'Created'
+    config.add_show_field solr_name('condition_note', :stored_searchable, type: :string), :label => 'Condition Note'
+    config.add_show_field solr_name('digitization_specifications', :stored_searchable, type: :string), :label => 'Digitization Specifications'
+    config.add_show_field solr_name('original_recording_specifications', :stored_searchable, type: :string), :label => 'Original Recording Specifications'
+    config.add_show_field solr_name('transcript_filename', :stored_searchable, type: :string), :label => 'Transcript Filename'
+    config.add_show_field solr_name('audio_filename', :stored_searchable, type: :string), :label => 'Audio Filename'
+    config.add_show_field solr_name('photograph_filename', :stored_searchable, type: :string), :label => 'Photograph Filename'
+    config.add_show_field solr_name('personal_names', :stored_searchable, type: :string), :label => 'Personal Names', :link_to_search => 'personal_names_tesim'
+    config.add_show_field solr_name('geographic_subject', :stored_searchable, type: :string), :label => 'Geographic Subject', :link_to_search => 'geographic_subject_sim'
+    config.add_show_field solr_name('organization_building', :stored_searchable, type: :string), :label => 'Organization / Building', :link_to_search => 'organization_building_sim'
+
+
+
+
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

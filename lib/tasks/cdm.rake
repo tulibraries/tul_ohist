@@ -57,7 +57,7 @@ namespace :tu_cdm do
   namespace :solr do
     desc "Reindex everything in Solr"
     task :reindex_all => :environment do
-      ActiveFedora::Base.reindex_everything()
+      ActiveFedora::Base.reindex_everything
     end
 
     desc "Delete a single item from Solr index"
