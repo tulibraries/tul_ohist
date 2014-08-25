@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
 .portrait{
   float: left;
   padding: 10px;
@@ -12,3 +13,19 @@
 	font-size: 14px;
 	font-weight: bold;
 }
+
+#transcript-pdf {
+	width:  877px;
+	height: 470px;
+	margin: 2em auto;
+
+	p {
+      padding: 1em;
+    }
+
+    object {
+      display: block;
+      border: solid 1px #a6c9e2;
+    }
+}
+
