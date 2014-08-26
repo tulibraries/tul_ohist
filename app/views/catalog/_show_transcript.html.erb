@@ -1,6 +1,9 @@
 
-
-<div class="portrait">
+<div class="transcript related-items">
+  <h2><%= t('tul_ohist.related_items_title') %></h2>
+<%= render_related_items(document['master_identifier_ssim'].to_sentence) %>
+</div>
+<div class="transcript portrait">
 <%= render_photo(document["master_identifier_ssim"]) %>
 </div>
 <% transcript_pdf = contentdm_file_url(document['contentdm_collection_id_ssm'].to_sentence,

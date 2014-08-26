@@ -90,10 +90,6 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('geographic_subject', :stored_searchable, type: :string), :label => 'Geographic Subject', :link_to_search => 'geographic_subject_sim'
     config.add_show_field solr_name('organization_building', :stored_searchable, type: :string), :label => 'Organization / Building', :link_to_search => 'organization_building_sim'
 
-
-
-
-
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #

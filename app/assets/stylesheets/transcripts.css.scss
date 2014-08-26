@@ -29,3 +29,31 @@
     }
 }
 
+.related-items{
+  float:right;
+  border: 1px solid #6695af;
+  padding: 0px;
+  width: 200px;
+  border-radius: 10px;
+
+  h2{
+    margin-top:0px;
+    font-size: 16px;
+    background-color: #6695af;
+    color:#ffffff;
+    text-align: center;
+    padding: 5px 0px;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  h3{
+    padding: 0px 0px 0px 10px;
+    font-size: 12px;
+    color: #6695af;
+    font-weight: bold;
+    border-bottom: 1px solid #6695af;
+  }
+}
+
