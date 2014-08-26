@@ -45,6 +45,7 @@ module TulOhistHelper
   	finding_aids, online_exhibits, catalog_records = related_items(master_identifier)
     related_items << render_single_list(finding_aids, "Finding Aid")
     related_items << render_single_list(online_exhibits, "Online Exhibit")
+    related_items << render_single_list(catalog_records, "Catalog Record")
     return related_items.html_safe
   end
 
