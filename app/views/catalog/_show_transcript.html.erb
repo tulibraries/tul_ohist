@@ -1,12 +1,4 @@
-<script type='text/javascript'>
-    function embedPDF(){
-      var myPDF = new PDFObject({
-        url: '<%= transcript_pdf %>',
-        pdfOpenParams: { scrollbars: '1', toolbar: '1', messages: '1', navpanes: '1' }
-      }).embed('transcript-pdf');
-    }
-    window.onload = embedPDF; //Feel free to replace window.onload if needed.
-</script>
+
 
 <div class="portrait">
 <%= render_photo(document["master_identifier_ssim"]) %>
@@ -50,3 +42,13 @@
   <h2><%= t('tul_ohist.rights_title') %></h2>
   <%= document['rights_ssm'].to_sentence %>
 </div>
+
+<script type='text/javascript'>
+    function embedPDF(){
+      var myPDF = new PDFObject({
+        url: '<%= transcript_pdf %>',
+        pdfOpenParams: { scrollbars: '1', toolbar: '1', messages: '1', navpanes: '1' }
+      }).embed('transcript-pdf');
+    }
+    window.onload = embedPDF; //Feel free to replace window.onload if needed.
+</script>

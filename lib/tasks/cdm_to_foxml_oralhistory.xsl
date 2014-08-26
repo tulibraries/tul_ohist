@@ -14,9 +14,6 @@
     <xsl:value-of select="manifest/foxml_dir" />
   </xsl:variable>
                 <xsl:for-each select="record">
-
-                        
-
                         <xsl:variable name="cdmfile">
                                 <xsl:value-of select="concat($collection,'x',CONTENTdm_number)"/>
                         </xsl:variable>
@@ -41,7 +38,7 @@
                           <xsl:value-of select="concat('info:fedora/', $pid)" />
                         </xsl:variable>
                         <xsl:variable name="rdfResource">
-                          <xsl:value-of select="concat('info:fedora/afmodel:', $MID)" />
+                          <xsl:value-of select="concat('info:fedora/afmodel:', Type)" />
                         </xsl:variable>
                         <exsl:document method="xml" href="{$foxmlDir}/{$cdmfile}.xml">
                                 

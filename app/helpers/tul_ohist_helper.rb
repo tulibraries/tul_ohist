@@ -23,32 +23,31 @@ module TulOhistHelper
   ##
   def render_photo(master_identifier)
     b = ActiveFedora::Base.where(master_identifier_ssim: master_identifier).to_a
-    
+    binding.pry
     titles = Array.new    
     dates = Array.new
     img = Array.new   
     
     b.each do |b_obj|
       pid=b_obj.id
+      binding.pry
       pid_fragments = pid.split(":");
       content_model = pid_fragments.first;
       case content_model
-        when 'photograph' then object = Photograph.find(pid)
+        when 'photograph' then object = DniPhotograph.find(pid)
         else nil
       end
       
       if(object)
+      	binding.pry
        intermed_title = object.title.first
        (titles ||= []) << intermed_title
-
-       intermed_date = object.date.first
-       (dates ||= []) << intermed_date
        image_url = get_image_url(pid)
        (img ||= []) << image_tag(image_url, :alt => intermed_title)
      end
 
     end
-    
+    binding.pry
     return img.to_sentence
 
   end

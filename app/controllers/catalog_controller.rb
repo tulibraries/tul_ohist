@@ -6,11 +6,13 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Hydra::Controller::ControllerBehavior
   include BlacklightAdvancedSearch::ParseBasicQ
+  
   # These before_filters apply the hydra access controls
   #before_filter :enforce_show_permissions, :only=>:show
   # This applies appropriate access controls to all solr queries
   #CatalogController.solr_search_params_logic += [:add_access_controls_to_solr_params]
-
+  
+  CatalogController.solr_search_params_logic += [:exclude_unwanted_models]
 
   configure_blacklight do |config|
     config.default_solr_params = {
@@ -169,6 +171,20 @@ class CatalogController < ApplicationController
     config.spell_max = 5
   end
 
+  def exclude_unwanted_models(solr_parameters, user_parameters)
+    solr_parameters[:fq] ||= []
+    unwanted_models.each do |um|
+    if um.kind_of?(String)
+      model_uri = um
+    else
+      model_uri = um.to_class_uri
+      end
+    solr_parameters[:fq] << "-has_model_ssim:\"#{model_uri}\""
+    end
+    solr_parameters[:fq] << "-has_model_s:\"info:fedora/afmodel:FileAsset\""
+  end
 
-
+  def unwanted_models
+    return [Photograph]
+  end
 end
