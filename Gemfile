@@ -63,5 +63,6 @@ end
 gem 'thin'
 gem 'blacklight_advanced_search'
 
-group :development, :test do
+group :test do
+  gem 'factory_girl_rails', "~> 4.0"
 end

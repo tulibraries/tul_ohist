@@ -119,6 +119,11 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.1)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     fastercsv (1.5.5)
     ffi (1.9.3)
     gherkin (2.12.2)
@@ -397,6 +402,7 @@ DEPENDENCIES
   cucumber-rails
   devise
   devise-guests (~> 0.3)
+  factory_girl_rails (~> 4.0)
   hydra (~> 7.1.0)
   jbuilder (~> 2.0)
   jettywrapper
