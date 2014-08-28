@@ -14,6 +14,7 @@
 //= require 'blacklight_advanced_search'
 //= require PDFObject/pdfobject.min
 //= require jquery.confirm/jquery.confirm.min.js
+//= require jquery.cookie/jquery.cookie.js
 
 
 //= require jquery_ujs
@@ -22,3 +23,4 @@
 // Required by Blacklight
 //= require blacklight/blacklight
 //= require_tree .
+//= require click_through
