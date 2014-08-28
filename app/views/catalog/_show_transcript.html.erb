@@ -11,22 +11,23 @@
                                     document['contentdm_file_name_ssm'].to_sentence) %>
 
 <div class="transcript collection-description">
-	<h2>About this Collection</h2>
+	<h2><%= t('tul_ohist.about_collection_title') %></h2>
 	<%= document['collection_description_tesim'].to_sentence %>
 </div>
 
 <div class="transcript content-summary">
-	<h2>About this Interview</h2>
+	<h2><%= t('tul_ohist.about_interview_title') %></h2>
 <%= document['content_summary_tesim'].to_sentence %>
 </div>
+  <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
 
 <div class="transcript biographical-history-note">
-	<h2>Biographical / History Note</h2>
+	<h2><%= t('tul_ohist.biographical_title') %></h2>
 <%= document['biographical_history_note_tesim'].to_sentence %>
 </div>
 
 <div class="transcript solr-fields">
-	<h2>Record Details</h2>
+	<h2><%= t('tul_ohist.record_details_title') %></h2>
   <dl class="defList">
   <% document_show_fields.each do |solr_fname, field| -%>
     <% if document.has? solr_fname %>
@@ -37,9 +38,6 @@
       <dt class="blacklight-contact">Contact:</dt>
       <dd class="blacklight-contact"><%= theme_contact_field(document["contact_ssm"].to_sentence) %></dd>
   </dl>
-
-  <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
-
 </div>
 <div class="rights">
   <h2><%= t('tul_ohist.rights_title') %></h2>

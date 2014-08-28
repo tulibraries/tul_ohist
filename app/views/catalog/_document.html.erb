@@ -2,3 +2,12 @@
 <div class="document <%= render_document_class document %>" itemscope itemtype="<%= document.itemtype %>">
   <%= render_document_partials document, blacklight_config.view_config(document_index_view_type).partials, :document_counter => document_counter %>
 </div>
+
+<script>
+
+$(".clickthroughConfirm").confirm({
+	    text: "<%= document['click_through_ssm'].to_sentence %>",
+	    confirmButton: "<%= t('tul_ohist.clickthroughConfirmButtonText') %>",
+	    cancelButton: "<%= t('tul_ohist.clickthroughCancelButtonText') %>"
+	});
+ </script>

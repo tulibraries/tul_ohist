@@ -13,6 +13,7 @@
 //= require jquery
 //= require 'blacklight_advanced_search'
 //= require PDFObject/pdfobject.min
+//= require jquery.confirm/jquery.confirm.min.js
 
 
 //= require jquery_ujs

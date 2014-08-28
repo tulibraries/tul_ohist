@@ -52,6 +52,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name('language', :facetable), :label => 'Language', :limit => true
     config.add_facet_field solr_name('format', :facetable), :label => 'Format', :limit => true
     config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true
+    config.add_facet_field solr_name('personal_names', :facetable), :label => 'Personal Names', :limit => true
     config.add_facet_field solr_name('geographic_subject', :facetable), :label => 'Geographic Subject', :limit => true
     config.add_facet_field solr_name('organization_building', :facetable), :label => 'Organization / Building', :limit => true
 
@@ -68,7 +69,8 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('title', :stored_searchable, type: :string), :label => 'Title'
-    config.add_index_field solr_name('subject', :stored_searchable, type: :string), :label => 'Subject'
+    config.add_index_field solr_name('subject', :stored_searchable, type: :string), :label => 'Subject', :link_to_search => 'subject_sim'
+    config.add_index_field solr_name('personal_names', :stored_searchable, type: :string), :label => 'Personal Names', :link_to_search => 'personal_names_sim'
 
 
     # solr fields to be displayed in the show (single result) view
@@ -86,7 +88,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('transcript_filename', :stored_searchable, type: :string), :label => 'Transcript Filename'
     config.add_show_field solr_name('audio_filename', :stored_searchable, type: :string), :label => 'Audio Filename'
     config.add_show_field solr_name('photograph_filename', :stored_searchable, type: :string), :label => 'Photograph Filename'
-    config.add_show_field solr_name('personal_names', :stored_searchable, type: :string), :label => 'Personal Names', :link_to_search => 'personal_names_tesim'
+    config.add_show_field solr_name('personal_names', :stored_searchable, type: :string), :label => 'Personal Names', :link_to_search => 'personal_names_sim'
     config.add_show_field solr_name('geographic_subject', :stored_searchable, type: :string), :label => 'Geographic Subject', :link_to_search => 'geographic_subject_sim'
     config.add_show_field solr_name('organization_building', :stored_searchable, type: :string), :label => 'Organization / Building', :link_to_search => 'organization_building_sim'
 

@@ -3,3 +3,9 @@ en:
     welcome: 'Welcome to the SCRC Oral Histories Repository'
     rights_title: 'Digital Collections Rights Statement for Use of This Content'
     related_items_title: 'Related Items'
+    about_collection_title: 'About this Collection'
+    about_interview_title: 'About this Interview'
+    biographical_title: 'Biographical / Historical Note'
+    record_details_title: 'Record Details'
+    clickthroughConfirmButtonText: "I understand and wish to continue"
+    clickthroughCancelButtonText: "I do not agree to the Terms of Use"
