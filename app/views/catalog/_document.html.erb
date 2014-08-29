@@ -2,3 +2,13 @@
 <div class="document <%= render_document_class document %>" itemscope itemtype="<%= document.itemtype %>">
   <%= render_document_partials document, blacklight_config.view_config(document_index_view_type).partials, :document_counter => document_counter %>
 </div>
+<script>
+acceptedTerms = $.cookie('acceptedTerms');
+if(!acceptedTerms){
+	searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through_confirm_button_text') %>","<%= t('tul_ohist.click_through_cancel_button_text') %>");
+} else {
+	if(acceptedTerms.indexOf("<%= document['click_through_ssm'].to_sentence %>") == -1){
+		searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through_confirm_button_text') %>","<%= t('tul_ohist.click_through_cancel_button_text') %>");
+	}
+}
+</script>
