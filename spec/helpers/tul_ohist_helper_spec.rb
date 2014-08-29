@@ -2,24 +2,55 @@ require 'rails_helper'
 
 RSpec.describe TulOhistHelper, :type => :helper do
 
+  let (:collection) { "p16002coll21" }
+  let (:id) { "0" }
+  let (:pdf_file_name) { "1.pdf" }
+  let (:image_file_name) { "5.jpg" }
+
   describe 'theme_contact_field' do
     let (:contact_email) { "abcd@example.com" }
     let (:html_link) { "<a href=\"mailto:#{contact_email}\">#{t('tul_ohist.contact_text')}</a>" }
-    fit "should generatge a contact field" do
+    it "should generatge a contact field" do
       expect(theme_contact_field("abcd@example.com")).to eq html_link
     end
   end
 
-  describe 'CONTENTdm access' do
+  context 'related objects' do
+    let (:p) { FactoryGirl.build(:photograph) }
+    let (:photograph) { Photograph.create(master_identifier: p.master_identifier, title: p.title, type: p.type) }
+    before do
+      #photograph.update_index
+    end
+
+    xdescribe 'get_related_objects' do
+      it "should find a photograph" do
+        objects = get_related_objects(p.master_identifier)
+        expect(objects.first.master_identifier).to match_array(p.master_identifier)
+      end
+    end
+    
+    xdescribe 'get_image_url' do
+    end
+
+    xdescribe 'render_photo' do
+
+      let (:expected_image_uri) { "http://digital.library.temple.edu/utils/getfile/collection/#{collection}/id/#{id}/filename/#{image_file_name}" }
+
+      it "should find a photograph" do
+        expected_html_text = "<img alt=\"#{p.title}\" src=\"#{expected_image_uri}\">"
+        actual_html_text = render_photo(p.master_identifier)
+        expect(actual_html_text).to eq expected_html_text
+      end
+    end
+  end
+
+  fdescribe 'CONTENTdm access' do
 
     let (:config) { YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__)) }
-    let (:expected_pdf_uri) { "http://digital.library.temple.edu/utils/getfile/collection/p16002coll21/id/0/filename/1.pdf" } 
+    let (:expected_pdf_uri) { "http://digital.library.temple.edu/utils/getfile/collection/#{collection}/id/#{id}/filename/#{pdf_file_name}" } 
 
     it "should construct a ContentDM getfile URI" do
-      collection = "p16002coll21"
-      id = "0"
-      file_name = "1.pdf"
-      file_uri = contentdm_file_url(collection, id, file_name)
+      file_uri = contentdm_file_url(collection, id, pdf_file_name)
       expect(file_uri).to eq(expected_pdf_uri)
     end
   end

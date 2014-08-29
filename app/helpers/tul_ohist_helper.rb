@@ -30,6 +30,7 @@ module TulOhistHelper
     b.each do |b_obj|
       pid=b_obj.id
       object = locate_by_model(pid)
+      binding.pry
       if(object && object.type.first == "Photograph")
        intermed_title = object.title.first
        (titles ||= []) << intermed_title
