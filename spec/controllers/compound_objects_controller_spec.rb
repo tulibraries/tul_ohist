@@ -17,7 +17,6 @@ describe 'CompoundObjectsController' do
     end
 
     it "renders title" do
-      puts subject.render_title(master_identifier)
       expect(subject.render_title(master_identifier)).to eq(title) 
     end
 
