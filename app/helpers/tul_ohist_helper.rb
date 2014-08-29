@@ -12,7 +12,7 @@ module TulOhistHelper
   #
   ##
   def theme_contact_field(field_val)
-  	output=link_to("Contact SCRC for audio", "mailto:#{field_val}")
+  	output=link_to(t('tul_ohist.contact_text'), "mailto:#{field_val}")
     output.html_safe
   end
 
