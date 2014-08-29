@@ -1,6 +1,6 @@
 <script>
 $(document).ready(function(){
-  checkForConfirmation("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through_confirm_button_text') %>", "<%= t('tul_ohist.click_through_cancel_button_text') %>", "<%= t('tul_ohist.click_through_preamble') %>");
+  checkForConfirmation("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through_confirm_button_text') %>", "<%= t('tul_ohist.click_through_cancel_button_text') %>");
 });
 
 </script>
@@ -47,9 +47,6 @@ $(document).ready(function(){
 <div class="rights">
   <h2><%= t('tul_ohist.rights_title') %></h2>
   <%= document['rights_ssm'].to_sentence %>
-</div>
-<div class="click-through">
-  <%= document['click_through_ssm'].to_sentence %>
 </div>
 
 <script type='text/javascript'>

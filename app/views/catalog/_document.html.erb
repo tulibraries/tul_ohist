@@ -5,9 +5,21 @@
 
 <script>
 
-$(".clickthroughConfirm").confirm({
-	    text: "<%= document['click_through_ssm'].to_sentence %>",
-	    confirmButton: "<%= t('tul_ohist.click_through_confirm_button_text') %>",
-	    cancelButton: "<%= t('tul_ohist.click_through_cancel_button_text') %>",
-	});
- </script>
+acceptedTerms = $.cookie('acceptedTerms');
+
+if(!acceptedTerms){
+	//alert("no accepted terms");
+	searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through_confirm_button_text') %>","<%= t('tul_ohist.click_through_cancel_button_text') %>");
+} else {
+    //alert("at least 1 term");
+	if(acceptedTerms.indexOf("<%= document['click_through_ssm'].to_sentence %>") == -1){
+		//alert("just not ours");
+		//alert("accepted Term: " + acceptedTerms);
+		//alert("term in question: " + "<%= document['click_through_ssm'].to_sentence %>");
+		searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through_confirm_button_text') %>","<%= t('tul_ohist.click_through_cancel_button_text') %>");
+
+	}
+}
+
+
+</script>
