@@ -1,0 +1,68 @@
+@import "base/colors.scss";
+@import "base/mixins.scss";
+
+/******
+*
+* General class- and ID-specific theming 
+*
+******/
+
+#main-container{
+  padding: 0px 10px;
+}
+
+
+
+/******
+*
+* Overriding Blacklight styles as needed
+*
+******/
+
+
+#header-navbar .navbar-brand {
+  width: 250px;
+  height: 60px;
+  margin-top: 10px;
+  background: transparent url(/assets/logo.png) no-repeat top left;
+}
+
+.navbar-inverse {
+  background-color: $temple-black;
+  border-color: $temple-dark-grey;
+}
+
+.panel-title a{
+  color: $temple-light-blue;
+}
+
+.dl-invert dt {
+  color: $temple-dark-grey;
+}
+
+.documentHeader{
+  padding: 0px;
+  margin:0px;
+}
+
+
+/******
+*
+* Theming for plugins 
+*
+******/
+
+/* Overlay style for the clickthrough */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    filter:alpha(opacity=95);
+    -moz-opacity:0.95;
+    -khtml-opacity: 0.95;
+    opacity: 0.95;
+    z-index: 100;
+}

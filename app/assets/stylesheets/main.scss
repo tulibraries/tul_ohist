@@ -1,0 +1,79 @@
+@import "base/mixins.scss";
+@import "base/globals.scss";
+@import "base/colors.scss";
+
+body{
+  background-color: $background;
+  color: $temple-black;
+}
+
+a {
+	color: $temple-light-blue;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-weight: bold;
+  color: $temple-cherry;
+  font-family: "Arial Narrow", Arial, sans-serif;
+}
+
+h1{
+  font-size: 18px;
+}
+
+h2{
+  font-size: 16px;
+}
+
+h3{
+  font-size: 14px;
+}
+
+h4{
+  font-size: 12px;
+}
+
+h5{
+  font-size: 10px;
+}
+
+h6{
+  font-size: 8px;
+}
+
+/* Header */
+
+#header-title h1{
+  color: $temple-white;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+#header-title{
+  clear:both;
+}
+
+#header-title h1 a{
+  color: $temple-white;
+}
+/* Footer */
+
+@include sticky-footer(100px);
+
+html,body,#wrapper,#main-wrapper,#footer {
+  width:100%;
+}
+
+#footer{
+	background-color: $temple-footer-bottom;
+	min-height: 70px;
+	margin-top: 100px;
+}
+
+#footer-runner{
+	background-color: $temple-footer-inner;
+	border-top: 10px solid $temple-footer-gutters;
+	border-bottom: 10px solid $temple-footer-gutters;
+	color: $temple-white;
+	padding: 10px;
+}
