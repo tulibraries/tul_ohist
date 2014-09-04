@@ -21,26 +21,29 @@ RSpec.describe TulOhistHelper, :type => :helper do
     let (:photograph) { Photograph.create(pid: pid, master_identifier: p.master_identifier, title: p.title, type: p.type, date_created: p.date_created,
                                           date_modified: p.date_modified, contentdm_number: p.contentdm_number, contentdm_file_name: p.contentdm_file_name,
                                           contentdm_file_path: p.contentdm_file_path, contentdm_collection_id: p.contentdm_collection_id) }
+    let (:expected_image_url) { "http://digital.library.temple.edu/utils/getfile/collection/#{p.contentdm_collection_id}/id/#{p.contentdm_number}/filename/#{p.contentdm_file_name}" }
+
     before do
       photograph.update_index
     end
 
-    xdescribe 'get_related_objects' do
+    describe 'get_related_objects' do
       it "should find a photograph" do
         objects = get_related_objects(p.master_identifier)
         expect(objects.first.master_identifier).to match_array(p.master_identifier)
       end
     end
     
-    xdescribe 'get_image_url' do
+    describe 'get_image_url' do
+      it "should get an image url" do
+          expect(get_image_url(pid)).to eq expected_image_url
+      end
     end
 
     describe 'render_photo' do
 
-      let (:expected_image_uri) { "http://digital.library.temple.edu/utils/getfile/collection/#{p.contentdm_collection_id}/id/#{p.contentdm_number}/filename/#{p.contentdm_file_name}" }
-
       it "should find a photograph" do
-        expected_html_text = "<img alt=\"#{p.title.first}\" src=\"#{expected_image_uri}\" />"
+        expected_html_text = "<img alt=\"#{p.title.first}\" src=\"#{expected_image_url}\" />"
         actual_html_text = render_photo(p.master_identifier.first)
         expect(actual_html_text).to eq expected_html_text
       end
