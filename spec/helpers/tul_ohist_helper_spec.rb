@@ -17,9 +17,12 @@ RSpec.describe TulOhistHelper, :type => :helper do
 
   context 'related objects' do
     let (:p) { FactoryGirl.build(:photograph) }
-    let (:photograph) { Photograph.create(master_identifier: p.master_identifier, title: p.title, type: p.type) }
+    let (:pid) { "#{p.type.first.downcase}:#{p.master_identifier.first}x#{p.contentdm_collection_id}x#{p.contentdm_number}" }
+    let (:photograph) { Photograph.create(pid: pid, master_identifier: p.master_identifier, title: p.title, type: p.type, date_created: p.date_created,
+                                          date_modified: p.date_modified, contentdm_number: p.contentdm_number, contentdm_file_name: p.contentdm_file_name,
+                                          contentdm_file_path: p.contentdm_file_path, contentdm_collection_id: p.contentdm_collection_id) }
     before do
-      #photograph.update_index
+      photograph.update_index
     end
 
     xdescribe 'get_related_objects' do
@@ -32,13 +35,13 @@ RSpec.describe TulOhistHelper, :type => :helper do
     xdescribe 'get_image_url' do
     end
 
-    xdescribe 'render_photo' do
+    describe 'render_photo' do
 
-      let (:expected_image_uri) { "http://digital.library.temple.edu/utils/getfile/collection/#{collection}/id/#{id}/filename/#{image_file_name}" }
+      let (:expected_image_uri) { "http://digital.library.temple.edu/utils/getfile/collection/#{p.contentdm_collection_id}/id/#{p.contentdm_number}/filename/#{p.contentdm_file_name}" }
 
       it "should find a photograph" do
-        expected_html_text = "<img alt=\"#{p.title}\" src=\"#{expected_image_uri}\">"
-        actual_html_text = render_photo(p.master_identifier)
+        expected_html_text = "<img alt=\"#{p.title.first}\" src=\"#{expected_image_uri}\" />"
+        actual_html_text = render_photo(p.master_identifier.first)
         expect(actual_html_text).to eq expected_html_text
       end
     end
