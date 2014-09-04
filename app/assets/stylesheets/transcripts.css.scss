@@ -1,59 +1,60 @@
-// Place all the styles related to the Transcripts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "base/mixins.scss";
+@import "base/colors.scss";
 
 
-
-.portrait{
+.portrait {
   float: left;
   padding: 10px;
-}
 
-.rights h2{
-	font-size: 14px;
-	font-weight: bold;
+  img {
+    @include rounded-corners-all;
+  }
 }
 
 #transcript-pdf {
-	width:  877px;
-	height: 470px;
-	margin: 2em auto;
+  width:  877px;
+  height: 470px;
+  margin: 2em auto;
 
-	p {
-      padding: 1em;
-    }
+  p {
+    padding: 1em;
+  }
 
-    object {
-      display: block;
-      border: solid 1px #a6c9e2;
-    }
+  object {
+    display: block;
+    border: solid 1px $temple-black;
+  }
 }
 
 .related-items{
   float:right;
-  border: 1px solid #6695af;
+  border: 1px solid $temple-light-blue;
   padding: 0px;
   width: 200px;
-  border-radius: 10px;
+  margin: 5px;
+  @include rounded-corners-all;
 
   h2{
     margin-top:0px;
     font-size: 16px;
-    background-color: #6695af;
+    background-color: $temple-light-blue;
     color:#ffffff;
     text-align: center;
     padding: 5px 0px;
     font-weight: bold;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    @include rounded-corners-top; 
   }
 
   h3{
     padding: 0px 0px 0px 10px;
     font-size: 12px;
-    color: #6695af;
+    color: $temple-light-blue;
     font-weight: bold;
-    border-bottom: 1px solid #6695af;
+    border-bottom: 1px solid $temple-light-blue;
   }
 }
 
+.rights h2{
+  font-size: 14px;
+  font-weight: bold;
+}
