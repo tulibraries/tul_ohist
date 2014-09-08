@@ -12,7 +12,7 @@ module TulOhistHelper
   #
   ##
   def theme_contact_field(field_val)
-  	output=link_to("Contact SCRC for audio", "mailto:#{field_val}")
+  	output=link_to(t('tul_ohist.contact_text'), "mailto:#{field_val}")
     output.html_safe
   end
 
@@ -77,7 +77,6 @@ module TulOhistHelper
 
   def render_single_list(links_list, links_label)
     html_list = ''
-    binding.pry
     if links_list.any?(&:present?) then html_list << "<h3>#{links_label.pluralize}</h3>" end
     html_list << "<ul>"
     for list_items in links_list do
