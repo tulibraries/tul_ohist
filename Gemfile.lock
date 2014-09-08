@@ -401,6 +401,7 @@ DEPENDENCIES
   blacklight_advanced_search
   bootstrap-sass
   byebug
+  capybara
   coffee-rails (~> 4.0.0)
   colorize
   cucumber-rails

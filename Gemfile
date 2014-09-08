@@ -51,6 +51,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'vcr'
   gem 'webmock'
+  gem 'capybara'
 end
 
 group :development, :test do

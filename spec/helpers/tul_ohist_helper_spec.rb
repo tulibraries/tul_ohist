@@ -31,13 +31,16 @@ RSpec.describe TulOhistHelper, :type => :helper do
     let (:related_photograph_url) { "http://digital.library.temple.edu/utils/getfile/collection/#{p.contentdm_collection_id}/id/#{p.contentdm_number}/filename/#{p.contentdm_file_name}" }
     let (:related_image_tag) { "<img alt=\"#{p.title.first}\" src=\"#{related_photograph_url}\" />" }
     let (:related_transcript_url) { "http://digital.library.temple.edu/utils/getfile/collection/#{t.contentdm_collection_id}/id/#{t.contentdm_number}/filename/#{t.contentdm_file_name}" }
+    let (:finding_aids_label) { "Finding Aids" }
+    let (:online_exhibit_label) { "Online Exhibit" }
+    let (:catalog_record_label) { "Catalog Record" }
 
     before do
       transcript.update_index
       photograph.update_index
     end
 
-    fdescribe 'get_related_objects' do
+    describe 'get_related_objects' do
       subject { get_related_objects(p.master_identifier) }
       it { is_expected.to have_object_of_type ("Photograph") }
       it { is_expected.to have_object_of_type ("Transcript") }
@@ -53,23 +56,47 @@ RSpec.describe TulOhistHelper, :type => :helper do
       it { is_expected.to eq related_image_tag }
     end
 
+    describe 'locate_by_model' do
+      subject { locate_by_model(photograph_pid).type.first }
+      it { is_expected.to eq "Photograph" }
+    end
+
     describe 'related_items' do
-      subject { related_items(master_identifier) }
-      # Left off here. Implement the following:
-      it { is_expected.to include t.finding_aid }
-      it { is_expected.to include t.online_exhibit}
-      it { is_expected.to include t.catalog_record}
+      let (:items) { related_items(t.master_identifier) }
+      let (:finding_aid_index) { 0 }
+      let (:online_exhibit_index) { 1 }
+      let (:catalog_record_index) { 2 }
+
+      describe 'has finding_aid' do
+        subject { items[finding_aid_index] }
+        it { is_expected.to include t.finding_aid.first }
+      end
+
+      describe 'has online_exhibit' do
+        subject { items[online_exhibit_index] }
+        it { is_expected.to include t.online_exhibit.first }
+      end
+
+      describe 'has catalog_record' do
+        subject { items[catalog_record_index] }
+        it { is_expected.to include t.catalog_record.first }
+      end
+    end
+
+    describe 'render_single_list' do
+      subject { render_single_list(t.finding_aid, finding_aids_label) }
+      it { is_expected.to have_content finding_aids_label }
+      it { is_expected.to include "<a href=\"#{t.finding_aid.first}\">" }
     end
 
     describe 'render_related_items' do
       subject { render_related_items(p.master_identifier) } 
-      pending
-      it { is_expected.to include 'finding aids' }
-    end
-
-    describe 'render_single_list(links_list, links_label)' do
-      subject { render_single_list(links_list, links_label) }
-      pending
+      it { is_expected.to have_content finding_aids_label }
+      it { is_expected.to include "<a href=\"#{t.finding_aid.first}\">" }
+      it { is_expected.to have_content online_exhibit_label }
+      it { is_expected.to include "<a href=\"#{t.online_exhibit.first}\">" }
+      it { is_expected.to have_content catalog_record_label }
+      it { is_expected.to include "<a href=\"#{t.catalog_record.first}\">" }
     end
 
   end
