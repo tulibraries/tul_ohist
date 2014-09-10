@@ -461,20 +461,38 @@
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Finding_Aid">  
-                                                                  <xsl:element name="finding_aid">  
+                                                          <xsl:for-each select="Finding_Aid_Link">  
+                                                                  <xsl:element name="finding_aid_link">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Online_Exhibit">  
-                                                                  <xsl:element name="online_exhibit">  
+                                                          <xsl:for-each select="Finding_Aid_Title">  
+                                                                  <xsl:element name="finding_aid_title">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 
                                                           <xsl:text>&#xa;</xsl:text>
-                                                          <xsl:for-each select="Catalog_Record">  
-                                                                  <xsl:element name="catalog_record">  
+                                                          <xsl:for-each select="Online_Exhibit_Link">  
+                                                                  <xsl:element name="online_exhibit_link">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Online_Exhibit_Title">  
+                                                                  <xsl:element name="online_exhibit_title">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Catalog_Record_Link">  
+                                                                  <xsl:element name="catalog_record_link">  
+                                                                          <xsl:value-of select="." />  
+                                                                  </xsl:element>
+                                                          </xsl:for-each> 
+                                                          <xsl:text>&#xa;</xsl:text>
+                                                          <xsl:for-each select="Catalog_Record_Title">  
+                                                                  <xsl:element name="catalog_record_title">  
                                                                           <xsl:value-of select="." />  
                                                                   </xsl:element>
                                                           </xsl:for-each> 

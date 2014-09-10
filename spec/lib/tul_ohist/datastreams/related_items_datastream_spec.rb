@@ -22,16 +22,28 @@ EODS
     expect(@datastream).to have_term(:repository_collection)
   end
 
-  it "should have term finding_aid" do
-    expect(@datastream).to have_term(:finding_aid)
+  it "should have term finding_aid_link" do
+    expect(@datastream).to have_term(:finding_aid_link)
   end
 
-  it "should have term online_exhibit" do
-    expect(@datastream).to have_term(:online_exhibit)
+  it "should have term finding_aid_title" do
+    expect(@datastream).to have_term(:finding_aid_title)
   end
 
-  it "should have term catalog_record" do
-    expect(@datastream).to have_term(:catalog_record)
+  it "should have term online_exhibit_link" do
+    expect(@datastream).to have_term(:online_exhibit_link)
+  end
+
+  it "should have term online_exhibit_title" do
+    expect(@datastream).to have_term(:online_exhibit_title)
+  end
+
+  it "should have term catalog_record_link" do
+    expect(@datastream).to have_term(:catalog_record_link)
+  end
+
+  it "should have term catalog_record_title" do
+    expect(@datastream).to have_term(:catalog_record_title)
   end
 
 end
