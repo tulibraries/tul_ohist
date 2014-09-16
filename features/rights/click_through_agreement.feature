@@ -3,6 +3,9 @@ Oral histories are covered by various licenses granted to Temple University
 Libraries by the narrators. We need to have users agree to these licenses 
 before they view oral history assets.
 
+NOTE: Step definitons are incomplete. These are valid tests if run manually.
+Pull Requests are welcome
+
 In order to allow users access to assets covered license agreements
 So that we can reasonably insure that users agree to license agreement to view the assets
 We want users to agree to the license agreement before they view the assets
