@@ -14,6 +14,10 @@ describe 'Photograph' do
     let (:p) { FactoryGirl.build(:photograph) }
     let (:photograph) { Photograph.create(master_identifier: p.master_identifier, title: p.title, type: p.type) }
 
+    before do
+      photograph.update_index
+    end
+
     it "should find the photograph" do
       object = ActiveFedora::Base.where(master_identifier_ssim: p.master_identifier).to_a 
       expect(object.first.master_identifier).to match_array(p.master_identifier)

@@ -52,6 +52,9 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', "~> 4.0"
+  gem 'launchy'
 end
 
 group :development, :test do
@@ -64,9 +67,4 @@ group :development do
   gem "pry-rails"
 end
 
-gem 'thin'
 gem 'blacklight_advanced_search'
-
-group :test do
-  gem 'factory_girl_rails', "~> 4.0"
-end
