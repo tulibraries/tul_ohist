@@ -15,6 +15,10 @@ describe 'Transcript' do
     let (:t) { FactoryGirl.build(:transcript) }
     let (:transcript) { Transcript.create(master_identifier: t.master_identifier, title: t.title, type: t.type) }
 
+    before do
+      transcript.update_index
+    end
+
     it "should find the transcript" do
       object = ActiveFedora::Base.where(master_identifier_ssim: t.master_identifier).to_a 
       expect(object.first.master_identifier).to match_array(t.master_identifier)
