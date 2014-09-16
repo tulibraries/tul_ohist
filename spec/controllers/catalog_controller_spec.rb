@@ -14,15 +14,11 @@ describe 'CatalogController' do
     let (:user) {}
 
     describe 'Unwanted Models' do
-      it "should filter out photographs" do
-        pending
-      end
+      it "should filter out photographs"
     end
 
     describe 'Exclude Unwanted Models' do
-      it "should exclude the Photograph model" do
-        pending
-      end
+      it "should exclude the Photograph model"
     end
 
   end
