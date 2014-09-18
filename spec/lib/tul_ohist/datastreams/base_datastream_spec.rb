@@ -1,6 +1,6 @@
 describe "BaseDatastream" do
 
-  subject {
+  subject do
     datastream = TulOhist::Datastreams::BaseDatastream.new
     datastream.content = <<EODS
 <foxml:datastream ID="baseMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
@@ -28,9 +28,8 @@ describe "BaseDatastream" do
   </foxml:datastreamVersion>
 </foxml:datastream>
 EODS
-
     datastream
-  }
+  end
 
   it { is_expected.to have_term(:title) }
   it { is_expected.to have_term(:date) }

@@ -69,7 +69,6 @@ module TulOhistHelper
        (related_items ||= []) << finding_aid << online_exhibit << catalog_record
      end
     end
-    binding.pry
     return related_items
   end
 

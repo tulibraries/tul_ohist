@@ -1,6 +1,6 @@
 describe "ContentdmDatastream" do
 
-  subject {
+  subject do
     datastream = TulOhist::Datastreams::ContentdmDatastream.new
     datastream.content = <<EODS
 <foxml:datastream ID="contentdmMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
@@ -19,9 +19,8 @@ describe "ContentdmDatastream" do
   </foxml:datastreamVersion>
 </foxml:datastream>
 EODS
-
     datastream
-  }
+  end
 
   it { is_expected.to have_term(:oclc_number) }
   it { is_expected.to have_term(:date_created) }
