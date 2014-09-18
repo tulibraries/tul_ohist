@@ -1,7 +1,8 @@
 describe "RightsDatastream" do
-  before do
-    @datastream = TulOhist::Datastreams::RightsDatastream.new
-    @datastream.content = <<EODS
+
+  subject do
+    datastream = TulOhist::Datastreams::RightsDatastream.new
+    datastream.content = <<EODS
 <foxml:datastream ID="rightsMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
   <foxml:datastreamVersion ID="rightsMetadata.0" LABEL="ContentDM metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
@@ -13,14 +14,10 @@ describe "RightsDatastream" do
   </foxml:datastreamVersion>
 </foxml:datastream>
 EODS
+    datastream
   end
 
-  it "should have term rights" do
-    expect(@datastream).to have_term(:rights)
-  end
-
-  it "should have term click_through" do
-    expect(@datastream).to have_term(:click_through)
-  end
+  it { is_expected.to have_term(:rights) }
+  it { is_expected.to have_term(:click_through) }
 
 end

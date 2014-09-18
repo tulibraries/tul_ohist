@@ -69,14 +69,13 @@ module TulOhistHelper
        (related_items ||= []) << finding_aid << online_exhibit << catalog_record
      end
     end
-    binding.pry
     return related_items
   end
 
   def render_single_list(links_list)
     html_list = ''
       for list_items in links_list do
-        unless list_items.first.empty?
+        unless list_items.first.nil? or list_items.first.empty?
           html_list << content_tag("li") do
           concat link_to "#{list_items.second}", "#{list_items.first}" 
          end

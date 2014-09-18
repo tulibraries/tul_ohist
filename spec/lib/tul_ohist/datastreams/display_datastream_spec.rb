@@ -1,8 +1,8 @@
 describe "DisplayDatastream" do
 
-  before do
-    @datastream = TulOhist::Datastreams::DisplayDatastream.new
-    @datastream.content = <<EODS
+  subject do
+    datastream = TulOhist::Datastreams::DisplayDatastream.new
+    datastream.content = <<EODS
 <foxml:datastream ID="displayMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
   <foxml:datastreamVersion ID="displayMetadata.0" LABEL="Display metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
@@ -13,10 +13,9 @@ describe "DisplayDatastream" do
   </foxml:datastreamVersion>
 </foxml:datastream>
 EODS
+    datastream
   end
 
-  it "should have term weight" do
-    expect(@datastream).to have_term(:weight)
-  end
+  it { is_expected.to have_term(:weight) }
 
 end

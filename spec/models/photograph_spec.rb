@@ -1,11 +1,11 @@
 describe 'Photograph' do
 
   #TODO: Failing - needs to be updated
-  xcontext 'Photograph Class' do
+  context 'Photograph Class' do
     subject { Photograph.new }
 
-    it { is_expected.to have_datastream_of_type("base", TulOhist::Datastreams::BaseDatastream) }
-    it { is_expected.to have_datastream_of_type("digital", TulOhist::Datastreams::DigitalDatastream) }
+    it { is_expected.to have_metadata_stream_of_type(TulOhist::Datastreams::BaseDatastream) }
+    it { is_expected.to have_metadata_stream_of_type(TulOhist::Datastreams::DigitalDatastream) }
   end
 
   context 'Photograph Object' do

@@ -1,8 +1,8 @@
 describe "RelatedItemsDatastream" do
 
-  before do
-    @datastream = TulOhist::Datastreams::RelatedItemsDatastream.new
-    @datastream.content = <<EODS
+  subject do
+    datastream = TulOhist::Datastreams::RelatedItemsDatastream.new
+    datastream.content = <<EODS
 <foxml:datastream ID="relatedItemsMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
   <foxml:datastreamVersion ID="relatedItemsMetadata.0" LABEL="related items metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
@@ -16,34 +16,14 @@ describe "RelatedItemsDatastream" do
   </foxml:datastreamVersion>
 </foxml:datastream>
 EODS
+    datastream
   end
 
-  it "should have term repository_collection" do
-    expect(@datastream).to have_term(:repository_collection)
-  end
-
-  it "should have term finding_aid_link" do
-    expect(@datastream).to have_term(:finding_aid_link)
-  end
-
-  it "should have term finding_aid_title" do
-    expect(@datastream).to have_term(:finding_aid_title)
-  end
-
-  it "should have term online_exhibit_link" do
-    expect(@datastream).to have_term(:online_exhibit_link)
-  end
-
-  it "should have term online_exhibit_title" do
-    expect(@datastream).to have_term(:online_exhibit_title)
-  end
-
-  it "should have term catalog_record_link" do
-    expect(@datastream).to have_term(:catalog_record_link)
-  end
-
-  it "should have term catalog_record_title" do
-    expect(@datastream).to have_term(:catalog_record_title)
-  end
+  it { is_expected.to have_term(:repository_collection) }
+  it { is_expected.to have_term(:finding_aid_link) }
+  it { is_expected.to have_term(:finding_aid_title) }
+  it { is_expected.to have_term(:online_exhibit_link) }
+  it { is_expected.to have_term(:catalog_record_link) }
+  it { is_expected.to have_term(:catalog_record_title) }
 
 end

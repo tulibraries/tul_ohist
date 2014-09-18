@@ -1,7 +1,8 @@
 describe "PhysicalDatastream" do
-  before do
-    @datastream = TulOhist::Datastreams::PhysicalDatastream.new
-    @datastream.content = <<EODS
+
+  subject do
+    datastream = TulOhist::Datastreams::PhysicalDatastream.new
+    datastream.content = <<EODS
 <foxml:datastream ID="physicalMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
   <foxml:datastreamVersion ID="physicalMetadata.0" LABEL="physical metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
@@ -13,14 +14,10 @@ describe "PhysicalDatastream" do
   </foxml:datastreamVersion>
 </foxml:datastream>
 EODS
+    datastream
   end
 
-  it "should have term location" do
-    expect(@datastream).to have_term(:location)
-  end
-
-  it "should have term physical_description" do
-    expect(@datastream).to have_term(:physical_description)
-  end
+  it { is_expected.to have_term(:location) }
+  it { is_expected.to have_term(:physical_description) }
 
 end

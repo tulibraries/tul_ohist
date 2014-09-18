@@ -1,8 +1,8 @@
 describe "GeographicDatastream" do
 
-  before do
-    @datastream = TulOhist::Datastreams::GeographicDatastream.new
-    @datastream.content = <<EODS
+  subject do
+    datastream = TulOhist::Datastreams::GeographicDatastream.new
+    datastream.content = <<EODS
 <foxml:datastream ID="geographicMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
   <foxml:datastreamVersion ID="geographicMetadata.0" LABEL="geographic metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
@@ -14,14 +14,10 @@ describe "GeographicDatastream" do
   </foxml:datastreamVersion>
 </foxml:datastream>
 EODS
+    datastream
   end
 
-  it "should have term geographic_subject" do
-    expect(@datastream).to have_term(:geographic_subject)
-  end
-
-  it "should have term organization_building" do
-    expect(@datastream).to have_term(:organization_building)
-  end
+  it { is_expected.to have_term(:geographic_subject) }
+  it { is_expected.to have_term(:organization_building) }
 
 end

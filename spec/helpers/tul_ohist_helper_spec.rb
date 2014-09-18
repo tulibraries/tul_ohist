@@ -82,18 +82,18 @@ RSpec.describe TulOhistHelper, :type => :helper do
     end
 
     describe 'render_single_list' do
-      subject { render_single_list(t.finding_aid, finding_aids_label) }
-      it { is_expected.to have_content finding_aids_label }
+      subject { render_single_list(related_items(t.master_identifier)) }
+      it { is_expected.to have_content t.finding_aid_title.first }
       it { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
     end
 
     describe 'render_related_items' do
       subject { render_related_items(p.master_identifier) } 
-      it { is_expected.to have_content finding_aids_title }
+      it { is_expected.to have_content t.finding_aid_title.first }
       it { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
-      it { is_expected.to have_content online_exhibit_title }
+      it { is_expected.to have_content t.online_exhibit_title.first }
       it { is_expected.to include "<a href=\"#{t.online_exhibit_link.first}\">" }
-      it { is_expected.to have_content catalog_record_title }
+      it { is_expected.to have_content t.catalog_record_title.first }
       it { is_expected.to include "<a href=\"#{t.catalog_record_link.first}\">" }
     end
 
