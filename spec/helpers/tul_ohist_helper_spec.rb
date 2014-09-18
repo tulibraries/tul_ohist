@@ -26,14 +26,12 @@ RSpec.describe TulOhistHelper, :type => :helper do
     let (:transcript) { Transcript.create(pid: transcript_pid, master_identifier: t.master_identifier, title: t.title, type: t.type, date_created: t.date_created,
                                           date_modified: t.date_modified, contentdm_number: t.contentdm_number, contentdm_file_name: t.contentdm_file_name,
                                           contentdm_file_path: t.contentdm_file_path, contentdm_collection_id: t.contentdm_collection_id,
-                                          repository_collection: t.repository_collection, finding_aid: t.finding_aid, online_exhibit: t.online_exhibit,
-                                          catalog_record: t.catalog_record) }
+                                          repository_collection: t.repository_collection, finding_aid_link: t.finding_aid_link, finding_aid_title: t.finding_aid_title,
+                                          online_exhibit_link: t.online_exhibit_link, online_exhibit_title: t.online_exhibit_title, catalog_record_link: t.catalog_record_link, 
+                                          catalog_record_title: t.catalog_record_title) }
     let (:related_photograph_url) { "http://digital.library.temple.edu/utils/getfile/collection/#{p.contentdm_collection_id}/id/#{p.contentdm_number}/filename/#{p.contentdm_file_name}" }
     let (:related_image_tag) { "<img alt=\"#{p.title.first}\" src=\"#{related_photograph_url}\" />" }
     let (:related_transcript_url) { "http://digital.library.temple.edu/utils/getfile/collection/#{t.contentdm_collection_id}/id/#{t.contentdm_number}/filename/#{t.contentdm_file_name}" }
-    let (:finding_aids_label) { "Finding Aids" }
-    let (:online_exhibit_label) { "Online Exhibit" }
-    let (:catalog_record_label) { "Catalog Record" }
 
     before do
       transcript.update_index
@@ -67,36 +65,36 @@ RSpec.describe TulOhistHelper, :type => :helper do
       let (:online_exhibit_index) { 1 }
       let (:catalog_record_index) { 2 }
 
-      describe 'has finding_aid' do
+      describe 'has finding_aid_link' do
         subject { items[finding_aid_index] }
-        it { is_expected.to include t.finding_aid.first }
+        it { is_expected.to include t.finding_aid_link.first }
       end
 
-      describe 'has online_exhibit' do
+      describe 'has online_exhibit_link' do
         subject { items[online_exhibit_index] }
-        it { is_expected.to include t.online_exhibit.first }
+        it { is_expected.to include t.online_exhibit_link.first }
       end
 
-      describe 'has catalog_record' do
+      describe 'has catalog_record_link' do
         subject { items[catalog_record_index] }
-        it { is_expected.to include t.catalog_record.first }
+        it { is_expected.to include t.catalog_record_link.first }
       end
     end
 
     describe 'render_single_list' do
       subject { render_single_list(t.finding_aid, finding_aids_label) }
       it { is_expected.to have_content finding_aids_label }
-      it { is_expected.to include "<a href=\"#{t.finding_aid.first}\">" }
+      it { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
     end
 
     describe 'render_related_items' do
       subject { render_related_items(p.master_identifier) } 
-      it { is_expected.to have_content finding_aids_label }
-      it { is_expected.to include "<a href=\"#{t.finding_aid.first}\">" }
-      it { is_expected.to have_content online_exhibit_label }
-      it { is_expected.to include "<a href=\"#{t.online_exhibit.first}\">" }
-      it { is_expected.to have_content catalog_record_label }
-      it { is_expected.to include "<a href=\"#{t.catalog_record.first}\">" }
+      it { is_expected.to have_content finding_aids_title }
+      it { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
+      it { is_expected.to have_content online_exhibit_title }
+      it { is_expected.to include "<a href=\"#{t.online_exhibit_link.first}\">" }
+      it { is_expected.to have_content catalog_record_title }
+      it { is_expected.to include "<a href=\"#{t.catalog_record_link.first}\">" }
     end
 
   end

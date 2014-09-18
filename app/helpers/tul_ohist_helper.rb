@@ -41,12 +41,11 @@ module TulOhistHelper
   end
 
   def render_related_items(master_identifier)
-  	related_items = ''
-  	finding_aids, online_exhibits, catalog_records = related_items(master_identifier)
-    related_items << render_single_list(finding_aids, "Finding Aid")
-    related_items << render_single_list(online_exhibits, "Online Exhibit")
-    related_items << render_single_list(catalog_records, "Catalog Record")
-    return related_items.html_safe
+  	related_items_list = ''
+  	related_items = related_items(master_identifier)
+    related_items_list << render_single_list(related_items)
+
+    return content_tag("ul") do related_items_list.html_safe end
   end
 
   ##
@@ -56,40 +55,37 @@ module TulOhistHelper
   ##
   def related_items(master_identifier)
     b = get_related_objects(master_identifier);
-    finding_aids = Array.new    
-    online_exhibits = Array.new
-    catalog_records = Array.new   
+
+    related_items = Array.new
+ 
     
     b.each do |b_obj|
       pid=b_obj.id
       object = locate_by_model(pid)
       if(object)
-       finding_aid = object.finding_aid.first
-       online_exhibit = object.online_exhibit.first
-       catalog_record = object.catalog_record.first
-       (finding_aids ||= []) << finding_aid
-       (online_exhibits ||= []) << online_exhibit
-       (catalog_records ||= []) << catalog_record
+       finding_aid = [object.finding_aid_link.first,object.finding_aid_title.first]
+       online_exhibit = [object.online_exhibit_link.first,object.online_exhibit_title.first]
+       catalog_record = [object.catalog_record_link.first,object.catalog_record_title.first]
+       (related_items ||= []) << finding_aid << online_exhibit << catalog_record
      end
     end
-    return [finding_aids, online_exhibits, catalog_records]
+    binding.pry
+    return related_items
   end
 
-  def render_single_list(links_list, links_label)
+  def render_single_list(links_list)
     html_list = ''
-    if links_list.any?(&:present?) then html_list << "<h3>#{links_label.pluralize}</h3>" end
-    html_list << "<ul>"
-    for list_items in links_list do
-
-      if list_items.present? then html_list << content_tag("li") do
-         concat link_to "#{links_label}", "#{list_items}" 
-       end
+      for list_items in links_list do
+        unless list_items.first.empty?
+          html_list << content_tag("li") do
+          concat link_to "#{list_items.second}", "#{list_items.first}" 
+         end
+        end
       end
+      return html_list.html_safe
     end
-    html_list << "</ul>"
-    return html_list.html_safe
 
-  end
+
 
   def get_image_url(pid)
   	object = Photograph.find(pid)

@@ -13,8 +13,11 @@ FactoryGirl.define do
     contentdm_collection_id "p16002coll21"
     # Related items
     repository_collection ["Oral Histories"]
-    finding_aid ["http://findingaids.library.temple.edu/fred"]
-    online_exhibit ["http://online-exhibit.library.temple.edu"]
-    catalog_record ["http://catalog.library.temple.edu/fred"]
+    finding_aid_link ["http://findingaids.library.temple.edu/fred"]
+    finding_aid_title ["Finding Aid of Fred"]
+    online_exhibit_link ["http://online-exhibit.library.temple.edu"]
+    online_exhibit_title ["Online Exhibit of Fred"]
+    catalog_record_link ["http://catalog.library.temple.edu/fred"]
+    catalog_record_title ["Catalog Record of Fred"]
   end
 end
