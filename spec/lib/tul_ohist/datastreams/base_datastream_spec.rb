@@ -1,8 +1,8 @@
 describe "BaseDatastream" do
 
-  before do
-    @datastream = TulOhist::Datastreams::BaseDatastream.new
-    @datastream.content = <<EODS
+  subject {
+    datastream = TulOhist::Datastreams::BaseDatastream.new
+    datastream.content = <<EODS
 <foxml:datastream ID="baseMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
   <foxml:datastreamVersion ID="baseMetadata.0" LABEL="Base metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
@@ -20,51 +20,29 @@ describe "BaseDatastream" do
         <subject>Demonstrations</subject>
         <subject>Civil rights</subject>
         <digital_collection>John W. Mosley Photographs</digital_collection>
+        <doi>ABCDE12345</doi>
+        <permanent_url>http://example.com/ABCDE12345.jpg</permanent_url>
+        <master_identifier>ZYXWV98765</master_identifier>
       </fields>
     </foxml:xmlContent>
   </foxml:datastreamVersion>
 </foxml:datastream>
 EODS
-  end
 
-  it "should have term title" do
-    expect(@datastream).to have_term(:title)
-  end
+    datastream
+  }
 
-  it "should have term date" do
-    expect(@datastream).to have_term(:date)
-  end
-
-  it "should have term contact" do
-    expect(@datastream).to have_term(:contact)
-  end
-
-  it "should have term digital_publisher" do
-    expect(@datastream).to have_term(:digital_publisher)
-  end
-
-  it "should have term repository" do
-    expect(@datastream).to have_term(:repository)
-  end
-
-  it "should have term format" do
-    expect(@datastream).to have_term(:format)
-  end
-
-  it "should have term type" do
-    expect(@datastream).to have_term(:type)
-  end
-
-  it "should have term language" do
-    expect(@datastream).to have_term(:language)
-  end
-
-  it "should have term subject" do
-    expect(@datastream).to have_term(:subject)
-  end
-
-  it "should have term digital_collection" do
-    expect(@datastream).to have_term(:digital_collection)
-  end
+  it { is_expected.to have_term(:title) }
+  it { is_expected.to have_term(:date) }
+  it { is_expected.to have_term(:contact) }
+  it { is_expected.to have_term(:repository) }
+  it { is_expected.to have_term(:format) }
+  it { is_expected.to have_term(:type) }
+  it { is_expected.to have_term(:language) }
+  it { is_expected.to have_term(:subject) }
+  it { is_expected.to have_term(:digital_collection) }
+  it { is_expected.to have_term(:doi) }
+  it { is_expected.to have_term(:permanent_url) }
+  it { is_expected.to have_term(:master_identifier) }
 
 end
