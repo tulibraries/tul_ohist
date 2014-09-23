@@ -1,10 +1,10 @@
-describe "RelatedItemsDatastream" do
+describe "RelatedResourcesDatastream" do
 
   subject do
-    datastream = TulOhist::Datastreams::RelatedItemsDatastream.new
+    datastream = TulOhist::Datastreams::RelatedResourcesDatastream.new
     datastream.content = <<EODS
-<foxml:datastream ID="relatedItemsMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-  <foxml:datastreamVersion ID="relatedItemsMetadata.0" LABEL="related items metadata" MIMETYPE="text/xml">
+<foxml:datastream ID="relatedResourcesMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+  <foxml:datastreamVersion ID="relatedResourcesMetadata.0" LABEL="related resources metadata" MIMETYPE="text/xml">
     <foxml:xmlContent>
       <fields>
         <repository_collection>John W. Mosley Photograph Collection</repository_collection>

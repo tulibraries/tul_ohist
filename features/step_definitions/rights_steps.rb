@@ -35,6 +35,5 @@ When(/^I visit "(.*?)"$/) do |oral_history|
 end
 
 Then(/^I should see license "(.*?)"$/) do |license_text|
-  binding.pry
   expect(page).to have_selector('div')
 end

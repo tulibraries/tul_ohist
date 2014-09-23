@@ -450,8 +450,8 @@
                                         </foxml:datastream>
                                         <xsl:text>&#xa;</xsl:text>
 
-                                        <foxml:datastream ID="relatedItemsMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
-                                          <foxml:datastreamVersion ID="relatedItemsMetadata.0" LABEL="related items metadata" MIMETYPE="text/xml">
+                                        <foxml:datastream ID="relatedResourcesMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+                                          <foxml:datastreamVersion ID="relatedResourcesMetadata.0" LABEL="related resources metadata" MIMETYPE="text/xml">
                                             <foxml:xmlContent>
                                               <fields>
                                                  <xsl:text>&#xa;</xsl:text>

@@ -40,25 +40,22 @@ module TulOhistHelper
     return img.to_sentence
   end
 
-  def render_related_items(master_identifier)
-  	related_items_list = ''
-  	related_items = related_items(master_identifier)
-    related_items_list << render_single_list(related_items)
+  def render_related_resources(master_identifier)
+  	related_resources_list = ''
+  	related_resources = related_resources(master_identifier)
+    related_resources_list << render_single_list(related_resources)
 
-    return content_tag("ul") do related_items_list.html_safe end
+    return content_tag("ul") do related_resources_list.html_safe end
   end
 
   ##
   #
-  # Grab all related items (links) for the transcript
+  # Grab all related resources (links) for the transcript
   # 
   ##
-  def related_items(master_identifier)
+  def related_resources(master_identifier)
     b = get_related_objects(master_identifier);
-
-    related_items = Array.new
- 
-    
+    related_resources = Array.new
     b.each do |b_obj|
       pid=b_obj.id
       object = locate_by_model(pid)
@@ -66,10 +63,10 @@ module TulOhistHelper
        finding_aid = [object.finding_aid_link.first,object.finding_aid_title.first]
        online_exhibit = [object.online_exhibit_link.first,object.online_exhibit_title.first]
        catalog_record = [object.catalog_record_link.first,object.catalog_record_title.first]
-       (related_items ||= []) << finding_aid << online_exhibit << catalog_record
+       (related_resources ||= []) << finding_aid << online_exhibit << catalog_record
      end
     end
-    return related_items
+    return related_resources
   end
 
   def render_single_list(links_list)
@@ -84,8 +81,6 @@ module TulOhistHelper
       return html_list.html_safe
     end
 
-
-
   def get_image_url(pid)
   	object = Photograph.find(pid)
   	filename = object.contentdm_file_name
@@ -94,7 +89,6 @@ module TulOhistHelper
     image_url = contentdm_file_url(cdm_alias, cdm_pointer, filename);
     return image_url
   end
-
 
   def get_related_objects(master_identifier)
     related_objects = ActiveFedora::Base.where(master_identifier_ssim: master_identifier).to_a

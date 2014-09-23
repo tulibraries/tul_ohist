@@ -2,7 +2,7 @@ module TulOhist
 
   module Datastreams
   
-    class RelatedItemsDatastream < ActiveFedora::OmDatastream
+    class RelatedResourcesDatastream < ActiveFedora::OmDatastream
 
       set_terminology do |t|
         t.root(path: "fields")

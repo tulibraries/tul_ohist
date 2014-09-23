@@ -4,9 +4,9 @@ $(document).ready(function(){
 });
 
 </script>
-<div class="transcript related-items">
-  <h2><%= t('tul_ohist.related_items_title') %></h2>
-<%= render_related_items(document['master_identifier_ssim'].to_sentence) %>
+<div class="transcript related-resources">
+  <h2><%= t('tul_ohist.related_resources_title') %></h2>
+<%= render_related_resources(document['master_identifier_ssim'].to_sentence) %>
 </div>
 <div class="transcript portrait">
 <%= render_photo(document["master_identifier_ssim"]) %>

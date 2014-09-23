@@ -39,13 +39,7 @@ class CompoundObjectsController < ApplicationController
        (dates ||= []) << intermed_date
       end
     end
-    # puts "argh"
-    # puts title
-    # binding.pry
     return titles
-
   end
-  
-  
-  
+
 end

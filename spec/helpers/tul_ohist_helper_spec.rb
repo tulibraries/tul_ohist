@@ -59,36 +59,36 @@ RSpec.describe TulOhistHelper, :type => :helper do
       it { is_expected.to eq "Photograph" }
     end
 
-    describe 'related_items' do
-      let (:items) { related_items(t.master_identifier) }
+    describe 'related_resources' do
+      let (:resources) { related_resources(t.master_identifier) }
       let (:finding_aid_index) { 0 }
       let (:online_exhibit_index) { 1 }
       let (:catalog_record_index) { 2 }
 
       describe 'has finding_aid_link' do
-        subject { items[finding_aid_index] }
+        subject { resources[finding_aid_index] }
         it { is_expected.to include t.finding_aid_link.first }
       end
 
       describe 'has online_exhibit_link' do
-        subject { items[online_exhibit_index] }
+        subject { resources[online_exhibit_index] }
         it { is_expected.to include t.online_exhibit_link.first }
       end
 
       describe 'has catalog_record_link' do
-        subject { items[catalog_record_index] }
+        subject { resources[catalog_record_index] }
         it { is_expected.to include t.catalog_record_link.first }
       end
     end
 
     describe 'render_single_list' do
-      subject { render_single_list(related_items(t.master_identifier)) }
+      subject { render_single_list(related_resources(t.master_identifier)) }
       it { is_expected.to have_content t.finding_aid_title.first }
       it { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
     end
 
-    describe 'render_related_items' do
-      subject { render_related_items(p.master_identifier) } 
+    describe 'render_related_resources' do
+      subject { render_related_resources(p.master_identifier) } 
       it { is_expected.to have_content t.finding_aid_title.first }
       it { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
       it { is_expected.to have_content t.online_exhibit_title.first }
@@ -96,11 +96,9 @@ RSpec.describe TulOhistHelper, :type => :helper do
       it { is_expected.to have_content t.catalog_record_title.first }
       it { is_expected.to include "<a href=\"#{t.catalog_record_link.first}\">" }
     end
-
   end
 
   describe 'CONTENTdm access' do
-
     let (:config) { YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__)) }
     let (:contentdm_pdf_url) { "http://digital.library.temple.edu/utils/getfile/collection/#{collection}/id/#{id}/filename/#{pdf_file_name}" } 
 

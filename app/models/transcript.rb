@@ -9,7 +9,7 @@ class Transcript < TulOhist::Models::Base
   has_attributes :notes, :personal_names, datastream: 'notationsMetadata', multiple: true
   has_attributes :location, :physical_description, datastream: 'physicalMetadata', multiple: true
   has_attributes :rights, :click_through, datastream: 'rightsMetadata', multiple: true
-  has_attributes :repository_collection, :finding_aid_link, :finding_aid_title, :online_exhibit_link, :online_exhibit_title, :catalog_record_link, :catalog_record_title, datastream: 'relatedItemsMetadata', multiple: true
+  has_attributes :repository_collection, :finding_aid_link, :finding_aid_title, :online_exhibit_link, :online_exhibit_title, :catalog_record_link, :catalog_record_title, datastream: 'relatedResourcesMetadata', multiple: true
   has_attributes :transcript, :document_content, :narrator, :interviewer, :ocr_note, datastream: 'interviewContentMetadata', multiple: true
   has_attributes :digitization_specifications, :original_recording_specifications, :transcript_filename, :audio_filename, :photograph_filename, datastream: 'digitalMetadata', multiple: true
   has_attributes :weight, datastream: 'displayMetadata', multiple: false

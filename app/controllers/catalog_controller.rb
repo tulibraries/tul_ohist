@@ -61,9 +61,9 @@ class CatalogController < ApplicationController
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
 
-    config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => true
-    config.add_facet_field solr_name('repository_collection', :facetable), :label => 'Repository Collection', :limit => true
-    config.add_facet_field solr_name('personal_names', :facetable), :label => 'Personal Names', :limit => true
+    config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => 5, :collapse => false
+    config.add_facet_field solr_name('repository_collection', :facetable), :label => 'Repository Collection', :limit => 5, :collapse => false
+    config.add_facet_field solr_name('personal_names', :facetable), :label => 'Personal Names', :limit => 5, :collapse => false
     config.add_facet_field solr_name('geographic_subject', :facetable), :label => 'Geographic Subject', :limit => true
     config.add_facet_field solr_name('organization_building', :facetable), :label => 'Organization / Building', :limit => true
     config.add_facet_field solr_name('narrator', :facetable), :label => 'Narrator', :limit => true
