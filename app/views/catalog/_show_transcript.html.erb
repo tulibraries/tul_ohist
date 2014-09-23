@@ -17,18 +17,18 @@ $(document).ready(function(){
 
 <div class="transcript collection-description">
 	<h2><%= t('tul_ohist.about_collection_title') %></h2>
-	<%= document['collection_description_tesim'].to_sentence if document['collection_description_tesim'] %>
+	<%= document['collection_description_tesim'].to_sentence.html_safe if document['collection_description_tesim'] %>
 </div>
 
 <div class="transcript content-summary">
 	<h2><%= t('tul_ohist.about_interview_title') %></h2>
-<%= document['content_summary_tesim'].to_sentence if document['content_summary_tesim'] %>
+<%= document['content_summary_tesim'].to_sentence.html_safe if document['content_summary_tesim'] %>
 </div>
   <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
 
 <div class="transcript biographical-history-note">
 	<h2><%= t('tul_ohist.biographical_title') %></h2>
-<%= document['biographical_history_note_tesim'].to_sentence if document['biographical_history_note_tesim'] %>
+<%= document['biographical_history_note_tesim'].to_sentence.html_safe if document['biographical_history_note_tesim'] %>
 </div>
 
 <div class="transcript solr-fields">
@@ -46,7 +46,7 @@ $(document).ready(function(){
 </div>
 <div class="rights">
   <h2><%= t('tul_ohist.rights_title') %></h2>
-  <%= document['rights_ssm'].to_sentence if document['rights_ssm'] %>
+  <%= document['rights_ssm'].to_sentence.html_safe if document['rights_ssm'] %>
 </div>
 
 <script type='text/javascript'>
