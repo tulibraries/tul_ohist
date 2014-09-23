@@ -16,7 +16,22 @@ class CatalogController < ApplicationController
 
   configure_blacklight do |config|
     config.default_solr_params = {
-      :qf => 'title_tesim date_tesim repository_tesim format_tesim type_tesim language_tesim geographic_subject_tesim organization_building_tesim notes_tesim personal_names_tesim location_tesim physical_description_tesim document_content_tesim doi_tesim digital_collection_tesim',
+      :qf => 'title_tesim 
+              date_tesim 
+              repository_tesim 
+              format_tesim 
+              type_tesim 
+              language_tesim 
+              geographic_subject_tesim 
+              organization_building_tesim 
+              notes_tesim 
+              personal_names_tesim 
+              location_tesim 
+              physical_description_tesim 
+              document_content_tesim 
+              doi_tesim 
+              digital_collection_tesim
+              repository_collection_tesim',
       :qt => 'search',
       :rows => 10
     }
@@ -47,14 +62,12 @@ class CatalogController < ApplicationController
     # facet bar
 
     config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => true
-    config.add_facet_field solr_name('narrator', :facetable), :label => 'Narrator', :limit => true
-    config.add_facet_field solr_name('type', :facetable), :label => 'Type', :limit => true
-    config.add_facet_field solr_name('language', :facetable), :label => 'Language', :limit => true
-    config.add_facet_field solr_name('format', :facetable), :label => 'Format', :limit => true
-    config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true
+    config.add_facet_field solr_name('repository_collection', :facetable), :label => 'Repository Collection', :limit => true
     config.add_facet_field solr_name('personal_names', :facetable), :label => 'Personal Names', :limit => true
     config.add_facet_field solr_name('geographic_subject', :facetable), :label => 'Geographic Subject', :limit => true
     config.add_facet_field solr_name('organization_building', :facetable), :label => 'Organization / Building', :limit => true
+    config.add_facet_field solr_name('narrator', :facetable), :label => 'Narrator', :limit => true
+    config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true
 
 
 
@@ -91,6 +104,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('personal_names', :stored_searchable, type: :string), :label => 'Personal Names', :link_to_search => 'personal_names_sim'
     config.add_show_field solr_name('geographic_subject', :stored_searchable, type: :string), :label => 'Geographic Subject', :link_to_search => 'geographic_subject_sim'
     config.add_show_field solr_name('organization_building', :stored_searchable, type: :string), :label => 'Organization / Building', :link_to_search => 'organization_building_sim'
+    config.add_show_field solr_name('repository_collection', :stored_searchable, type: :string), :label => 'Repository Collection', :link_to_search => 'repository_collection_tesim'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
