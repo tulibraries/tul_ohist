@@ -30,7 +30,7 @@
   float:right;
   border: 1px solid $temple-light-blue;
   padding: 0px;
-  width: 200px;
+  width: 300px;
   margin: 5px;
   @include rounded-corners-all;
 
@@ -51,6 +51,18 @@
     color: $temple-light-blue;
     font-weight: bold;
     border-bottom: 1px solid $temple-light-blue;
+  }
+
+  ul{
+    margin: 0px 10px 5px -10px;
+  }
+
+  li{
+  }
+
+  .related-resource-label{
+    font-weight: bold;
+    color: $temple-lavendar-grey;
   }
 }
 

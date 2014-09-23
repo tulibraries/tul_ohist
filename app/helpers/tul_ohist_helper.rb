@@ -12,7 +12,7 @@ module TulOhistHelper
   #
   ##
   def theme_contact_field(field_val)
-  	output=link_to(t('tul_ohist.contact_text'), "mailto:#{field_val}")
+  	output=link_to(t('tul_ohist.contact_field.text'), "mailto:#{field_val}")
     output.html_safe
   end
 
@@ -40,11 +40,15 @@ module TulOhistHelper
     return img.to_sentence
   end
 
-  def render_related_resources(master_identifier)
+  def render_related_resources(master_identifier, document)
   	related_resources_list = ''
+    rc_label = content_tag("span", nil, class: "related-resource-label") do t('tul_ohist.related_resources.label.repository_collection') end
+    rc_solr_field = render_document_show_field_value(document,'repository_collection_tesim')
+    repository_collection_link = content_tag("li") do (rc_label + rc_solr_field).html_safe end
   	related_resources = related_resources(master_identifier)
     related_resources_list << render_single_list(related_resources)
 
+    related_resources_list.prepend(repository_collection_link)
     return content_tag("ul") do related_resources_list.html_safe end
   end
 
@@ -60,9 +64,9 @@ module TulOhistHelper
       pid=b_obj.id
       object = locate_by_model(pid)
       if(object)
-       finding_aid = [object.finding_aid_link.first,object.finding_aid_title.first]
-       online_exhibit = [object.online_exhibit_link.first,object.online_exhibit_title.first]
-       catalog_record = [object.catalog_record_link.first,object.catalog_record_title.first]
+       finding_aid = [object.finding_aid_link.first,object.finding_aid_title.first,t('tul_ohist.related_resources.label.finding_aid')]
+       online_exhibit = [object.online_exhibit_link.first,object.online_exhibit_title.first, t('tul_ohist.related_resources.label.online_exhibit')]
+       catalog_record = [object.catalog_record_link.first,object.catalog_record_title.first, t('tul_ohist.related_resources.label.catalog_record')]
        (related_resources ||= []) << finding_aid << online_exhibit << catalog_record
      end
     end
@@ -74,7 +78,9 @@ module TulOhistHelper
       for list_items in links_list do
         unless list_items.first.nil? or list_items.first.empty?
           html_list << content_tag("li") do
-          concat link_to "#{list_items.second}", "#{list_items.first}" 
+          link_text = link_to "#{list_items.second}", "#{list_items.first}" 
+          label = content_tag("span", nil, class: "related-resource-label") do "#{list_items.third}: " end
+          concat (label + link_text).html_safe
          end
         end
       end

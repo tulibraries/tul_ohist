@@ -1,12 +1,12 @@
 <script>
 $(document).ready(function(){
-  checkForConfirmation("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through_confirm_button_text') %>", "<%= t('tul_ohist.click_through_cancel_button_text') %>");
+  checkForConfirmation("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through.confirm_button_text') %>", "<%= t('tul_ohist.click_through.cancel_button_text') %>");
 });
 
 </script>
 <div class="transcript related-resources">
-  <h2><%= t('tul_ohist.related_resources_title') %></h2>
-<%= render_related_resources(document['master_identifier_ssim'].to_sentence) %>
+  <h2><%= t('tul_ohist.title.related_resources') %></h2>
+<%= render_related_resources(document['master_identifier_ssim'].to_sentence, document) %>
 </div>
 <div class="transcript portrait">
 <%= render_photo(document["master_identifier_ssim"]) %>
@@ -16,23 +16,23 @@ $(document).ready(function(){
                                     document['contentdm_file_name_ssm'].to_sentence) %>
 
 <div class="transcript collection-description">
-	<h2><%= t('tul_ohist.about_collection_title') %></h2>
+	<h2><%= t('tul_ohist.transcript_view.title.about_collection') %></h2>
 	<%= document['collection_description_tesim'].to_sentence.html_safe if document['collection_description_tesim'] %>
 </div>
 
 <div class="transcript content-summary">
-	<h2><%= t('tul_ohist.about_interview_title') %></h2>
+	<h2><%= t('tul_ohist.transcript_view.title.about_interview') %></h2>
 <%= document['content_summary_tesim'].to_sentence.html_safe if document['content_summary_tesim'] %>
 </div>
   <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
 
 <div class="transcript biographical-history-note">
-	<h2><%= t('tul_ohist.biographical_title') %></h2>
+	<h2><%= t('tul_ohist.transcript_view.title.biographical') %></h2>
 <%= document['biographical_history_note_tesim'].to_sentence.html_safe if document['biographical_history_note_tesim'] %>
 </div>
 
 <div class="transcript solr-fields">
-	<h2><%= t('tul_ohist.record_details_title') %></h2>
+	<h2><%= t('tul_ohist.transcript_view.title.record_details') %></h2>
   <dl class="defList">
   <% document_show_fields.each do |solr_fname, field| -%>
     <% if document.has? solr_fname %>
@@ -45,7 +45,7 @@ $(document).ready(function(){
   </dl>
 </div>
 <div class="rights">
-  <h2><%= t('tul_ohist.rights_title') %></h2>
+  <h2><%= t('tul_ohist.transcript_view.title.rights') %></h2>
   <%= document['rights_ssm'].to_sentence.html_safe if document['rights_ssm'] %>
 </div>
 

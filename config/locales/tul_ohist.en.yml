@@ -1,15 +1,28 @@
 en:
   tul_ohist:
-    welcome: 'Welcome to the'
-    application_name: 'SCRC Oral Histories Repository'
-    rights_title: 'Digital Collections Rights Statement for Use of This Content'
-    related_resources_title: 'Related Resources'
-    about_collection_title: 'About this Collection'
-    about_interview_title: 'About this Interview'
-    biographical_title: 'Biographical / Historical Note'
-    record_details_title: 'Record Details'
-    click_through_confirm_button_text: "I understand and wish to continue"
-    click_through_cancel_button_text: "I do not agree to the Terms of Use" 
-    intro_text: "The SCRC is the principal repository for and steward of the Libraries’ rare books, manuscripts, archives and University records. We collect, preserve, and make accessible primary resources and rare or unique materials, to stimulate, enrich, and support research, teaching, learning, and administration at Temple University. SCRC makes these resources available to a broad constituency as part of the University's engagement with the larger community of scholars and independent researchers."   
-    footer_content: "This site is run by SCRC, Temple University Libraries"
-    contact_text: "Contact SCRC for audio"
+    general:
+      application_name: 'SCRC Oral Histories Repository'
+      footer_content: "This site is run by SCRC, Temple University Libraries"
+    homepage:
+      welcome: 'Welcome to the'
+      intro_text: "The SCRC is the principal repository for and steward of the Libraries’ rare books, manuscripts, archives and University records. We collect, preserve, and make accessible primary resources and rare or unique materials, to stimulate, enrich, and support research, teaching, learning, and administration at Temple University. SCRC makes these resources available to a broad constituency as part of the University's engagement with the larger community of scholars and independent researchers."   
+    transcript_view:
+      title:
+        rights: 'Digital Collections Rights Statement for Use of This Content'
+        related_resources: 'Related Resources'
+        about_collection: 'About this Collection'
+        about_interview: 'About this Interview'
+        biographical: 'Biographical / Historical Note'
+        record_details: 'Record Details'
+    click_through:
+      confirm_button_text: "I understand and wish to continue"
+      cancel_button_text: "I do not agree to the Terms of Use" 
+    contact_field:
+      text: "Contact SCRC for audio"
+    related_resources:
+      label:
+        repository_collection: "More like this: "
+        finding_aid: "Finding aid: "
+        online_exhibit: "Online exhibit: "
+        catalog_record: "Catalog record: "
+

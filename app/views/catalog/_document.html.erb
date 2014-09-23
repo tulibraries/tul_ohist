@@ -6,10 +6,10 @@
 <script>
 acceptedTerms = $.cookie('acceptedTerms');
 if(!acceptedTerms){
-	searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through_confirm_button_text') %>","<%= t('tul_ohist.click_through_cancel_button_text') %>");
+	searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through.confirm_button_text') %>","<%= t('tul_ohist.click_through.cancel_button_text') %>");
 } else {
 	if(acceptedTerms.indexOf("<%= document['click_through_ssm'].to_sentence %>") == -1){
-		searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through_confirm_button_text') %>","<%= t('tul_ohist.click_through_cancel_button_text') %>");
+		searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through.confirm_button_text') %>","<%= t('tul_ohist.click_through.cancel_button_text') %>");
 	}
 }
 </script>
