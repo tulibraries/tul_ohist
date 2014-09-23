@@ -6,7 +6,7 @@ module TulOhist
 
       set_terminology do |t|
         t.root(path: "fields")
-        t.repository_collection index_as: :stored_searchable
+        t.repository_collection(:index_as=>[:facetable, :stored_searchable], :type=>:string)
         t.finding_aid_link index_as: :displayable
         t.finding_aid_title index_as: :displayable
         t.online_exhibit_link index_as: :displayable
