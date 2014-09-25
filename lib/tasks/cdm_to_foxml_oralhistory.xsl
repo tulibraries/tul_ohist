@@ -236,6 +236,9 @@
   <xsl:template match="Master_Identifier">
     <master_identifier><xsl:apply-templates /></master_identifier>
   </xsl:template>
+  <xsl:template match="Narrator">
+    <narrator><xsl:apply-templates /></narrator>
+  </xsl:template>
   <xsl:template match="Repository_Collection">
     <repository_collection><xsl:apply-templates /></repository_collection>
   </xsl:template>
