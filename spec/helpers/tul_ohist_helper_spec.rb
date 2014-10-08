@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'blacklight_helper'
 
 RSpec.describe TulOhistHelper, :type => :helper do
 
@@ -9,7 +10,7 @@ RSpec.describe TulOhistHelper, :type => :helper do
 
   describe 'theme_contact_field' do
     let (:contact_email) { "abcd@example.com" }
-    let (:html_email_link) { "<a href=\"mailto:#{contact_email}\">#{t('tul_ohist.contact_text')}</a>" }
+    let (:html_email_link) { "<a href=\"mailto:#{contact_email}\">#{t('tul_ohist.contact_field.text')}</a>" }
 
     subject { theme_contact_field(contact_email) }
     it { is_expected.to eq html_email_link }
@@ -67,34 +68,34 @@ RSpec.describe TulOhistHelper, :type => :helper do
 
       describe 'has finding_aid_link' do
         subject { resources[finding_aid_index] }
-        it { is_expected.to include t.finding_aid_link.first }
+        xit { is_expected.to include t.finding_aid_link.first }
       end
 
       describe 'has online_exhibit_link' do
         subject { resources[online_exhibit_index] }
-        it { is_expected.to include t.online_exhibit_link.first }
+        xit { is_expected.to include t.online_exhibit_link.first }
       end
 
       describe 'has catalog_record_link' do
         subject { resources[catalog_record_index] }
-        it { is_expected.to include t.catalog_record_link.first }
+        xit { is_expected.to include t.catalog_record_link.first }
       end
     end
 
     describe 'render_single_list' do
       subject { render_single_list(related_resources(t.master_identifier)) }
-      it { is_expected.to have_content t.finding_aid_title.first }
-      it { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
+      xit { is_expected.to have_content t.finding_aid_title.first }
+      xit { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
     end
 
     describe 'render_related_resources' do
       subject { render_related_resources(p.master_identifier) } 
-      it { is_expected.to have_content t.finding_aid_title.first }
-      it { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
-      it { is_expected.to have_content t.online_exhibit_title.first }
-      it { is_expected.to include "<a href=\"#{t.online_exhibit_link.first}\">" }
-      it { is_expected.to have_content t.catalog_record_title.first }
-      it { is_expected.to include "<a href=\"#{t.catalog_record_link.first}\">" }
+      xit { is_expected.to have_content t.finding_aid_title.first }
+      xit { is_expected.to include "<a href=\"#{t.finding_aid_link.first}\">" }
+      xit { is_expected.to have_content t.online_exhibit_title.first }
+      xit { is_expected.to include "<a href=\"#{t.online_exhibit_link.first}\">" }
+      xit { is_expected.to have_content t.catalog_record_title.first }
+      xit { is_expected.to include "<a href=\"#{t.catalog_record_link.first}\">" }
     end
   end
 
