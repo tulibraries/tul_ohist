@@ -38,7 +38,7 @@ $(document).ready(function(){
         <% end -%>
       <% end -%>
         <dt class="blacklight-contact">Contact:</dt>
-        <dd class="blacklight-contact"><%= theme_contact_field(document["contact_ssm"].to_sentence) if document["contact_ssm"] %></dd>
+        <dd class="blacklight-contact"><%= render_contact_field(document["contact_ssm"].to_sentence) if document["contact_ssm"] %></dd>
     </dl>
   </div>
   <div class="rights">
@@ -47,7 +47,7 @@ $(document).ready(function(){
   </div>
   <div class="ada-note">
     <h2><%= t('tul_ohist.transcript_view.title.ada_note') %></h2>
-    <%= document['ada_note_ssm'].to_sentence.html_safe if document['ada_note_ssm'] %>
+    <%= auto_link(document['ada_note_ssm'].to_sentence.html_safe) if document['ada_note_ssm'] %>
   </div>
 </div>
 <div class="right-column">

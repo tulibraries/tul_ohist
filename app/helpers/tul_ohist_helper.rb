@@ -11,7 +11,7 @@ module TulOhistHelper
   # Custom theming for contact email to output as linkable field
   #
   ##
-  def theme_contact_field(field_val)
+  def render_contact_field(field_val)
   	output=link_to(t('tul_ohist.contact_field.text'), "mailto:#{field_val}")
     output.html_safe
   end
