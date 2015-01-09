@@ -92,7 +92,7 @@ module TulOhistHelper
   	filename = object.contentdm_file_name
     cdm_pointer = object.contentdm_number
     cdm_alias = object.contentdm_collection_id
-    image_url = contentdm_file_url(cdm_alias, cdm_pointer, filename);
+    image_url = contentdm_image_asset_url(cdm_alias, cdm_pointer);
     return image_url
   end
 
@@ -104,6 +104,11 @@ module TulOhistHelper
   def contentdm_file_url(collection, pointer, name)
     config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
     "#{config['cdm_archive']}/utils/getfile/collection/#{collection}/id/#{pointer}/filename/#{name}"
+  end
+
+  def contentdm_image_asset_url(collection, pointer)
+    config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
+    "#{config['cdm_archive']}/utils/ajaxhelper/?CISOROOT=#{collection}&CISOPTR=#{pointer}&action=2&DMSCALE=10&DMWIDTH=2000&DMHEIGHT=2000"
   end
 
   def locate_by_model(pid)

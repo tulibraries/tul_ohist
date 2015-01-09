@@ -121,7 +121,7 @@ module CDMUtils
 	
       case fname
         #audio
-        when 'p16002coll21'
+        when 'p16002coll22'
           `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_oralhistory.xsl #{file_name}`
         else
           `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_noncustom.xsl #{file_name}`

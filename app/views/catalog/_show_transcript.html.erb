@@ -4,55 +4,58 @@ $(document).ready(function(){
 });
 
 </script>
-<div class="transcript related-resources">
-  <h2><%= t('tul_ohist.title.related_resources') %></h2>
-<%= render_related_resources(document['master_identifier_ssim'].to_sentence, document) %>
-</div>
-<div class="transcript portrait">
-<%= render_photo(document["master_identifier_ssim"]) %>
-</div>
-<% transcript_pdf = contentdm_file_url(document['contentdm_collection_id_ssm'].to_sentence,
-                                    document['contentdm_number_ssm'].to_sentence,
-                                    document['contentdm_file_name_ssm'].to_sentence) %>
+<div class="main-column">
+  <div class="transcript portrait">
+  <%= render_photo(document["master_identifier_ssim"]) %>
+  </div>
+  <% transcript_pdf = contentdm_file_url(document['contentdm_collection_id_ssm'].to_sentence,
+                                      document['contentdm_number_ssm'].to_sentence,
+                                      document['contentdm_file_name_ssm'].to_sentence) %>
 
-<div class="transcript collection-description">
-	<h2><%= t('tul_ohist.transcript_view.title.about_collection') %></h2>
-	<%= document['collection_description_tesim'].to_sentence.html_safe if document['collection_description_tesim'] %>
-</div>
+  <div class="transcript collection-description">
+    <h2><%= t('tul_ohist.transcript_view.title.about_collection') %></h2>
+    <%= document['collection_description_tesim'].to_sentence.html_safe if document['collection_description_tesim'] %>
+  </div>
 
-<div class="transcript content-summary">
-	<h2><%= t('tul_ohist.transcript_view.title.about_interview') %></h2>
-<%= document['content_summary_tesim'].to_sentence.html_safe if document['content_summary_tesim'] %>
-</div>
-  <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
+  <div class="transcript content-summary">
+    <h2><%= t('tul_ohist.transcript_view.title.about_interview') %></h2>
+  <%= document['content_summary_tesim'].to_sentence.html_safe if document['content_summary_tesim'] %>
+  </div>
+    <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
 
-<div class="transcript biographical-history-note">
-	<h2><%= t('tul_ohist.transcript_view.title.biographical') %></h2>
-<%= document['biographical_history_note_tesim'].to_sentence.html_safe if document['biographical_history_note_tesim'] %>
-</div>
+  <div class="transcript biographical-history-note">
+    <h2><%= t('tul_ohist.transcript_view.title.biographical') %></h2>
+  <%= document['biographical_history_note_tesim'].to_sentence.html_safe if document['biographical_history_note_tesim'] %>
+  </div>
 
-<div class="transcript solr-fields">
-	<h2><%= t('tul_ohist.transcript_view.title.record_details') %></h2>
-  <dl class="defList">
-  <% document_show_fields.each do |solr_fname, field| -%>
-    <% if document.has? solr_fname %>
-        <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_label :field => solr_fname %></dt>
-        <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
+  <div class="transcript solr-fields">
+    <h2><%= t('tul_ohist.transcript_view.title.record_details') %></h2>
+    <dl class="defList">
+    <% document_show_fields.each do |solr_fname, field| -%>
+      <% if document.has? solr_fname %>
+          <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_label :field => solr_fname %></dt>
+          <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
+        <% end -%>
       <% end -%>
-    <% end -%>
-      <dt class="blacklight-contact">Contact:</dt>
-      <dd class="blacklight-contact"><%= theme_contact_field(document["contact_ssm"].to_sentence) if document["contact_ssm"] %></dd>
-  </dl>
+        <dt class="blacklight-contact">Contact:</dt>
+        <dd class="blacklight-contact"><%= theme_contact_field(document["contact_ssm"].to_sentence) if document["contact_ssm"] %></dd>
+    </dl>
+  </div>
+  <div class="rights">
+    <h2><%= t('tul_ohist.transcript_view.title.rights') %></h2>
+    <%= document['rights_ssm'].to_sentence.html_safe if document['rights_ssm'] %>
+  </div>
+  <div class="ada-note">
+    <h2><%= t('tul_ohist.transcript_view.title.ada_note') %></h2>
+    <%= document['ada_note_ssm'].to_sentence.html_safe if document['ada_note_ssm'] %>
+  </div>
 </div>
-<div class="rights">
-  <h2><%= t('tul_ohist.transcript_view.title.rights') %></h2>
-  <%= document['rights_ssm'].to_sentence.html_safe if document['rights_ssm'] %>
+<div class="right-column">
+  <div class="transcript related-resources">
+    <h2><%= t('tul_ohist.title.related_resources') %></h2>
+    <%= render_related_resources(document['master_identifier_ssim'].to_sentence, document) %>
+  </div>
 </div>
-<div class="ada-note">
-  <h2><%= t('tul_ohist.transcript_view.title.ada_note') %></h2>
-  <%= document['ada_note_ssm'].to_sentence.html_safe if document['ada_note_ssm'] %>
-</div>
-
 <script type='text/javascript'>
     function embedPDF(){
       var myPDF = new PDFObject({
