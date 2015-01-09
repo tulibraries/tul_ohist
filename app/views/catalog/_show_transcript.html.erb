@@ -48,6 +48,10 @@ $(document).ready(function(){
   <h2><%= t('tul_ohist.transcript_view.title.rights') %></h2>
   <%= document['rights_ssm'].to_sentence.html_safe if document['rights_ssm'] %>
 </div>
+<div class="ada-note">
+  <h2><%= t('tul_ohist.transcript_view.title.ada_note') %></h2>
+  <%= document['ada_note_ssm'].to_sentence.html_safe if document['ada_note_ssm'] %>
+</div>
 
 <script type='text/javascript'>
     function embedPDF(){

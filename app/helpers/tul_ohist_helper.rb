@@ -79,7 +79,7 @@ module TulOhistHelper
         unless list_items.first.nil? or list_items.first.empty?
           html_list << content_tag("li") do
           link_text = link_to "#{list_items.second}", "#{list_items.first}" 
-          label = content_tag("span", nil, class: "related-resource-label") do "#{list_items.third}: " end
+          label = content_tag("span", nil, class: "related-resource-label") do "#{list_items.third}" end
           concat (label + link_text).html_safe
          end
         end
