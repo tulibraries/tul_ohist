@@ -11,6 +11,7 @@ module TulOhist
         t.biographical_history_note index_as: :stored_searchable
         t.content_summary index_as: :stored_searchable
         t.collection_description index_as: :stored_searchable
+        t.ada_note index_as: :stored_searchable
       end 
 
       def self.xml_template

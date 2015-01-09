@@ -5,7 +5,7 @@ class Photograph < TulOhist::Models::Base
   has_attributes :oclc_number, :date_created, :date_modified, :contentdm_number, :contentdm_file_name, :contentdm_file_path, :contentdm_collection_id, datastream: 'contentdmMetadata', multiple: false
   has_attributes :created, :condition_note, datastream: 'creationMetadata', multiple: true
   has_attributes :geographic_subject, :organization_building, datastream: 'geographicMetadata', multiple: true
-  has_attributes :notes, :personal_names, datastream: 'notationsMetadata', multiple: true
+  has_attributes :notes, :personal_names, :biographical_history_note, :content_summary, :collection_description, :ada_note, datastream: 'notationsMetadata', multiple: true
   has_attributes :location, :physical_description, datastream: 'physicalMetadata', multiple: true
   has_attributes :rights, :click_through, datastream: 'rightsMetadata', multiple: true
   has_attributes :repository_collection, :finding_aid_link, :finding_aid_title, :online_exhibit_link, :online_exhibit_title, :catalog_record_link, :catalog_record_title, datastream: 'relatedResourcesMetadata', multiple: true
