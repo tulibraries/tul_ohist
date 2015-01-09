@@ -24,6 +24,8 @@ EODS
   it { is_expected.to have_term(:notes) }
   it { is_expected.to have_term(:personal_names) }
   it { is_expected.to have_term(:biographical_history_note) }
+  it { is_expected.to have_term(:content_summary) }
   it { is_expected.to have_term(:collection_description) }
+  it { is_expected.to have_term(:ada_note) }
 
 end

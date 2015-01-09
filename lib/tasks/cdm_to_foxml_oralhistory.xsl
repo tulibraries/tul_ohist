@@ -138,6 +138,7 @@
                 <biographical_history_note><xsl:apply-templates select="Biographical_History_Note"/></biographical_history_note>
                 <content_summary><xsl:apply-templates select="Content_Summary"/></content_summary>
                 <collection_description><xsl:apply-templates select="Collection_Description"/></collection_description>
+                <ada_note><xsl:apply-templates select="ADA_Note"/></ada_note>
               </fields>
             </foxml:xmlContent>
           </foxml:datastreamVersion>

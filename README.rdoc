@@ -20,7 +20,7 @@ Complete the installation.
 
     rake jetty:config
     rake jetty:start
-    rails s thin -d
+    rails s -d
 
 * Ruby version
 
