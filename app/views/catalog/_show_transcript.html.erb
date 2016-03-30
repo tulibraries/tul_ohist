@@ -37,6 +37,8 @@ $(document).ready(function(){
           <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
         <% end -%>
       <% end -%>
+        <dt class="blacklight-type_tesim">Type:</dt>
+        <dd class="blacklight-type_tesim">Oral Histories</dd>
         <dt class="blacklight-contact">Contact:</dt>
         <dd class="blacklight-contact"><%= render_contact_field(document["contact_ssm"].to_sentence) if document["contact_ssm"] %></dd>
     </dl>

@@ -94,6 +94,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('date', :stored_searchable, type: :string), :label => 'Date'
     config.add_show_field solr_name('language', :stored_searchable, type: :string), :label => 'Language'
     config.add_show_field solr_name('permanent_url', :displayable, type: :string), :label => 'Permanent URL'
+    config.add_show_field solr_name('created', :displayable, type: :string), :label => 'Created'
     config.add_show_field solr_name('condition_note', :stored_searchable, type: :string), :label => 'Condition Note'
     config.add_show_field solr_name('digitization_specifications', :stored_searchable, type: :string), :label => 'Digitization Specifications'
     config.add_show_field solr_name('original_recording_specifications', :stored_searchable, type: :string), :label => 'Original Recording Specifications'
