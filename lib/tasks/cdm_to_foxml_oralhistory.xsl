@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:exsl="http://exslt.org/common" xmlns:ex="http://exslt.org/dates-and-times" extension-element-prefixes="exsl ex">
+  <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:exsl="http://exslt.org/common" xmlns:ex="http://exslt.org/dates-and-times" xmlns:str="http://exslt.org/strings" extension-element-prefixes="exsl ex str">
   <xsl:variable name="collection">
     <xsl:value-of select="metadata/manifest/contentdm_collection_id" />
   </xsl:variable>
@@ -271,3 +271,4 @@
     <organization_building><xsl:apply-templates /></organization_building>
   </xsl:template>
 </xsl:stylesheet>
+

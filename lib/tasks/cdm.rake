@@ -8,7 +8,7 @@ namespace :tu_cdm do
   OpenURI::Buffer.const_set 'StringMax', 0
 
   config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
-
+  
   desc "List current ContentDM collections on the CDM server"  
   task :list => :environment do
     collections = CDMUtils.list(config['cdm_server'])
