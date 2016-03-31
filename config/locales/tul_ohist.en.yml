@@ -20,7 +20,7 @@ en:
       confirm_button_text: "I understand and wish to continue"
       cancel_button_text: "I do not agree to the Terms of Use" 
     contact_field:
-      text: "Contact SCRC for audio"
+      text: "Contact SCRC for the audio recording corresponding to this transcript."
     related_resources:
       label:
         repository_collection: "More like this: "

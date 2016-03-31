@@ -64,7 +64,8 @@ desc 'Verify converted downloads, backup the repo, and clean in preperation for 
       `cp -R #{Rails.root}/db #{jetty_backup_dir}`
       `cp -R #{Rails.root}/log/cron_log.log #{jetty_backup_dir}`
       `zip -r #{jetty_backup_dir}.bkup.zip #{jetty_backup_dir}`
-      `rsync -avP --no-o --no-p --no-g #{jetty_backup_dir}.bkup.zip #{config_bg['backup_permanent']}`
+      `rsync -avP --no-o --no-p --no-g --remove-sent-files #{jetty_backup_dir}.bkup.zip #{config_bg['backup_permanent']}`
+      `rm -rf #{jetty_backup_dir}`
 
       puts "Fedora state #{Time.now} backed up to #{jetty_backup_dir}"
       records_num = 0

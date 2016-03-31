@@ -38,6 +38,10 @@ module CDMUtils
       # If coll is nil, then import all the available collections
       user = config['cdm_user']
       password = config['cdm_password']
+    
+      build_xml_url = "#{config['cdm_server']}/cgi-bin/admin/exportxml.exe?CISODB=%2F#{coll}&CISOTYPE=custom&CISOPAGE=&CISOPTRLIST=&title=Title&date=Date&descri=Content_Summary&creato=Interviewer&contri=Narrator&subjec=Subject&geogra=Geographic_Subject&organi=Organization_Building&subjea=Personal_Name&descra=Notes&format=Format&type=Type&source=Physical_Description&langua=Language&origin=Original_Source_Title&origia=Original_Recording_Specifications&rights=Rights&clickt=Click_Through&reposi=Repository&reposa=Repository_Collection&digita=Digital_Collection&catalo=Digital_Publisher&digiti=Digitization_Specifications&contac=Contact&create=Created&identi=Master_Identifier&audio=Audio_Filename&transc=Transcript_Filename&photog=Photograph_Filename&transa=Transcript&docume=Document_Content&ocr=OCR_Note&ada=ADA_Note&transb=Transcript_Note&findin=Finding_Aid_Link&findia=Finding_Aid_Title&online=Online_Exhibit_Link&onlina=Online_Exhibit_Title&catala=Catalog_Record_Link&catalb=Catalog_Record_Title&condit=Condition_Note&biogra=Biographical_History_Note&collec=Collection_Description&folder=Location&weight=Weight&find=Item_URL&dmoclcno=OCLC_number&dmcreated=Date_created&dmmodified=Date_modified&dmrecord=CONTENTdm_number&cdmfile=CONTENTdm_file_name&cdmpath=CONTENTdm_file_path&CISOMODE1=rep&CISOMODE2=rep"
+      open(build_xml_url, :http_basic_authentication=>[user, password])
+
       cdm_url = "#{config['cdm_server']}/dmwebservices/index.php?q=dmGetCollectionList/xml"
       xml = Nokogiri::XML(open(cdm_url))
       FileUtils::mkdir_p config['cdm_download_dir']

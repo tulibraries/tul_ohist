@@ -13,7 +13,8 @@
 
 .main-column{
   float:left;
-  width: 800px;
+  width: 680px;
+  padding-left: 30px;
 }
 
 .right-column{
@@ -60,9 +61,11 @@
 }
 
 /* Remove below class to make responsive */
+/*
 .container {
     width: 1200px;
 }
+*/
 
 
 /******
@@ -78,7 +81,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000;
+    background-color: $temple-white;
     filter:alpha(opacity=95);
     -moz-opacity:0.95;
     -khtml-opacity: 0.95;
@@ -95,3 +98,30 @@
   float: right;
   margin: 10px;
 }
+
+
+/* search styling */
+
+.secondary-input-group {
+ float: right;
+ padding-left: 20px;
+}
+
+
+#sort-dropdown{
+  display: none;
+}
+
+/* Advanced search restyling */
+
+.limit-criteria {
+  display: none;
+}
+
+
+/* Homepage */
+
+h2.homepage a {
+  color: $temple-cherry;
+}
+

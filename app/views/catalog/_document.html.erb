@@ -3,13 +3,3 @@
   <%= render_document_partials document, blacklight_config.view_config(document_index_view_type).partials, :document_counter => document_counter %>
 </div>
 </li>
-<script>
-acceptedTerms = $.cookie('acceptedTerms');
-if(!acceptedTerms){
-	searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through.confirm_button_text') %>","<%= t('tul_ohist.click_through.cancel_button_text') %>");
-} else {
-	if(acceptedTerms.indexOf("<%= document['click_through_ssm'].to_sentence %>") == -1){
-		searchResultsClickThroughConfirmBox("<%= document['click_through_ssm'].to_sentence %>","<%= t('tul_ohist.click_through.confirm_button_text') %>","<%= t('tul_ohist.click_through.cancel_button_text') %>");
-	}
-}
-</script>

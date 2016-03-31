@@ -20,8 +20,13 @@ $(document).ready(function(){
   <div class="transcript content-summary">
     <h2><%= t('tul_ohist.transcript_view.title.about_interview') %></h2>
   <%= document['content_summary_tesim'].to_sentence.html_safe if document['content_summary_tesim'] %>
-  </div>
-    <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
+  </div>   
+    <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%">
+      <p>It appears your Web browser is not configured to display embedded PDF files.  To view this, just <a href="<%= transcript_pdf %>">click here to view the PDF file.</a></p>
+    </object></div>
+<div class="download-link">
+<a target="_blank" href="<%= transcript_pdf %>">Download PDF</a>
+</div>
 
   <div class="transcript biographical-history-note">
     <h2><%= t('tul_ohist.transcript_view.title.biographical') %></h2>
@@ -41,6 +46,8 @@ $(document).ready(function(){
         <dd class="blacklight-type_tesim">Oral Histories</dd>
         <dt class="blacklight-contact">Contact:</dt>
         <dd class="blacklight-contact"><%= render_contact_field(document["contact_ssm"].to_sentence) if document["contact_ssm"] %></dd>
+        <dt class="blacklight-type_tesim">Transcript Identifier:</dt>
+        <dd class="blacklight-type_tesim"><%= document["master_identifier_ssim"].to_sentence if document["master_identifier_ssim"] %></dd>
     </dl>
   </div>
   <div class="rights">
