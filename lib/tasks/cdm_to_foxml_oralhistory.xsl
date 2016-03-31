@@ -33,6 +33,7 @@
       <xsl:variable name="rdfResource">
         <xsl:value-of select="concat('info:fedora/afmodel:', Type)" />
       </xsl:variable>
+
       <exsl:document method="xml" href="{$foxml_dir}/{$cdmfile}.xml">
         <xsl:element name="foxml:digitalObject" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <xsl:attribute name="VERSION"><xsl:value-of select="1.1"/></xsl:attribute>
@@ -71,7 +72,13 @@
                 <xsl:apply-templates select="Format"/>
                 <xsl:apply-templates select="Type"/>
                 <xsl:apply-templates select="Language"/>
-                <xsl:apply-templates select="Subject"/>
+
+                <xsl:for-each select="str:tokenize(Subject, '--')">
+                  <xsl:element name="subject">
+                    <xsl:value-of select="normalize-space(.)"/>
+                  </xsl:element>
+                </xsl:for-each>
+
                 <xsl:apply-templates select="Digital_Collection"/>
                 <doi />
                 <permanent_url />

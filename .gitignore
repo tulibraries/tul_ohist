@@ -11,11 +11,13 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
-# Ignore CONTENTdm configuration
-config/contentdm.yml
+# Ignore config YML files
+config/*.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
 /jetty
 spec/fixtures/
+
+/public

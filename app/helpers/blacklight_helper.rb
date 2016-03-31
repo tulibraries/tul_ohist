@@ -14,6 +14,6 @@ module BlacklightHelper
 
 	def render_advanced_search()
 		path_var = request.path.gsub(/[^0-9A-Za-z]/, '')
-		if path_var == "advanced" then link_to t('blacklight.basic_search_link'), root_url, :class=>'basic_search' else  link_to t('blacklight.advanced_search_link'), advanced_search_path(params), :class=>'advanced_search' end
+		if path_var.include? "advanced" then link_to t('blacklight.basic_search_link'), root_url, :class=>'basic_search' else  link_to t('blacklight.advanced_search_link'), advanced_search_path(params), :class=>'advanced_search' end
 	end
 end

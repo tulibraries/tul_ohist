@@ -8,7 +8,8 @@ namespace :tu_cdm do
   OpenURI::Buffer.const_set 'StringMax', 0
 
   config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
-  
+  config_bg = YAML.load_file(File.expand_path("#{Rails.root}/config/backups.yml", __FILE__))
+
   desc "List current ContentDM collections on the CDM server"  
   task :list => :environment do
     collections = CDMUtils.list(config['cdm_server'])
@@ -42,8 +43,48 @@ namespace :tu_cdm do
     end
 
   end
-  
+
+desc 'Verify converted downloads, backup the repo, and clean in preperation for ingest -- USE WITH CAUTION'
+  task :verify_backup_clean => :environment do
+    contents = Dir.glob("#{config['cdm_foxml_dir']}/*.xml").count
+
+    index_i = 0
+    ActiveFedora::Base.find_each({}, batch_size: 2000) do |o|
+      index_i += 1
+    end
     
+    puts "Index: #{index_i}"
+    puts "Contents: #{contents}"
+
+    if contents >= index_i
+      
+      jetty_backup_dir = "#{config_bg['backup_interstitial']}/tul_ohist_jetty_db_backup_#{Time.now.to_i.to_s}"
+      FileUtils::mkdir_p jetty_backup_dir
+      `cp -R #{Rails.root}/jetty #{jetty_backup_dir}`
+      `cp -R #{Rails.root}/db #{jetty_backup_dir}`
+      `cp -R #{Rails.root}/log/cron_log.log #{jetty_backup_dir}`
+      `zip -r #{jetty_backup_dir}.bkup.zip #{jetty_backup_dir}`
+      `rsync -avP --no-o --no-p --no-g #{jetty_backup_dir}.bkup.zip #{config_bg['backup_permanent']}`
+
+      puts "Fedora state #{Time.now} backed up to #{jetty_backup_dir}"
+      records_num = 0
+      ActiveFedora::Base.find_each({},batch_size: 2000) do |o|
+        CDMUtils.delete_object(o)
+        records_num += 1
+      end
+      puts "#{records_num} objects deleted from Fedora"
+
+    elsif
+      CdmMailer.report_download_errors.deliver
+      abort("Count of downloaded files is less than that in the current repository.  Aborting rake task.")
+    end
+  end
+
+  desc "test mailer functions"
+  task :mail_thing => :environment do
+    CdmMailer.report_download_errors.deliver
+  end
+  
   desc "Ingest all converted and up-to-date ContentDM objects into Fedora"  
   task :ingest => :environment do
     contents = ENV['DIR'] ? Dir.glob(File.join(ENV['DIR'], "*.xml")) : Dir.glob("#{config['cdm_foxml_dir']}/*.xml")
@@ -51,7 +92,7 @@ namespace :tu_cdm do
       pid = CDMUtils.ingest_file(file)
     end
     puts "All files ingested -- phew!".green
-    
+    CdmMailer.report_success.deliver
   end
     
   namespace :solr do

@@ -5,12 +5,12 @@ $(document).ready(function(){
 
 </script>
 <div class="main-column">
+
   <div class="transcript portrait">
-  <%= render_photo(document["master_identifier_ssim"]) %>
+    <%= render_photo_local(document["master_identifier_ssim"]) %>
   </div>
-  <% transcript_pdf = contentdm_file_url(document['contentdm_collection_id_ssm'].to_sentence,
-                                      document['contentdm_number_ssm'].to_sentence,
-                                      document['contentdm_file_name_ssm'].to_sentence) %>
+
+  <% transcript_pdf = local_file_url(document["master_identifier_ssim"]) %>
 
   <div class="transcript collection-description">
     <h2><%= t('tul_ohist.transcript_view.title.about_collection') %></h2>
@@ -47,6 +47,12 @@ $(document).ready(function(){
     <h2><%= t('tul_ohist.transcript_view.title.rights') %></h2>
     <%= document['rights_ssm'].to_sentence.html_safe if document['rights_ssm'] %>
   </div>
+  
+  <div class="transcript-note">
+    <h2><%= t('tul_ohist.transcript_view.title.transcript_note') %></h2>
+    <%= auto_link(document['transcript_note_ssm'].to_sentence.html_safe) if document['transcript_note_ssm'] %>
+  </div>
+  
   <div class="ada-note">
     <h2><%= t('tul_ohist.transcript_view.title.ada_note') %></h2>
     <%= auto_link(document['ada_note_ssm'].to_sentence.html_safe) if document['ada_note_ssm'] %>

@@ -12,6 +12,7 @@ module TulOhist
         t.content_summary index_as: :stored_searchable
         t.collection_description index_as: :stored_searchable
         t.ada_note index_as: :displayable
+        t.transcript_note index_as: :displayable
       end 
 
       def self.xml_template

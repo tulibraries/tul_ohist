@@ -22,6 +22,11 @@ module CDMUtils
   end
   module_function :download_all_collections # :nodoc:
 
+  def self.delete_object(o)
+    puts "Deleting #{o}..."
+    o.delete
+  end
+
   class Download
     def self.init_download
       OpenURI::Buffer.send :remove_const, 'StringMax'
