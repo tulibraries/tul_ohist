@@ -88,3 +88,5 @@ Rails.application.configure do
   config.action_controller.relative_url_root = '/oralhistories'
 
 end
+
+GA.tracker = "UA-2152985-13"
