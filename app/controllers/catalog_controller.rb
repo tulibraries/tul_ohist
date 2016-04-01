@@ -61,13 +61,13 @@ class CatalogController < ApplicationController
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
 
+    config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true, :collapse => false
     config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => 5, :collapse => false
     config.add_facet_field solr_name('narrator', :facetable), :label => 'Narrator', :limit => 5, :collapse => false
     config.add_facet_field solr_name('organization_building', :facetable), :label => 'Organization / Building', :limit => 5, :collapse => false
     config.add_facet_field solr_name('personal_names', :facetable), :label => 'Personal Names', :limit => 5, :collapse => true
     config.add_facet_field solr_name('geographic_subject', :facetable), :label => 'Geographic Subject', :limit => true
     config.add_facet_field solr_name('repository_collection', :facetable), :label => 'Repository Collection', :limit => true
-    config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
