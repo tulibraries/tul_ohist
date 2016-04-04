@@ -51,8 +51,6 @@ gem 'colorize'
 gem "devise"
 gem "devise-guests", "~> 0.3"
 
-gem 'google-analytics-rails', '1.1.0'
-
 group :test do
   gem "rspec-rails"
   gem 'cucumber-rails', require: false
@@ -72,6 +70,10 @@ end
 
 group :development do
   gem "pry-rails"
+end
+
+group :production do
+  gem 'google-analytics-rails', '1.1.0'
 end
 
 gem 'blacklight_advanced_search'
