@@ -31,6 +31,15 @@ namespace :tu_cdm do
     puts downloaded == 0 ?  "Warning: #{message}".colorize(:red) : message
   end
 
+  desc 'Validate FOXML'
+  task :validate => :environment do
+    u_files = Dir.glob("#{config['cdm_foxml_dir']}/*.xml").select { |fn| File.file?(fn) }
+    puts "#{u_files.length} FOXML files detected"
+    
+    u_files.length.times do |i|
+      error = CDMUtils.validate(u_files[i])
+    end
+  end
 
   desc 'Convert ContentDM custom XML to FOXML'
   task :convert => :environment do
