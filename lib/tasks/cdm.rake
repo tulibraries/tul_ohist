@@ -119,6 +119,7 @@ namespace :tu_cdm do
       CdmMailer.report_success.deliver
     else
       puts "Errors, #{ingest_count} of #{contents.count} ingested".red
+      CdmMailer.report_ingest_errors.deliver
     end
   end
 
