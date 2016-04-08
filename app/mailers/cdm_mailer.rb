@@ -1,10 +1,15 @@
 class CdmMailer < ApplicationMailer
-  
+
   default from: "No-Reply LibDigital <no-reply-libdigital@temple.edu>"
 
   def report_download_errors
     attachments['cron_errors.log'] = File.read('log/cron_error_log.log')
     mail(:to => "tuf15651@temple.edu,tug34268@temple.edu", :subject => "ERROR: CONTENTdm download for TULOHIST error", :body => "Something went wrong during the CONTENTdm nightly download.  Please see attached error log.")
+  end
+
+  def report_ingest_errors
+    attachments['ingest.log'] = File.read('log/ingest.log')
+    mail(:to => "tuf15651@temple.edu,tug34268@temple.edu", :subject => "ERROR: CONTENTdm ingest for TULOHIST error", :body => "Something went wrong during the CONTENTdm nightly download.  Please see attached error log.")
   end
 
   def report_success
