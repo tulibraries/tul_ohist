@@ -1,6 +1,7 @@
 require "active-fedora"
 require "open-uri"
 require "fileutils"
+require "logger"
 
 module CDMUtils
   def self.list(server)
@@ -146,19 +147,15 @@ module CDMUtils
   module_function :validate # :nodoc:
 
   class Validate
-    def self.validate_file(file_name)
+    attr_reader :errors
+
+    def is_valid?(file_name)
       schema_url = "http://www.fedora.info/definitions/1/0/foxml1-1.xsd"
 
       xsd = Nokogiri::XML::Schema(open(schema_url))
-      print "#{File.basename(file_name)} "
       doc = Nokogiri::XML(File.read(file_name))
-      errors = xsd.validate(doc)
-      if errors.count
-        print "has #{errors.count} errors\n"
-        errors.each do |error|
-          print "#{error}\n"
-        end
-      end
+      @errors = xsd.validate(doc)
+      @errors.count == 0
     end
   end
 
@@ -168,16 +165,36 @@ module CDMUtils
   module_function :ingest_file # :nodoc:
 
   class Ingest
+    @validator ||= CDMUtils::Validate.new
+    @logger ||= Logger.new(File.join(Rails.root, "log", "ingest.log"))
+
     def self.ingest_file(file_name)
       print "Ingest: #{File.basename(file_name)} ..."
-      binding.pry
-      pid = ActiveFedora::FixtureLoader.import_to_fedora(file_name)
-      print "\b\b\b(#{pid}) ..."
-      status = ActiveFedora::FixtureLoader.index(pid)
-      print "#{status}\b\b\bDone.\n"
-      File.delete(file_name)
+      if @validator.is_valid?(file_name)
+        @logger.info "Ingest: #{File.basename(file_name)}"
+        state = "Ingest"
+        pid = ActiveFedora::FixtureLoader.import_to_fedora(file_name)
+        print "\b\b\b(#{pid}) ..."
+        state = "Index"
+        status = ActiveFedora::FixtureLoader.index(pid)
+        @logger.info "Index status: #{status.inspect}"
+        print "\b\b\bDone.\n"
+        File.delete(file_name)
+        @logger.info "Deleting: #{File.basename(file_name)}"
 
-      { solr_status: status["responseHeader"]["status"], pid: pid }
+        { solr_status: status["responseHeader"]["status"], pid: pid }
+      else
+        print "\b\b\bInvalid FOXML\n"
+        @validator.errors.each do |error|
+          @logger.error "#{File.basename(file_name)}: #{error}"
+        end
+
+        { }
+      end
+    rescue Rubydora::FedoraInvalidRequest => e
+      print "\b\b\b#{state} Failed, #{e.cause}. #{$!}\n"
+      @logger.error "#{File.basename(file_name)}: #{state} Failed, #{e.cause}. #{$!}."
+      { }
     end
   end
 
