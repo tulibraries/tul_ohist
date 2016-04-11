@@ -3,7 +3,7 @@
 
 /******
 *
-* General class- and ID-specific theming 
+* General class- and ID-specific theming
 *
 ******/
 
@@ -70,7 +70,7 @@
 
 /******
 *
-* Theming for plugins 
+* Theming for plugins
 *
 ******/
 
@@ -118,10 +118,15 @@
   display: none;
 }
 
+.advanced-search-form {
+  .sort-buttons {
+    display: none;
+  }
+}
+
 
 /* Homepage */
 
 h2.homepage a {
   color: $temple-cherry;
 }
-
