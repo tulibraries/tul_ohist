@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:exsl="http://exslt.org/common" xmlns:ex="http://exslt.org/dates-and-times" extension-element-prefixes="exsl ex">
+  <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:exsl="http://exslt.org/common" xmlns:ex="http://exslt.org/dates-and-times" xmlns:str="http://exslt.org/strings" extension-element-prefixes="exsl ex str">
   <xsl:variable name="collection">
     <xsl:value-of select="metadata/manifest/contentdm_collection_id" />
   </xsl:variable>
@@ -33,6 +33,7 @@
       <xsl:variable name="rdfResource">
         <xsl:value-of select="concat('info:fedora/afmodel:', Type)" />
       </xsl:variable>
+
       <exsl:document method="xml" href="{$foxml_dir}/{$cdmfile}.xml">
         <xsl:element name="foxml:digitalObject" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <xsl:attribute name="VERSION"><xsl:value-of select="1.1"/></xsl:attribute>
@@ -71,7 +72,13 @@
                 <xsl:apply-templates select="Format"/>
                 <xsl:apply-templates select="Type"/>
                 <xsl:apply-templates select="Language"/>
-                <xsl:apply-templates select="Subject"/>
+
+                <xsl:for-each select="str:tokenize(Subject, '--')">
+                  <xsl:element name="subject">
+                    <xsl:value-of select="normalize-space(.)"/>
+                  </xsl:element>
+                </xsl:for-each>
+
                 <xsl:apply-templates select="Digital_Collection"/>
                 <doi />
                 <permanent_url />
@@ -139,6 +146,7 @@
                 <content_summary><xsl:apply-templates select="Content_Summary"/></content_summary>
                 <collection_description><xsl:apply-templates select="Collection_Description"/></collection_description>
                 <ada_note><xsl:apply-templates select="ADA_Note"/></ada_note>
+                <transcript_note><xsl:apply-templates select="Transcript_Note"/></transcript_note>
               </fields>
             </foxml:xmlContent>
           </foxml:datastreamVersion>
@@ -271,3 +279,4 @@
     <organization_building><xsl:apply-templates /></organization_building>
   </xsl:template>
 </xsl:stylesheet>
+

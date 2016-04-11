@@ -40,6 +40,26 @@ module TulOhistHelper
     return img.to_sentence
   end
 
+  def render_photo_local(master_identifier)
+    b = get_related_objects(master_identifier);
+    titles = Array.new
+    dates = Array.new
+    img = Array.new
+
+    b.each do |b_obj|
+      pid=b_obj.id
+      object = locate_by_model(pid)
+      if(object && object.type.first == "Photograph")
+       intermed_title = object.title.first
+       (titles ||= []) << intermed_title
+       image_url = get_image_url_local(pid)
+       (img ||= []) << image_tag(image_url, :alt => intermed_title)
+     end
+    end
+    return img.to_sentence
+  end
+
+
   def render_related_resources(master_identifier, document)
   	related_resources_list = ''
     rc_label = content_tag("span", nil, class: "related-resource-label") do t('tul_ohist.related_resources.label.repository_collection') end
@@ -96,6 +116,13 @@ module TulOhistHelper
     return image_url
   end
 
+  def get_image_url_local(pid)
+    object = Photograph.find(pid)
+    mid = object.master_identifier
+    image_url = local_image_asset_url(mid)
+    return image_url
+  end
+
   def get_related_objects(master_identifier)
     related_objects = ActiveFedora::Base.where(master_identifier_ssim: master_identifier).to_a
     return related_objects
@@ -109,6 +136,14 @@ module TulOhistHelper
   def contentdm_image_asset_url(collection, pointer)
     config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
     "#{config['cdm_archive']}/utils/ajaxhelper/?CISOROOT=#{collection}&CISOPTR=#{pointer}&action=2&DMSCALE=10&DMWIDTH=2000&DMHEIGHT=2000"
+  end
+
+  def local_image_asset_url(mid)
+    "https://libdigital.temple.edu/pdfa1/Oral Histories/#{mid.to_sentence}.jpg"
+  end
+
+  def local_file_url(mid)
+    "https://libdigital.temple.edu/pdfa1/Oral Histories/#{mid.to_sentence}Q01.pdf"
   end
 
   def locate_by_model(pid)

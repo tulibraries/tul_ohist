@@ -7,7 +7,7 @@ body{
   color: $temple-black;
 }
 
-a {
+a, a.facet-browse-all {
 	color: $temple-light-blue;
 }
 
@@ -76,4 +76,12 @@ html,body,#wrapper,#main-wrapper,#footer {
 	border-bottom: 10px solid $temple-footer-gutters;
 	color: $temple-white;
 	padding: 10px;
+}
+
+#footer a{
+  color: #5999d0;
+}
+
+#footer a:hover{
+  color: #b9d3eb;
 }

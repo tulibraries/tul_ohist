@@ -13,11 +13,13 @@
 
 .main-column{
   float:left;
-  width: 880px;
+  width: 680px;
+  padding-left: 30px;
 }
+
 .right-column{
-  float: right;
-  width: 310px;
+  float: left;
+  width: 270px;
 }
 
 
@@ -33,7 +35,7 @@
   width: 250px;
   height: 60px;
   margin-top: 10px;
-  background: transparent url(/assets/logo.png) no-repeat top left;
+  background: transparent asset-data-url("logo.png") no-repeat top left;
 }
 
 .navbar-inverse {
@@ -56,8 +58,14 @@
 
 .portrait img {
   width: 290px;
-  height: 230px;
 }
+
+/* Remove below class to make responsive */
+/*
+.container {
+    width: 1200px;
+}
+*/
 
 
 /******
@@ -73,10 +81,47 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000;
+    background-color: $temple-white;
     filter:alpha(opacity=95);
     -moz-opacity:0.95;
     -khtml-opacity: 0.95;
     opacity: 0.95;
     z-index: 100;
 }
+
+
+
+
+/* Other */
+
+.image-ohist {
+  float: right;
+  margin: 10px;
+}
+
+
+/* search styling */
+
+.secondary-input-group {
+ float: right;
+ padding-left: 20px;
+}
+
+
+#sort-dropdown{
+  display: none;
+}
+
+/* Advanced search restyling */
+
+.limit-criteria {
+  display: none;
+}
+
+
+/* Homepage */
+
+h2.homepage a {
+  color: $temple-cherry;
+}
+

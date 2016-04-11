@@ -5,12 +5,12 @@ $(document).ready(function(){
 
 </script>
 <div class="main-column">
+
   <div class="transcript portrait">
-  <%= render_photo(document["master_identifier_ssim"]) %>
+    <%= render_photo_local(document["master_identifier_ssim"]) %>
   </div>
-  <% transcript_pdf = contentdm_file_url(document['contentdm_collection_id_ssm'].to_sentence,
-                                      document['contentdm_number_ssm'].to_sentence,
-                                      document['contentdm_file_name_ssm'].to_sentence) %>
+
+  <% transcript_pdf = local_file_url(document["master_identifier_ssim"]) %>
 
   <div class="transcript collection-description">
     <h2><%= t('tul_ohist.transcript_view.title.about_collection') %></h2>
@@ -20,8 +20,13 @@ $(document).ready(function(){
   <div class="transcript content-summary">
     <h2><%= t('tul_ohist.transcript_view.title.about_interview') %></h2>
   <%= document['content_summary_tesim'].to_sentence.html_safe if document['content_summary_tesim'] %>
-  </div>
-    <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%"></object></div>
+  </div>   
+    <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%">
+      <p>It appears your Web browser is not configured to display embedded PDF files.  To view this, just <a href="<%= transcript_pdf %>">click here to view the PDF file.</a></p>
+    </object></div>
+<div class="download-link">
+<a target="_blank" href="<%= transcript_pdf %>">Download PDF</a>
+</div>
 
   <div class="transcript biographical-history-note">
     <h2><%= t('tul_ohist.transcript_view.title.biographical') %></h2>
@@ -37,14 +42,24 @@ $(document).ready(function(){
           <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
         <% end -%>
       <% end -%>
+        <dt class="blacklight-type_tesim">Type:</dt>
+        <dd class="blacklight-type_tesim">Oral Histories</dd>
         <dt class="blacklight-contact">Contact:</dt>
         <dd class="blacklight-contact"><%= render_contact_field(document["contact_ssm"].to_sentence) if document["contact_ssm"] %></dd>
+        <dt class="blacklight-type_tesim">Transcript Identifier:</dt>
+        <dd class="blacklight-type_tesim"><%= document["master_identifier_ssim"].to_sentence if document["master_identifier_ssim"] %></dd>
     </dl>
   </div>
   <div class="rights">
     <h2><%= t('tul_ohist.transcript_view.title.rights') %></h2>
     <%= document['rights_ssm'].to_sentence.html_safe if document['rights_ssm'] %>
   </div>
+  
+  <div class="transcript-note">
+    <h2><%= t('tul_ohist.transcript_view.title.transcript_note') %></h2>
+    <%= auto_link(document['transcript_note_ssm'].to_sentence.html_safe) if document['transcript_note_ssm'] %>
+  </div>
+  
   <div class="ada-note">
     <h2><%= t('tul_ohist.transcript_view.title.ada_note') %></h2>
     <%= auto_link(document['ada_note_ssm'].to_sentence.html_safe) if document['ada_note_ssm'] %>

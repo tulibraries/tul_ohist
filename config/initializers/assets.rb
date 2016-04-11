@@ -7,4 +7,15 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
+Rails.application.config.assets.precompile += %w( images/logo.png )
+
+Rails.application.config.assets.precompile += %w( application.css.scss )
+Rails.application.config.assets.precompile += %w( blacklight.css.scss )
+Rails.application.config.assets.precompile += %w( main.css.scss )
+Rails.application.config.assets.precompile += %w( photographs.css.scss )
+Rails.application.config.assets.precompile += %w( transcripts.css.scss )
+Rails.application.config.assets.precompile += %w( tul_ohist.css.scss )
+Rails.application.config.assets.precompile += %w( base/colors.css.scss )
+Rails.application.config.assets.precompile += %w( base/globals.css.scss )
+Rails.application.config.assets.precompile += %w( base/mixins.css.scss )
 
