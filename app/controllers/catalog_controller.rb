@@ -164,6 +164,14 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.advanced_search = {
+      :form_solr_parameters => {
+        "facet.field" => ["digital_collection_sim"],
+        "facet.limit" => -1, # return all facet values
+        "facet.sort" => "index" # sort by byte order of values
+      }
+    }
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
