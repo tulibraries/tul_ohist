@@ -81,6 +81,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('title', :stored_searchable, type: :string), :label => 'Title'
     config.add_index_field solr_name('subject', :stored_searchable, type: :string), :label => 'Subject', :link_to_search => 'subject_sim'
+    config.add_index_field solr_name('narrator', :stored_searchable, type: :string), :label => 'Narrator', :link_to_search => 'narrator_sim'
     config.add_index_field solr_name('personal_names', :stored_searchable, type: :string), :label => 'Personal Names', :link_to_search => 'personal_names_sim'
 
 
@@ -118,7 +119,7 @@ class CatalogController < ApplicationController
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
 
-    config.add_search_field 'all_fields', :label => 'All Fields'
+    config.add_search_field 'all_fields', :label => 'All Fields', :sort => 'narrator_si asc, title_si asc'
 
     #THIS WORKS -- DO WE NEED pf SOLR NAME?  
     config.add_search_field('Title') do |field|
@@ -169,7 +170,7 @@ class CatalogController < ApplicationController
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
     config.add_sort_field 'score desc, pub_date_dtsi desc, title_tesi asc', :label => 'relevance'
-    config.add_sort_field 'narrator_tesi asc, title_tesi asc', :label => 'narrator'
+    config.add_sort_field 'narrator_si asc, title_si asc', :label => 'narrator'
     config.add_sort_field 'title_tesi asc, pub_date_dtsi desc', :label => 'title'
 
     # If there are more than this many search results, no spelling ("did you
