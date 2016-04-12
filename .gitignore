@@ -14,6 +14,11 @@
 # Ignore config YML files
 config/contentdm.yml
 config/backups.yml
+config/database.yml
+config/fedora.yml
+config/jetty.yml
+config/secrets.yml
+config/solr.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
