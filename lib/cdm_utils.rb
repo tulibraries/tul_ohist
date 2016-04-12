@@ -142,7 +142,7 @@ module CDMUtils
   end
 
   def validate(file_name)
-    Validate.validate_file(file_name)
+    Validate.is_valid?(file_name)
   end
   module_function :validate # :nodoc:
 
