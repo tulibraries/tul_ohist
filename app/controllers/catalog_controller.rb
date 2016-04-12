@@ -6,30 +6,30 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Hydra::Controller::ControllerBehavior
   include BlacklightAdvancedSearch::ParseBasicQ
-  
+
   # These before_filters apply the hydra access controls
   #before_filter :enforce_show_permissions, :only=>:show
   # This applies appropriate access controls to all solr queries
   #CatalogController.solr_search_params_logic += [:add_access_controls_to_solr_params]
-  
+
   CatalogController.solr_search_params_logic += [:exclude_unwanted_models]
 
   configure_blacklight do |config|
     config.default_solr_params = {
-      :qf => 'title_tesim 
-              date_tesim 
-              repository_tesim 
-              format_tesim 
-              type_tesim 
-              language_tesim 
-              geographic_subject_tesim 
-              organization_building_tesim 
-              notes_tesim 
-              personal_names_tesim 
-              location_tesim 
-              physical_description_tesim 
-              document_content_tesim 
-              doi_tesim 
+      :qf => 'title_tesim
+              date_tesim
+              repository_tesim
+              format_tesim
+              type_tesim
+              language_tesim
+              geographic_subject_tesim
+              organization_building_tesim
+              notes_tesim
+              personal_names_tesim
+              location_tesim
+              physical_description_tesim
+              document_content_tesim
+              doi_tesim
               digital_collection_tesim
               repository_collection_tesim',
       :qt => 'search',
@@ -120,7 +120,7 @@ class CatalogController < ApplicationController
 
     config.add_search_field 'all_fields', :label => 'All Fields'
 
-    #THIS WORKS -- DO WE NEED pf SOLR NAME?  
+    #THIS WORKS -- DO WE NEED pf SOLR NAME?
     config.add_search_field('Title') do |field|
       solr_name = solr_name("title_tesim", :stored_searchable, type: :string)
       field.solr_local_parameters = {
@@ -164,6 +164,14 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.advanced_search = {
+      :form_solr_parameters => {
+        "facet.field" => ["digital_collection_sim"],
+        "facet.limit" => -1, # return all facet values
+        "facet.sort" => "index" # sort by byte order of values
+      }
+    }
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
@@ -194,4 +202,3 @@ class CatalogController < ApplicationController
     return [Photograph]
   end
 end
-
