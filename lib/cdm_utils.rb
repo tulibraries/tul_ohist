@@ -39,7 +39,7 @@ module CDMUtils
       # If coll is nil, then import all the available collections
       user = config['cdm_user']
       password = config['cdm_password']
-
+    
       build_xml_url = "#{config['cdm_server']}/cgi-bin/admin/exportxml.exe?CISODB=%2F#{coll}&CISOTYPE=custom&CISOPAGE=&CISOPTRLIST=&title=Title&date=Date&descri=Content_Summary&creato=Interviewer&contri=Narrator&subjec=Subject&geogra=Geographic_Subject&organi=Organization_Building&subjea=Personal_Name&descra=Notes&format=Format&type=Type&source=Physical_Description&langua=Language&origin=Original_Source_Title&origia=Original_Recording_Specifications&rights=Rights&clickt=Click_Through&reposi=Repository&reposa=Repository_Collection&digita=Digital_Collection&catalo=Digital_Publisher&digiti=Digitization_Specifications&contac=Contact&create=Created&identi=Master_Identifier&audio=Audio_Filename&transc=Transcript_Filename&photog=Photograph_Filename&transa=Transcript&docume=Document_Content&ocr=OCR_Note&ada=ADA_Note&transb=Transcript_Note&findin=Finding_Aid_Link&findia=Finding_Aid_Title&online=Online_Exhibit_Link&onlina=Online_Exhibit_Title&catala=Catalog_Record_Link&catalb=Catalog_Record_Title&condit=Condition_Note&biogra=Biographical_History_Note&collec=Collection_Description&folder=Location&weight=Weight&find=Item_URL&dmoclcno=OCLC_number&dmcreated=Date_created&dmmodified=Date_modified&dmrecord=CONTENTdm_number&cdmfile=CONTENTdm_file_name&cdmpath=CONTENTdm_file_path&CISOMODE1=rep&CISOMODE2=rep"
       open(build_xml_url, :http_basic_authentication=>[user, password])
 
@@ -56,11 +56,11 @@ module CDMUtils
           puts "xmlFilePath #{xmlFilePath}"
           source_url = open(dl_url, :http_basic_authentication=>[user, password])
           file = File.read source_url
-          File.open(Rails.root + xmlFilePath, 'w') { |f| f.write(file) }
+          File.open(Rails.root + xmlFilePath, 'w') { |f| f.write(file) }	
           puts "Successfully harvested #{new_coll}"
           harvested_count += 1
         end
-      end
+      end 
       harvested_count
     end
   end
@@ -77,12 +77,12 @@ module CDMUtils
 
   class Convert
     def self.conform(doc, collection_file_name, target_dir)
-
+      
       #Strip out any bad keying from CDM
       replace = doc.gsub("&amp<", "<")
       replace2 = replace.gsub("&quot<", "<")
       replace3 = replace2.gsub("", "")
-
+      
       #Normalize inconsistent CDM metadata vocabulary
       #So ugly -- remove when vocab is normalized by staff
       replace4 = replace3.gsub("<Filename>", "<File_Name>")
@@ -95,7 +95,7 @@ module CDMUtils
       replace11 = replace10.gsub("<Call_Number>", "<Local_Call_Number>")
       replace12 = replace11.gsub("<Audio_Filename>", "<File_Name>")
       replace13 = replace12.gsub("<Video_Filename>", "<File_Name>")
-
+      
       replace14 = replace13.gsub("</Filename>", "</File_Name>")
       replace15 = replace14.gsub("</Created_by>", "</Created>")
       replace16 = replace15.gsub("</Personal_Name>", "</Personal_Names>")
@@ -118,17 +118,17 @@ module CDMUtils
       replace32 = replace31.gsub("<Audio_Filename/>", "<File_Name/>")
       replace33 = replace32.gsub("<Video_Filename/>", "<File_Name/>")
       replace34 = replace33.gsub("<metadata>", "<metadata>\n  <manifest>\n    <contentdm_collection_id>#{collection_file_name}</contentdm_collection_id>\n    <Rails_Root>#{Rails.root}</Rails_Root>\n    <foxml_dir>#{target_dir}</foxml_dir>\n  </manifest>")
-
+      
     end
 
     def self.convert_file(file_name, foxml_dir)
       fname = File.basename(file_name, ".xml")
       text = File.read(file_name)
       conformed_text = CDMUtils.conform(text, fname, foxml_dir)
-
+	
       FileUtils::mkdir_p foxml_dir
       File.open(file_name, "w") { |file| file.puts conformed_text }
-
+	
       case fname
         #audio
         when 'p16002coll22'
@@ -136,7 +136,7 @@ module CDMUtils
         else
           `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_noncustom.xsl #{file_name}`
       end
-
+        
       puts "XSLT transformation complete for #{fname}".green
     end
   end
@@ -233,3 +233,4 @@ module CDMUtils
     end
   end
 end
+

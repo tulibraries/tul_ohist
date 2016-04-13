@@ -1,5 +1,5 @@
 class CdmMailer < ApplicationMailer
-
+  
   default from: "No-Reply LibDigital <no-reply-libdigital@temple.edu>"
 
   def report_download_errors
