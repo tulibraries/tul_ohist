@@ -94,6 +94,19 @@ describe 'List CONTENTdm collections' do
     end
   end
 
+  describe 'validate' do
+    let (:valid_file)   { "spec/fixtures/foxml/valid.xml" }
+    let (:invalid_file) { "spec/fixtures/foxml/invalid.xml" }
+
+    it "should check validate" do
+      expect(CDMUtils.validate(valid_file)).to be
+    end
+
+    it "should check invalid" do
+      expect(CDMUtils.validate(invalid_file)).to_not be
+    end
+  end
+
   describe 'ingest' do
     let (:source_file_name) { collection_name + '.xml' }
     let (:ingest_pid) { "pid:001" }
