@@ -150,9 +150,7 @@ module CDMUtils
     attr_reader :errors
 
     def is_valid?(file_name)
-      schema_url = "http://www.fedora.info/definitions/1/0/foxml1-1.xsd"
-
-      xsd = Nokogiri::XML::Schema(open(schema_url))
+      xsd ||= Nokogiri::XML::Schema(File.read("public/foxml1-1.xsd"))
       doc = Nokogiri::XML(File.read(file_name))
       @errors = xsd.validate(doc)
       @errors.count == 0
