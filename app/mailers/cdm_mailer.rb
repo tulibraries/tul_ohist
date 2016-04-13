@@ -14,6 +14,6 @@ class CdmMailer < ApplicationMailer
 
   def report_success
     attachments['cron_log.txt'] = File.read('log/cron_log.log')
-    mail(:to => "tuf73699@temple.edu,tuf73699@temple.edu,tug34268@temple.edu", :subject => "SUCCESS: CONTENTdm backup and reindex for TULOHIST", :body => "Successful backup and reingest of TULOHIST collection items. Please see attached log for more information.")
+    mail(:to => "tuf73699@temple.edu,tug34268@temple.edu", :subject => "SUCCESS: CONTENTdm backup and reindex for TULOHIST", :body => "Successful backup and reingest of TULOHIST collection items. Please see attached log for more information.")
   end
 end
