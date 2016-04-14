@@ -1,16 +1,23 @@
 <div class="collection-landing-page">
   <div class="image-ohist">
-    <%= image_tag("feinstein_cover.jpg", alt: "Photograph of tallit hanging from railing") %>
-    <%= content_tag(:figcaption, "Tallit hanging from railing, Philadelphia Geriatric Center, n.d.") %>
+    <%= content_tag :figure do -%>
+      <%= image_tag("feinstein_cover.jpg", alt: "Photograph of tallit hanging from railing") %>
+      <%= content_tag :figcaption do -%>
+        Tallit hanging from railing, Philadelphia Geriatric Center, n.d.
+        (<%= link_to "PGC23.TIF", "http://digital.library.temple.edu/cdm/singleitem/collection/p15037coll15/id/2949/rec/1" %>)
+        <% end -%>
+    <% end -%>
+
+    <%= content_tag(:figcaption, ) %>
   </div>
 
   <h1>Feinstein Center Oral Histories</h1>
 
   <h2>Browse the Feinstein Oral Histories</h2>
   <ul>
-  <li><a href="https://libdigital.temple.edu/oralhistories/catalog/facet/narrator_sim?facet.sort=index">Browse by Narrator</a></li>
-  <li><a href="https://libdigital.temple.edu/oralhistories/catalog/facet/subject_sim">Browse by Subject</a></li>
-  <li><a href="https://libdigital.temple.edu/oralhistories/?utf8=%E2%9C%93&search_field=all_fields&q=">Browse All</a></li>
+  <li><a href="/catalog/facet/narrator_sim?facet.sort=index">Browse by Narrator</a></li>
+  <li><a href="/catalog/facet/subject_sim">Browse by Subject</a></li>
+  <li><a href="/?f%5Bdigital_collection_sim%5D%5B%5D=Myer+and+Rosaline+Feinstein+Center+for+American+Jewish+History+Oral+Histories">Browse All</a></li>
   </ul>
 
   <h2>About the Collection</h2>
