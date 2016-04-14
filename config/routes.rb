@@ -63,4 +63,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   get 'pages/walter_massey_phillips_oral_histories' => 'high_voltage/pages#show', id: 'walter_massey_phillips_oral_histories'
+  get 'pages/feinstein_collection' => 'high_voltage/pages#show', id: 'feinstein_collection'
 end
