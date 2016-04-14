@@ -1,6 +1,12 @@
 <div class="collection-landing-page">
   <div class="image-ohist">
-    <%= image_tag("ohist_cover.png", alt: "aeriel shot of a building") %>
+    <%= content_tag :figure do -%>
+      <%= image_tag "ohist_cover.png", alt: "aeriel shot of a building" %>
+      <%= content_tag :figcaption do -%>
+        Ben Franklin Parkway, George D. McDowell Philadelphia Evening Bulletin Photographs, September 1, 1949
+        (<%= link_to "V19110B", "http://digital.library.temple.edu/cdm/singleitem/collection/p15037coll3/id/50742/rec/1" %>)
+        <% end -%>
+    <% end -%>
   </div>
 
   <h1>Walter Massey Phillips Oral Histories</h1>
