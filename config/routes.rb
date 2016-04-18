@@ -62,4 +62,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get 'pages/feinstein_collection' => 'high_voltage/pages#show', id: 'feinstein_collection'
 end
