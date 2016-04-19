@@ -21,7 +21,7 @@
     <%= opensearch_description_tag application_name, opensearch_catalog_path(:format => 'xml', :only_path => false) %>
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
-    <%= analytics_init if GoogleAnalytics.valid_tracker? %>
+    <%= analytics_init if (Rails.env.production? and GoogleAnalytics.valid_tracker?) %>
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
 
