@@ -125,3 +125,29 @@ h2.homepage a {
   color: $temple-cherry;
 }
 
+/* Landing Pages */
+
+.collection-landing-page {
+  h1 {
+    text-align:center;
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  figure {
+    display: table;
+    width: 50%;
+    text-align:right;
+  }
+  figcaption { 
+    text-align:right;
+    font-size: 12px;
+  }
+  .related-items {
+    margin-top: 24px;
+    p {
+      line-height: 100%;
+    }
+  }
+}

@@ -31,6 +31,24 @@ namespace :tu_cdm do
     puts downloaded == 0 ?  "Warning: #{message}".colorize(:red) : message
   end
 
+  desc 'Validate FOXML'
+  task :validate => :environment do
+    u_files = Dir.glob("#{config['cdm_foxml_dir']}/*.xml").select { |fn| File.file?(fn) }
+    puts "#{u_files.length} FOXML files detected"
+    
+    @validator ||= CDMUtils::Validate.new
+    u_files.length.times do |i|
+      unless @validator.is_valid?(u_files[i])
+        status_str = "encountered #{@validator.errors.count} errors"
+        @validator.errors.each do |error|
+          status_str << "\n#{error}"
+        end
+      else
+        status_str = "is valid"
+      end
+      puts "#{File.basename(u_files[i])} #{status_str}"
+    end
+  end
 
   desc 'Convert ContentDM custom XML to FOXML'
   task :convert => :environment do
@@ -89,11 +107,20 @@ desc 'Verify converted downloads, backup the repo, and clean in preperation for 
   desc "Ingest all converted and up-to-date ContentDM objects into Fedora"  
   task :ingest => :environment do
     contents = ENV['DIR'] ? Dir.glob(File.join(ENV['DIR'], "*.xml")) : Dir.glob("#{config['cdm_foxml_dir']}/*.xml")
+    ingest_count = 0
     contents.each do |file|
-      pid = CDMUtils.ingest_file(file)
+      status = CDMUtils.ingest_file(file)
+      unless status.empty?
+        ingest_count += 1
+      end
     end
-    puts "All files ingested -- phew!".green
-    CdmMailer.report_success.deliver
+    if (ingest_count == contents.count)
+      puts "All files ingested -- phew!".green
+      CdmMailer.report_success.deliver
+    else
+      puts "Errors, #{ingest_count} of #{contents.count} ingested".red
+      CdmMailer.report_ingest_errors.deliver
+    end
   end
     
   namespace :solr do
