@@ -60,6 +60,22 @@
   width: 290px;
 }
 
+
+/******
+*
+* Fixes mozilla peculiarities
+*
+******/
+
+/* Fixes mid-word break in facet content */
+
+@-moz-document url-prefix() {
+  .facet-values .facet-label {
+    word-break: normal;
+  }
+}
+
+
 /* Remove below class to make responsive */
 /*
 .container {
