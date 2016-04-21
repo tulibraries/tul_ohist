@@ -114,8 +114,10 @@
 
 /* Advanced search restyling */
 
-.limit-criteria {
-  display: none;
+.advanced-search-form {
+  .sort-buttons {
+    display: none;
+  }
 }
 
 
