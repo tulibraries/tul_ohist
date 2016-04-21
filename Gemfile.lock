@@ -136,6 +136,7 @@ GEM
     fastercsv (1.5.5)
     ffi (1.9.10)
     gherkin (3.2.0)
+    google-analytics-rails (1.1.0)
     haml (4.0.7)
       tilt
     hashdiff (0.3.0)
@@ -448,6 +449,7 @@ DEPENDENCIES
   devise-guests (~> 0.3)
   factory_girl_rails (~> 4.0)
   high_voltage (~> 2.2.1)
+  google-analytics-rails (= 1.1.0)
   hydra (~> 7.1.0)
   jbuilder (~> 2.0)
   jettywrapper

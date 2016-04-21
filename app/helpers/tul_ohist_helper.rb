@@ -156,5 +156,9 @@ module TulOhistHelper
       end
   end
 
+  def render_google_analytics
+    analytics_init if (Rails.env.production? and GoogleAnalytics.valid_tracker?)
+  end
+
 end
 
