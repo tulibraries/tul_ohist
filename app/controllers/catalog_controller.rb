@@ -61,10 +61,10 @@ class CatalogController < ApplicationController
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
 
-    config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true, :collapse => false, :sort => "index"
-    config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => 5, :collapse => false, :sort => "index"
-    config.add_facet_field solr_name('narrator', :facetable), :label => 'Narrator', :limit => 5, :collapse => false, :sort => "count"
-    config.add_facet_field solr_name('organization_building', :facetable), :label => 'Organization / Building', :limit => 5, :collapse => false, :sort => "count"
+    config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true, :collapse => false
+    config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => 5, :collapse => false
+    config.add_facet_field solr_name('narrator', :facetable), :label => 'Narrator', :limit => 5, :collapse => false
+    config.add_facet_field solr_name('organization_building', :facetable), :label => 'Organization / Building', :limit => 5, :collapse => false
     config.add_facet_field solr_name('personal_names', :facetable), :label => 'Personal Names', :limit => 5, :collapse => true
     config.add_facet_field solr_name('geographic_subject', :facetable), :label => 'Geographic Subject', :limit => true
     config.add_facet_field solr_name('repository_collection', :facetable), :label => 'Repository Collection', :limit => true
@@ -207,7 +207,11 @@ class CatalogController < ApplicationController
   #
   def add_facet_sort_to_solr(solr_parameters, user_parameters)
     solr_parameters["facet.field"].each do |f|
-      solr_parameters[:"f.#{f}.facet.sort"] = blacklight_config.facet_fields[f].sort
+      sort = blacklight_config.facet_fields[f].try(:sort) { "index" }
+      if sort.nil?
+        sort = "index"
+      end
+      solr_parameters[:"f.#{f}.facet.sort"] = sort
     end
   end
 end
