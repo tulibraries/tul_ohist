@@ -12,7 +12,7 @@ class CatalogController < ApplicationController
   # This applies appropriate access controls to all solr queries
   #CatalogController.solr_search_params_logic += [:add_access_controls_to_solr_params]
   
-  CatalogController.solr_search_params_logic += [:exclude_unwanted_models]
+  CatalogController.solr_search_params_logic += [:exclude_unwanted_models, :add_facet_sort_to_solr]
 
   configure_blacklight do |config|
     config.default_solr_params = {
@@ -61,10 +61,10 @@ class CatalogController < ApplicationController
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
 
-    config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true, :collapse => false
-    config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => 5, :collapse => false
-    config.add_facet_field solr_name('narrator', :facetable), :label => 'Narrator', :limit => 5, :collapse => false
-    config.add_facet_field solr_name('organization_building', :facetable), :label => 'Organization / Building', :limit => 5, :collapse => false
+    config.add_facet_field solr_name('digital_collection', :facetable), :label => 'Digital Collection', :limit => true, :collapse => false, :sort => "index"
+    config.add_facet_field solr_name('subject', :facetable), :label => 'Subject', :limit => 5, :collapse => false, :sort => "index"
+    config.add_facet_field solr_name('narrator', :facetable), :label => 'Narrator', :limit => 5, :collapse => false, :sort => "count"
+    config.add_facet_field solr_name('organization_building', :facetable), :label => 'Organization / Building', :limit => 5, :collapse => false, :sort => "count"
     config.add_facet_field solr_name('personal_names', :facetable), :label => 'Personal Names', :limit => 5, :collapse => true
     config.add_facet_field solr_name('geographic_subject', :facetable), :label => 'Geographic Subject', :limit => true
     config.add_facet_field solr_name('repository_collection', :facetable), :label => 'Repository Collection', :limit => true
@@ -200,6 +200,15 @@ class CatalogController < ApplicationController
 
   def unwanted_models
     return [Photograph]
+  end
+
+  ## 
+  # Adds missing facet sort, which doesn't seem to be added anywhere else
+  #
+  def add_facet_sort_to_solr(solr_parameters, user_parameters)
+    solr_parameters["facet.field"].each do |f|
+      solr_parameters[:"f.#{f}.facet.sort"] = blacklight_config.facet_fields[f].sort
+    end
   end
 end
 
