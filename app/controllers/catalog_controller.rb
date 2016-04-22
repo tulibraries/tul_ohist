@@ -12,7 +12,7 @@ class CatalogController < ApplicationController
   # This applies appropriate access controls to all solr queries
   #CatalogController.solr_search_params_logic += [:add_access_controls_to_solr_params]
   
-  CatalogController.solr_search_params_logic += [:exclude_unwanted_models]
+  CatalogController.solr_search_params_logic += [:exclude_unwanted_models, :add_facet_sort_to_solr]
 
   configure_blacklight do |config|
     config.default_solr_params = {
@@ -201,5 +201,22 @@ class CatalogController < ApplicationController
   def unwanted_models
     return [Photograph]
   end
+
+  ## 
+  # Adds missing facet sort, which doesn't seem to be added anywhere else
+  #
+  def add_facet_sort_to_solr(solr_parameters, user_parameters)
+    solr_parameters["facet.field"].each do |facet_field|
+      solr_parameters[:"f.#{facet_field}.facet.sort"] = facet_sort(solr_parameters, user_parameters, facet_field)
+    end
+  end
+
+  # Get facet sort parameter. Default to count sorting
+  def facet_sort(solr_parameters, user_parameters, facet_field)
+    return "index" if (user_parameters["action"] == "facet")
+    return "count" if blacklight_config.facet_fields[facet_field].sort.nil?
+    return blacklight_config.facet_fields[facet_field].sort
+  end
+
 end
 
