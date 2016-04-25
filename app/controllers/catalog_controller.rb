@@ -207,18 +207,23 @@ class CatalogController < ApplicationController
   #
   def add_facet_sort_to_solr(solr_parameters, user_parameters)
     solr_parameters["facet.field"].each do |facet_field|
-      solr_parameters[:"f.#{facet_field}.facet.sort"] = facet_sort(solr_parameters, facet_field)
+      solr_parameters[:"f.#{facet_field}.facet.sort"] = facet_sort(solr_parameters, user_parameters, facet_field)
     end
   end
 
-  # Get facet sort parameter. Default to alphabetical sorting
-  def facet_sort(solr_parameters, facet_field)
+  # Get facet sort parameter. Default to count sorting
+  def facet_sort(solr_parameters, user_parameters, facet_field)
     unless blacklight_config.facet_fields[facet_field].sort.nil?
       sort = blacklight_config.facet_fields[facet_field].sort
     else
-      sort = :index
+      if (user_parameters["action"] == "facet")
+        sort = 'index'
+      else
+        sort = 'count'
+      end
     end
   end
+
 
 end
 
