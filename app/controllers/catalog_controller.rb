@@ -206,13 +206,19 @@ class CatalogController < ApplicationController
   # Adds missing facet sort, which doesn't seem to be added anywhere else
   #
   def add_facet_sort_to_solr(solr_parameters, user_parameters)
-    solr_parameters["facet.field"].each do |f|
-      sort = blacklight_config.facet_fields[f].try(:sort) { "index" }
-      if sort.nil?
-        sort = "index"
-      end
-      solr_parameters[:"f.#{f}.facet.sort"] = sort
+    solr_parameters["facet.field"].each do |facet_field|
+      solr_parameters[:"f.#{facet_field}.facet.sort"] = facet_sort(solr_parameters, facet_field)
     end
   end
+
+  # Get facet sort parameter. Default to alphabetical sorting
+  def facet_sort(solr_parameters, facet_field)
+    unless blacklight_config.facet_fields[facet_field].sort.nil?
+      sort = blacklight_config.facet_fields[facet_field].sort
+    else
+      sort = :index
+    end
+  end
+
 end
 
