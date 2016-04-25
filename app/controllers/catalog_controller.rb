@@ -213,17 +213,10 @@ class CatalogController < ApplicationController
 
   # Get facet sort parameter. Default to count sorting
   def facet_sort(solr_parameters, user_parameters, facet_field)
-    unless blacklight_config.facet_fields[facet_field].sort.nil?
-      sort = blacklight_config.facet_fields[facet_field].sort
-    else
-      if (user_parameters["action"] == "facet")
-        sort = 'index'
-      else
-        sort = 'count'
-      end
-    end
+    return "index" if (user_parameters["action"] == "facet")
+    return "count" if blacklight_config.facet_fields[facet_field].sort.nil?
+    return blacklight_config.facet_fields[facet_field].sort
   end
-
 
 end
 
