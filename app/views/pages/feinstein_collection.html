@@ -1,0 +1,29 @@
+<div class="collection-landing-page" id="feinsteinCollectionLandingPage">
+  <div class="image-ohist" id="feinsteinCollectionImage">
+    <%= content_tag :figure do -%>
+      <%= image_tag("feinstein_cover.jpg", alt: "Photograph of tallit hanging from railing") %>
+      <%= content_tag :figcaption do -%>
+        Tallit hanging from railing, Philadelphia Geriatric Center, n.d.
+        (<%= link_to "PGC23.TIF", "http://digital.library.temple.edu/cdm/singleitem/collection/p15037coll15/id/2949/rec/1" %>)
+        <% end -%>
+    <% end -%>
+
+    <%= content_tag(:figcaption, ) %>
+  </div>
+
+  <h1>Feinstein Center Oral Histories</h1>
+
+  <div class="browse-collection" id="feinsteinCollectionBrowse">
+    <h2>Browse the Feinstein Oral Histories</h2>
+    <ul>
+    <li><a href="/catalog/facet/narrator_sim?facet.sort=index">Browse by Narrator</a></li>
+    <li><a href="/catalog/facet/subject_sim">Browse by Subject</a></li>
+    <li><a href="/?f%5Bdigital_collection_sim%5D%5B%5D=Myer+and+Rosaline+Feinstein+Center+for+American+Jewish+History+Oral+Histories">Browse All</a></li>
+    </ul>
+  </div>
+
+  <div class="about-collection" id="feinsteinCollectionAbout">
+    <h2>About the Collection</h2>
+    <p>Among its goals, Temple University’s <a href="http://www.cla.temple.edu/feinsteincenter/">Feinstein Center for American Jewish History</a> promotes the study of the of the Philadelphia Jewish community.  In 2001, through grants from the Albert M. Greenfield Foundation, and The Pew Charitable Trusts, the center conducted oral history interviews with fifty Philadelphia Jewish men and women who played significant roles in business, political, cultural, educational, philanthropic, and other arenas of the social fabric of the community.</p>
+  </div>
+</div>
