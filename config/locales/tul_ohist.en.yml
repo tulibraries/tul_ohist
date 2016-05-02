@@ -1,7 +1,7 @@
 en:
   tul_ohist:
     general:
-      application_name: 'SCRC Oral Histories Repository'
+      application_name: 'Special Collections Oral Histories Repository'
       footer_content: "This site is run by SCRC, Temple University Libraries"
     homepage:
       welcome: 'Welcome to the'

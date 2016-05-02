@@ -148,13 +148,25 @@ h2.homepage a {
 		width: 150px;
 		height: 150px;
 		overflow: hidden;
-	}
 
-	.crop img {
-		width: 160%;
-		height: 160%;
-		margin-left: -90px;
-		display: block;
+    img {
+      display: block;
+      border: none;
+    }
+
+    img#blockson-thumbnail {
+      width: 160%;
+      height: 160%;
+      margin-top: -10px;
+      margin-left: -80px;
+    }
+
+    img#feinstein-thumbnail {
+      margin-top: -90px;
+      margin-left: -80px;
+      width: 180%;
+      height: 180%;
+    }
 	}
 
 	#collections-left {
@@ -165,12 +177,12 @@ h2.homepage a {
 		width: 50%
 	}
 
-	#collecitons-right {
+	#collections-right {
 		text-align: center;
 		margin-left: auto;
 		margin-right: auto;
 		float: right;
-		width: 50%
+		width: 50%;
 	}
 }
 
