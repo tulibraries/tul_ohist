@@ -448,8 +448,8 @@ DEPENDENCIES
   devise
   devise-guests (~> 0.3)
   factory_girl_rails (~> 4.0)
-  high_voltage (~> 2.2.1)
   google-analytics-rails (= 1.1.0)
+  high_voltage (~> 2.2.1)
   hydra (~> 7.1.0)
   jbuilder (~> 2.0)
   jettywrapper
