@@ -1,3 +1,16 @@
+GIT
+  remote: git://github.com/projectblacklight/blacklight.git
+  revision: 1b7196421cae781456905e6b5fe7a2ba12c513cb
+  branch: release-5.5
+  specs:
+    blacklight (5.5.4)
+      bootstrap-sass (~> 3.0)
+      deprecation
+      kaminari (~> 0.13)
+      nokogiri (~> 1.6)
+      rails (>= 3.2.6, < 5)
+      rsolr (~> 1.0.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,13 +62,6 @@ GEM
     bcp47 (0.3.3)
       i18n
     bcrypt (3.1.11)
-    blacklight (5.5.4)
-      bootstrap-sass (~> 3.0)
-      deprecation
-      kaminari (~> 0.13)
-      nokogiri (~> 1.6)
-      rails (>= 3.2.6, < 5)
-      rsolr (~> 1.0.6)
     blacklight_advanced_search (5.1.2)
       blacklight (>= 5.2, < 6.0)
       parslet
@@ -437,6 +443,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  blacklight!
   blacklight_advanced_search
   bootstrap-sass (= 3.3.1.0)
   byebug
@@ -448,8 +455,8 @@ DEPENDENCIES
   devise
   devise-guests (~> 0.3)
   factory_girl_rails (~> 4.0)
-  high_voltage (~> 2.2.1)
   google-analytics-rails (= 1.1.0)
+  high_voltage (~> 2.2.1)
   hydra (~> 7.1.0)
   jbuilder (~> 2.0)
   jettywrapper
@@ -473,4 +480,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.11.2
+   1.12.1
