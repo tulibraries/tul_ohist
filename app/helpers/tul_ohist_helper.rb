@@ -160,5 +160,29 @@ module TulOhistHelper
     analytics_init if (Rails.env.production? and GoogleAnalytics.valid_tracker?)
   end
 
+  ##
+  # Get the selected digital collection
+  # Blacklight adds the facet each time it's added, even if it already exists
+  # TODO Clean up search filter
+  def selected_digital_collections(params)
+    # Get previously selected collection facets, handle missing facet parameters
+    selected_digital_collections = params.fetch('f'){ {"digital_collection_sim" => [""]} }.fetch("digital_collection_sim"){[""]}
+    # Return last selected collection
+    selected_digital_collections.last
+  end
+
+  def collections_fields
+    collections = get_all_facet_items("digital_collection_sim")
+    collections.unshift([t('blacklight.search.form.default_option'), ""])
+  end
+
+  def get_all_facet_items(facet_field)
+    solr_params = controller.solr_facet_params(facet_field, params)
+    solr_params["f.#{facet_field}.facet.limit"] = -1 # Get all of the facets
+    solr_results= controller.find(solr_params)
+    facets = solr_results.facets
+    facets.first.items.map { |f| f.value }
+  end
+
 end
 
