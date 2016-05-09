@@ -13,6 +13,7 @@
 
 # Ignore config YML files
 config/contentdm.yml
+config/collections.yml
 config/backups.yml
 config/database.yml
 config/fedora.yml

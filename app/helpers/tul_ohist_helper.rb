@@ -171,17 +171,10 @@ module TulOhistHelper
     selected_digital_collections.last
   end
 
+  ##
+  # Get the available digital collections by their display name mapped to their digital collection name
   def collections_fields
-    collections = get_all_facet_items("digital_collection_sim")
-    collections.unshift([t('blacklight.search.form.default_option'), ""])
-  end
-
-  def get_all_facet_items(facet_field)
-    solr_params = controller.solr_facet_params(facet_field, params)
-    solr_params["f.#{facet_field}.facet.limit"] = -1 # Get all of the facets
-    solr_results= controller.find(solr_params)
-    facets = solr_results.facets
-    facets.first.items.map { |f| f.value }
+    collections = YAML.load_file(File.expand_path("#{Rails.root}/config/collections.yml", __FILE__))
   end
 
 end
