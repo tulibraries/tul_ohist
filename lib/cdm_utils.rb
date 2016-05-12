@@ -142,14 +142,14 @@ module CDMUtils
   end
 
   def validate(file_name)
-    Validate.is_valid?(file_name)
+    Validate.new.is_valid?(file_name)
   end
   module_function :validate # :nodoc:
 
   class Validate
     attr_reader :errors
 
-    def self.is_valid?(file_name)
+    def is_valid?(file_name)
       xsd ||= Nokogiri::XML::Schema(File.read("public/foxml1-1.xsd"))
       doc = Nokogiri::XML(File.read(file_name))
       @errors = xsd.validate(doc)
