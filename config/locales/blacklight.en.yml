@@ -6,3 +6,8 @@ en:
 
     search:
       title: 'Search Results - %{application_name}'
+      form:
+        search_field:
+          title: 'Collection search options'
+        collections_search_field: 'Select Collections'
+        default_option: 'All Digital Collections'

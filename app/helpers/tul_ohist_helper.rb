@@ -160,5 +160,22 @@ module TulOhistHelper
     analytics_init if (Rails.env.production? and GoogleAnalytics.valid_tracker?)
   end
 
+  ##
+  # Get the selected digital collection
+  # Blacklight adds the facet each time it's added, even if it already exists
+  # TODO Clean up search filter
+  def selected_digital_collections(params)
+    # Get previously selected collection facets, handle missing facet parameters
+    selected_digital_collections = params.fetch('f'){ {"digital_collection_sim" => [""]} }.fetch("digital_collection_sim"){[""]}
+    # Return last selected collection
+    selected_digital_collections.last
+  end
+
+  ##
+  # Get the available digital collections by their display name mapped to their digital collection name
+  def collections_fields
+    collections = YAML.load_file(File.expand_path("#{Rails.root}/config/collections.yml", __FILE__))
+  end
+
 end
 
