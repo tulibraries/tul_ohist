@@ -3,7 +3,7 @@
 
     <div class="input-group">
       <span class="input-group-addon">
-        <%= select_tag("f[digital_collection_sim][]", options_for_select(collections_fields, selected_digital_collections(params)), :title => t('blacklight.search.form.collection_field.title'), :class=>"search_field") %>
+        <%= select_tag("f[digital_collection_sim][]", options_for_select(collections_fields, selected_digital_collections(params)), :title => t('blacklight.search.form.search_field.title'), :class=>"search_field") %>
         <span class="sr-only"><%= t('blacklight.search.form.search_field.post_label') %></span>
       </span>
       <label for="q" class="sr-only"><%= t('blacklight.search.form.q') %></label>
