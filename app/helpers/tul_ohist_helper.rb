@@ -143,7 +143,9 @@ module TulOhistHelper
   end
 
   def local_file_url(mid)
-    "https://libdigital.temple.edu/pdfa1/Oral Histories/#{mid.to_sentence}Q01.pdf"
+    related_objects = get_related_objects(mid)
+    transcript_filename = related_objects.first.transcript_filename.first
+    "https://libdigital.temple.edu/pdfa1/Oral Histories/#{transcript_filename}"
   end
 
   def locate_by_model(pid)
