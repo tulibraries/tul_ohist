@@ -1,14 +1,12 @@
 <div class="collection-landing-page" id="feinsteinCollectionLandingPage">
   <div class="image-ohist" id="feinsteinCollectionImage">
     <%= content_tag :figure do -%>
-      <%= image_tag("feinstein_cover.jpg", alt: "Photograph of tallit hanging from railing") %>
+      <%= image_tag "feinstein_cover.jpg", alt: "Photograph of tallit hanging from railing" %>
       <%= content_tag :figcaption do -%>
-        Tallit hanging from railing, Philadelphia Geriatric Center, n.d.
-        (<%= link_to "PGC23.TIF", "http://digital.library.temple.edu/cdm/singleitem/collection/p15037coll15/id/2949/rec/1" %>)
+        <%= link_to "Tallit hanging from railing, Philadelphia Geriatric Center, n.d.",
+                    "http://digital.library.temple.edu/cdm/singleitem/collection/p15037coll15/id/2949/rec/1" %>
         <% end -%>
     <% end -%>
-
-    <%= content_tag(:figcaption, ) %>
   </div>
 
   <h1>Feinstein Center Oral Histories</h1>
