@@ -13,7 +13,7 @@ RSpec.feature "ResultsNumberings", type: :feature do
     Transcript.destroy_all
   end
 
-  it "shows first items as 11 on the second page" do
+  xit "shows first items as 11 on the second page" do
     visit "/catalog"
     click_button "Search"
     first(:link, "Next »").click
