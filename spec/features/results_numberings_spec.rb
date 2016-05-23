@@ -17,7 +17,7 @@ RSpec.feature "ResultsNumberings", type: :feature do
     visit "/catalog"
     click_button "Search"
     first(:link, "Next »").click
-    expect(page).to have_css("ol[start='11']")
+    expect(page).to have_css("ul[start='11']")
   end
 
 end

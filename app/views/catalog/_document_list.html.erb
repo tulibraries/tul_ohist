@@ -1,6 +1,6 @@
 <% # container for all documents in index view -%>
 <div id="documents">
-  <ol start=<%= @response.start + 1 %> >
+  <ul start=<%= @response.start + 1 %> class="list-unstyled" >
   	<%= render documents, :as => :document %>
-  </ol>
+  </ul>
 </div>
