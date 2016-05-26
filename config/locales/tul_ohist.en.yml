@@ -16,6 +16,7 @@ en:
         record_details: 'Record Details'
         ada_note: 'Note on ADA Compliance'
         transcript_note: 'Transcript Note'
+      browse_pdf: 'Browse PDF'
     click_through:
       confirm_button_text: "I understand and wish to continue"
       cancel_button_text: "I do not agree to the Terms of Use" 
