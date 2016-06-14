@@ -1,5 +1,7 @@
 set :environment, "development"
-set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
+tul_ohist_config = YAML.load_file(File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'tul_ohist.yml'), __FILE__))
+set :output, {:error    => File.join(File.dirname(__FILE__), '..', 'log', tul_ohist_config['cron_error_log']),
+              :standard => File.join(File.dirname(__FILE__), '..', 'log', tul_ohist_config['cron_log'])}
 
 every :sunday, :at => '2:00 am' do
   command 'echo "Starting download"'
