@@ -19,6 +19,7 @@ config/fedora.yml
 config/jetty.yml
 config/secrets.yml
 config/solr.yml
+config/tul_ohist.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log

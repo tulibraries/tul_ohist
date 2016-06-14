@@ -28,4 +28,14 @@ en:
         finding_aid: "Finding aid: "
         online_exhibit: "Online exhibit: "
         catalog_record: "Catalog record: "
+    mailer:
+      nightly_download_error:
+        subject: "ERROR: CONTENTdm download for TULOHIST error"
+        body: "Something went wrong during the CONTENTdm nightly download.  Please see attached error log."
+      ingest_error:
+        subject: "ERROR: CONTENTdm ingest for TULOHIST error"
+        body: "Something went wrong during the CONTENTdm ingest.  Please see attached error log."
+      backup_log:
+        subject: "SUCCESS: CONTENTdm backup and reindex for TULOHIST"
+        body: "Successful backup and reingest of TULOHIST collection items. Please see attached log for more information."
 
