@@ -28,6 +28,8 @@ $(document).ready(function(){
   <a target="_blank" href="<%= transcript_pdf %>"><%= t('tul_ohist.transcript_view.browse_pdf') %></a>
 </div>
 
+  <%= render_audio_player(document[:ensemble_identifier_tesim]) if document.key?(:ensemble_identifier_tesim) %>
+
   <div class="transcript biographical-history-note">
     <h2><%= t('tul_ohist.transcript_view.title.biographical') %></h2>
   <%= document['biographical_history_note_tesim'].to_sentence.html_safe if document['biographical_history_note_tesim'] %>
