@@ -179,5 +179,49 @@ module TulOhistHelper
     collections = YAML.load_file(File.expand_path("#{Rails.root}/config/collections.yml", __FILE__))
   end
 
+  def render_audio_player(document)
+    output = ''
+    config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
+    ensemble_identifier = document[:ensemble_identifier_tesim].first
+    width = "380"
+    height = "36"
+    frame_width = 401
+    frame_height = 56
+    audio_width = 380
+    audio_height = 36
+    ensemble_plugin = "https://ensemble.temple.edu/ensemble/app/plugin/plugin.aspx"
+    ensemble_style_sheet = "https://ensemble.temple.edu/ensemble/app/plugin/css/ensembleEmbeddedContent.css"
+
+    player_options = {
+      "styleSheetUrl"  => ensemble_style_sheet,
+      "contentID"      => ensemble_identifier,
+      "useIFrame"      => true,
+      "embed"          => true,
+      "displayTitle"   => false,
+      "startTime"      => 0,
+      "autoPlay"       => false,
+      "hideControls"   => false,
+      "showCaptions"   => false,
+      "width"          => audio_width,
+      "height"         => audio_height,
+      "audio"          => true,
+      "q"              => config['cdm_archive'],
+      "frameborder"    => 0
+    }
+
+    player_src = ensemble_plugin + '?' + player_options.to_query
+    output << content_tag(:div,
+                          content_tag(:script,
+                            "",
+                            type: "text/javascript",
+                            src: player_src,
+                            style: ["width: #{frame_width}px;", "height: #{frame_height}px;"],
+                            escape: true).html_safe,
+                          class: "ensembleEmbeddedContent",
+                          id: "ensembleEmbeddedContent_#{ensemble_identifier}",
+                          style: ["width: #{width}px;", "height: #{height}px;"])
+
+    output.html_safe
+  end
 end
 

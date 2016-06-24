@@ -28,6 +28,10 @@ $(document).ready(function(){
   <a target="_blank" href="<%= transcript_pdf %>"><%= t('tul_ohist.transcript_view.browse_pdf') %></a>
 </div>
 
+  <div class="audio-player">
+    <%= render_audio_player document %>
+  </div>
+
   <div class="transcript biographical-history-note">
     <h2><%= t('tul_ohist.transcript_view.title.biographical') %></h2>
   <%= document['biographical_history_note_tesim'].to_sentence.html_safe if document['biographical_history_note_tesim'] %>
