@@ -182,10 +182,11 @@ module TulOhistHelper
   def render_audio_player(document)
     output = ''
     config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
-    ensemble_identifier = document[:ensemble_identifier_tesim].first
+    model = model_from_document(document)
+    ensemble_identifier = document[:ensemble_identifier_tesim]
     width = "380"
     height = "36"
-    frame_width = 401
+    frame_width = 400
     frame_height = 56
     audio_width = 380
     audio_height = 36
@@ -222,6 +223,11 @@ module TulOhistHelper
                           style: ["width: #{width}px;", "height: #{height}px;"])
 
     output.html_safe
+  end
+
+  # Returns the ActiveFedora model from the Solr document
+  def model_from_document(document)
+    active_fedora_model = document["active_fedora_model_ssi"]
   end
 end
 
