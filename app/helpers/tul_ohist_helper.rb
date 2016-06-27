@@ -1,4 +1,4 @@
-##
+#
 #
 # Custom views helpers for TUL_OHIST
 #
@@ -179,14 +179,13 @@ module TulOhistHelper
     collections = YAML.load_file(File.expand_path("#{Rails.root}/config/collections.yml", __FILE__))
   end
 
-  def render_audio_player(document)
+  def render_audio_player(ensemble_identifier)
     output = ''
+    eid = ensemble_identifier.first.strip
     config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
-    model = model_from_document(document)
-    ensemble_identifier = document[:ensemble_identifier_tesim]
     width = "380"
     height = "36"
-    frame_width = 400
+    frame_width = 401
     frame_height = 56
     audio_width = 380
     audio_height = 36
@@ -195,8 +194,8 @@ module TulOhistHelper
 
     player_options = {
       "styleSheetUrl"  => ensemble_style_sheet,
-      "contentID"      => ensemble_identifier,
-      "useIFrame"      => true,
+      "contentID"      => eid,
+      "useIFrame"      => false,
       "embed"          => true,
       "displayTitle"   => false,
       "startTime"      => 0,
@@ -219,15 +218,10 @@ module TulOhistHelper
                             style: ["width: #{frame_width}px;", "height: #{frame_height}px;"],
                             escape: true).html_safe,
                           class: "ensembleEmbeddedContent",
-                          id: "ensembleEmbeddedContent_#{ensemble_identifier}",
+                          id: "ensembleEmbeddedContent_#{eid}",
                           style: ["width: #{width}px;", "height: #{height}px;"])
-
+                          
     output.html_safe
-  end
-
-  # Returns the ActiveFedora model from the Solr document
-  def model_from_document(document)
-    active_fedora_model = document["active_fedora_model_ssi"]
   end
 end
 

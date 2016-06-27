@@ -28,9 +28,7 @@ $(document).ready(function(){
   <a target="_blank" href="<%= transcript_pdf %>"><%= t('tul_ohist.transcript_view.browse_pdf') %></a>
 </div>
 
-  <div class="audio-player">
-    <%= render_audio_player document %>
-  </div>
+  <%= render_audio_player(document[:ensemble_identifier_tesim]) if document.key?(:ensemble_identifier_tesim) %>
 
   <div class="transcript biographical-history-note">
     <h2><%= t('tul_ohist.transcript_view.title.biographical') %></h2>

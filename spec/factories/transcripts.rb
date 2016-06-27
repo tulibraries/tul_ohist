@@ -1,5 +1,8 @@
 FactoryGirl.define do
   factory :transcript do
+    transient do
+      has_audio false
+    end
     master_identifier ["AOH1093X20140828fred"]
     title ["Oral history interview with Fred"]
     date ["2014-08-31"]
@@ -19,9 +22,13 @@ FactoryGirl.define do
     online_exhibit_title ["Online Exhibit of Fred"]
     catalog_record_link ["http://catalog.library.temple.edu/fred"]
     catalog_record_title ["Catalog Record of Fred"]
+    ensemble_identifier { has_audio ? ["fredsrecording"] : [] }
   end
 
   factory :transcript_list , class: Transcript do
+    transient do
+      has_audio false
+    end
     # objectMetadata attributes
     sequence(:master_identifier) {|n| ["AOH1093X20160519fred#{n}"] }
     sequence(:title) {|n| ["Transcript #{n}"] }
@@ -42,5 +49,6 @@ FactoryGirl.define do
     online_exhibit_title ["Online Exhibit of Fred"]
     catalog_record_link ["http://catalog.library.temple.edu/fred"]
     catalog_record_title ["Catalog Record of Fred"]
+    ensemble_identifier { |n| has_audio ? ["fredsrecording#{n}"] : [] }
   end
 end
