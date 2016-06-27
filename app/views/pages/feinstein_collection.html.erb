@@ -29,9 +29,6 @@
     <p>Finding Aid: <a href="https://library.temple.edu/scrc/myer-and-rosaline-feinstein">Myer and Rosaline Feinstein Center for American Jewish History Oral Histories</a></p>
   </div>
 
-  <div class="ada-note">
-    <h2><%= t('tul_ohist.ada_note.title') %></h2>
-    <p><%= t('tul_ohist.ada_note.text') %> <%= mail_to "diglib@temple.edu" %>.</p> 
-  </div>
+  <%= render partial: "/ada_note" %>
 </div>
 

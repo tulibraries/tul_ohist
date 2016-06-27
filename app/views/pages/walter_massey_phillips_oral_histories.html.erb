@@ -29,9 +29,6 @@
     <p>Related Collection: <a href="http://library.temple.edu/scrc/walter-m-phillips-sr-papers">Walter Massey Phillips Papers</a></p>
   </div>
 
-  <div class="ada-note">
-    <h2><%= t('tul_ohist.ada_note.title') %></h2>
-    <p><%= t('tul_ohist.ada_note.text') %> <%= mail_to "diglib@temple.edu" %>.</p> 
-  </div>
+  <%= render partial: "/ada_note" %>
 
 </div>
