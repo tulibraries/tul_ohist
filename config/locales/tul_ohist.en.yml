@@ -28,4 +28,9 @@ en:
         finding_aid: "Finding aid: "
         online_exhibit: "Online exhibit: "
         catalog_record: "Catalog record: "
-
+    search:
+      label:
+        browse_all: "Browse All"
+    ada_note:
+      title: "Note on ADA Compliance"
+      text: "For Americans with Disabilities Act (ADA) accommodation, including help with reading this content, please contact"

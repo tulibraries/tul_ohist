@@ -7,6 +7,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+require "fileutils"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -40,6 +41,11 @@ module TulOhist
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-  
+ 
+    # Create log files
+    tul_ohist_config = YAML.load_file(File.expand_path("#{Rails.root}/config/tul_ohist.yml", __FILE__))
+    FileUtils.touch(File.join(Rails.root, 'log', tul_ohist_config['cron_error_log']))
+    FileUtils.touch(File.join(Rails.root, 'log', tul_ohist_config['cron_log']))
+    FileUtils.touch(File.join(Rails.root, 'log', tul_ohist_config['ingest_log']))
   end
 end

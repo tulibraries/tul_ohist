@@ -165,8 +165,8 @@ module CDMUtils
 
   class Ingest
     @validator ||= CDMUtils::Validate.new
-    @logger ||= Logger.new(File.join(Rails.root, "log", "ingest.log"))
-
+    tul_ohist_config = YAML.load_file(File.expand_path(File.join(Rails.root, 'config', 'tul_ohist.yml'), __FILE__))
+    @logger ||= Logger.new(File.join(Rails.root, "log", tul_ohist_config['ingest_log']))
     def self.ingest_file(file_name)
       print "Ingest: #{File.basename(file_name)} ..."
       if @validator.is_valid?(file_name)
