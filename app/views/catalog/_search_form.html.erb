@@ -14,10 +14,12 @@
           <span class="submit-search-text"><%=t('blacklight.search.form.submit')%></span>
           <span class="glyphicon glyphicon-search"></span>
         </button>
-        </span>
+      </span>
 
       </div>
       <div class="secondary-input-group">
-           <%= render_advanced_search %>
+        <a class="btn btn-default" href="<%=root_url%>?utf8=%E2%9C%93&search_field=all_fields&q="><%= t('tul_ohist.search.label.browse_all') %></a>
+        <%= render_advanced_search %>
       </div>
+
 <% end %>
