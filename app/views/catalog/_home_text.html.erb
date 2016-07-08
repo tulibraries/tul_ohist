@@ -12,6 +12,16 @@
     </a>
     </center>
   </div>
+  <div id="collections-center">
+    <center>
+	    <a href=<%= "#{root_url}waller-anderson-still_collection"%>>
+      <div class="crop">
+        <%= image_tag("waller-anderson-still_cover.jpg", alt: "Waller-Anderson-Still Collection", class: "thumbnail", id: "waller-anderson-still-thumbnail" ) %>
+      </div>
+      <h2>Waller-Anderson-Still Oral Histories</h2>
+    </a>
+    </center>
+  </div>
   <div id="collections-right">
     <center>
 	    <a href=<%= "#{root_url}feinstein_collection"%>>
@@ -22,8 +32,6 @@
     </a>
     </center>
   </div>
-<div class="image-ohist">
-</div>
 
 <div style="clear: both;"><!-- Clear collection floats --></div> 
 
@@ -35,6 +43,5 @@
   <p>In Doing Oral History, Donald Ritchie explains, "Oral History collects memories and personal commentaries of historical significance through recorded interviews.  An oral history interview generally consists of a well-prepared interviewer questioning an interviewee and recording their exchange in audio or video format.  Recordings of the interview are transcribed, summarized, or indexed and then placed in a library or archives. These interviews may be used for research or excerpted in a publication, radio or video documentary, museum exhibition, dramatization or other form of public presentation. Recordings, transcripts, catalogs, photographs and related documentary materials can also be posted on the Internet.  Oral history does not include random taping, such as President Richard Nixon’s surreptitious recording of his White House conversations, nor does it refer to recorded speeches, wiretapping, personal diaries on tape, or other sound recordings that lack the dialogue between interviewer and interviewee."</p>
 </div>
 
-<h2>Note on ADA Compliance</h2>
-<p>For Americans with Disabilities Act (ADA) accommodation, including help with reading this content, please contact <a href="mailto:diglib@temple.edu">diglib@temple.edu</a>.</p> 
+  <%= render partial: "/ada_note" %>
 

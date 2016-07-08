@@ -28,6 +28,12 @@ en:
         finding_aid: "Finding aid: "
         online_exhibit: "Online exhibit: "
         catalog_record: "Catalog record: "
+    search:
+      label:
+        browse_all: "Browse All"
+    ada_note:
+      title: "Note on ADA Compliance"
+      text: "For Americans with Disabilities Act (ADA) accommodation, including help with reading this content, please contact"
     mailer:
       nightly_download_error:
         subject: "ERROR: CONTENTdm download for TULOHIST error"
@@ -38,4 +44,3 @@ en:
       backup_log:
         subject: "SUCCESS: CONTENTdm backup and reindex for TULOHIST"
         body: "Successful backup and reingest of TULOHIST collection items. Please see attached log for more information."
-
