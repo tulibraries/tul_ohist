@@ -179,48 +179,52 @@ module TulOhistHelper
     collections = YAML.load_file(File.expand_path("#{Rails.root}/config/collections.yml", __FILE__))
   end
 
-  def render_audio_player(ensemble_identifier)
+  def render_audio_player(ensemble_identifiers)
     output = ''
-    eid = ensemble_identifier.first.strip
-    config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
-    width = "380"
-    height = "36"
-    frame_width = 401
-    frame_height = 56
-    audio_width = 380
-    audio_height = 36
-    ensemble_plugin = "https://ensemble.temple.edu/ensemble/app/plugin/plugin.aspx"
-    ensemble_style_sheet = "https://ensemble.temple.edu/ensemble/app/plugin/css/ensembleEmbeddedContent.css"
+    recordings = []
 
-    player_options = {
-      "styleSheetUrl"  => ensemble_style_sheet,
-      "contentID"      => eid,
-      "useIFrame"      => false,
-      "embed"          => true,
-      "displayTitle"   => false,
-      "startTime"      => 0,
-      "autoPlay"       => false,
-      "hideControls"   => false,
-      "showCaptions"   => false,
-      "width"          => audio_width,
-      "height"         => audio_height,
-      "audio"          => true,
-      "q"              => config['cdm_archive'],
-      "frameborder"    => 0
-    }
+    ensemble_identifiers.first.split(';').map(&:strip).each.with_index(1) do |ensemble_identifier, track|
+      config = YAML.load_file(File.expand_path("#{Rails.root}/config/contentdm.yml", __FILE__))
+      width = "380"
+      height = "36"
+      frame_width = 401
+      frame_height = 56
+      audio_width = 380
+      audio_height = 36
+      ensemble_plugin = "https://ensemble.temple.edu/ensemble/app/plugin/plugin.aspx"
+      ensemble_style_sheet = "https://ensemble.temple.edu/ensemble/app/plugin/css/ensembleEmbeddedContent.css"
 
-    player_src = ensemble_plugin + '?' + player_options.to_query
-    output << content_tag(:div,
-                          content_tag(:script,
-                            "",
-                            type: "text/javascript",
-                            src: player_src,
-                            style: ["width: #{frame_width}px;", "height: #{frame_height}px;"],
-                            escape: true).html_safe,
-                          class: "ensembleEmbeddedContent",
-                          id: "ensembleEmbeddedContent_#{eid}",
-                          style: ["width: #{width}px;", "height: #{height}px;"])
-                          
+      player_options = {
+        "styleSheetUrl"  => ensemble_style_sheet,
+        "contentID"      => ensemble_identifier,
+        "useIFrame"      => false,
+        "embed"          => true,
+        "displayTitle"   => false,
+        "startTime"      => 0,
+        "autoPlay"       => false,
+        "hideControls"   => false,
+        "showCaptions"   => false,
+        "width"          => audio_width,
+        "height"         => audio_height,
+        "audio"          => true,
+        "q"              => config['cdm_archive'],
+        "frameborder"    => 0
+      }
+
+      player_src = ensemble_plugin + '?' + player_options.to_query
+      output << content_tag(:h2, "Track #{track}")
+      player_tag = content_tag(:script,
+                              "",
+                              type: "text/javascript",
+                              src: player_src,
+                              style: ["width: #{frame_width}px;", "height: #{frame_height}px;"],
+                              escape: true).html_safe
+      output << content_tag(:div,
+                            player_tag,
+                            class: "ensembleEmbeddedContent",
+                            id: "ensembleEmbeddedContent_#{ensemble_identifier}",
+                            style: ["width: #{width}px;", "height: #{height}px;"])
+    end
     output.html_safe
   end
 end
