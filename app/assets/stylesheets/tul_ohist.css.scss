@@ -144,16 +144,10 @@ h2.homepage a {
 }
 
 #collections-ohist {
-  margin-top: 24px;
 	.crop {
 		width: 150px;
 		height: 150px;
 		overflow: hidden;
-
-    img {
-      display: block;
-      border: none;
-    }
 
     img#blockson-thumbnail {
       width: 160%;
@@ -170,12 +164,55 @@ h2.homepage a {
     }
 
     img#feinstein-thumbnail {
-      margin-top: -90px;
-      margin-left: -80px;
       width: 180%;
       height: 180%;
+      margin-top: -90px;
+      margin-left: -80px;
     }
 	}
+}
+
+#about-this-collection {
+  padding-top: 8px;
+	.crop {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    float: left;
+    margin-right: 6px;
+
+    img#blockson-thumbnail {
+      width: 150%;
+      height: auto;
+      margin-top: -1px;
+      margin-left: -27px;
+    }
+
+    img#waller-anderson-still-thumbnail {
+      width: 60%;
+      height: auto;
+      margin-top: 0px;
+      margin-left: 0px;
+    }
+
+    img#feinstein-thumbnail {
+      width: 217%;
+      height: auto;
+      margin-top: -34px;
+      margin-left: -40px;
+    }
+	}
+}
+
+#collections-ohist, #about-this-collection {
+  margin-top: 24px;
+	.crop {
+
+    img {
+      display: block;
+      border: none;
+    }
+  }
 
 	#collections-left {
 		text-align: center;
@@ -237,3 +274,54 @@ h2.homepage a {
     }
   }
 }
+
+/******
+*
+* Sidebar
+*
+******/
+
+.right-column
+  .widget {
+    float: right;
+    min-height: 20px;
+    padding: 19px;
+    margin-left : 20px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+
+    h2#atc-title {
+      font-size: 20px;
+    }
+    .thumbnail {
+      float: left;
+      width: 60px;
+      height: 60px;
+      padding: 1px;
+      margin: 6px 12px 0 0;
+      img {
+        max-width:100%;
+        max-width:100%;
+      }
+    }
+    .related-resources-list {
+      ul {
+        padding-left: 0px;
+        list-style-position: inside;
+        li {
+          padding-bottom: 0px;
+          color: black;
+        }
+      }
+    }
+    .research-helps {
+      padding-top: 20px;
+    }
+
+    img {
+      width: 60px;
+      height: 60px;
+    }
+  }

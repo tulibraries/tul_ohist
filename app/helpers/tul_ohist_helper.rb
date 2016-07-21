@@ -61,15 +61,37 @@ module TulOhistHelper
 
 
   def render_related_resources(master_identifier, document)
-  	related_resources_list = ''
-    rc_label = content_tag("span", nil, class: "related-resource-label") do t('tul_ohist.related_resources.label.repository_collection') end
-    rc_solr_field = render_document_show_field_value(document,'repository_collection_tesim')
-    repository_collection_link = content_tag("li") do (rc_label + rc_solr_field).html_safe end
-  	related_resources = related_resources(master_identifier)
-    related_resources_list << render_single_list(related_resources)
+    about_title = content_tag(:h1,  t('tul_ohist.title.about_this_collection'), class: "related-resource-label")
 
-    related_resources_list.prepend(repository_collection_link)
-    return content_tag("ul") do related_resources_list.html_safe end
+    dc_solr_field = render_document_show_field_value(document,'digital_collection_tesim')
+    about_fields = about_this_collection(dc_solr_field) 
+
+    rc_solr_field = render_document_show_field_value(document,'repository_collection_tesim')
+    repository_collection_link = content_tag(:h2, rc_solr_field, class: "atc-title")
+
+    repository_collection_image = image_tag(about_fields["cover_image"], class: "thumbnail", id: about_fields["cover_image_id"])
+    repository_collection_thumbnail = content_tag(:div, repository_collection_image , class: "crop")
+
+    repository_collection_description = content_tag(:div, about_fields["description"], class: "atc-description" )
+
+    related_resources_list = content_tag(:ul, render_single_list(related_resources(master_identifier), :li))
+    repository_resources = content_tag(:div, related_resources_list, class: "related-resources-list")
+
+    research_help = content_tag(:div, t('tul_ohist.related_resources.label.research_help').html_safe, class: "research-help")
+
+    related_resources_box = about_title
+    related_resources_box << repository_collection_link
+    related_resources_box << repository_collection_thumbnail
+    related_resources_box << repository_collection_description
+    related_resources_box << repository_resources
+    related_resources_box << research_help
+    return content_tag(:div, related_resources_box, class: "widget", id: "about-this-collection")
+
+  end
+
+  def about_this_collection(digital_collection)
+    collections = YAML.load_file(File.expand_path("#{Rails.root}/config/collections.yml", __FILE__))
+    collections["about"][digital_collection]
   end
 
   ##
@@ -93,11 +115,11 @@ module TulOhistHelper
     return related_resources
   end
 
-  def render_single_list(links_list)
+  def render_single_list(links_list, list_tag)
     html_list = ''
       for list_items in links_list do
         unless list_items.first.nil? or list_items.first.empty?
-          html_list << content_tag("li") do
+          html_list << content_tag(list_tag) do
           link_text = link_to "#{list_items.second}", "#{list_items.first}" 
           label = content_tag("span", nil, class: "related-resource-label") do "#{list_items.third}" end
           concat (label + link_text).html_safe
@@ -177,6 +199,7 @@ module TulOhistHelper
   # Get the available digital collections by their display name mapped to their digital collection name
   def collections_fields
     collections = YAML.load_file(File.expand_path("#{Rails.root}/config/collections.yml", __FILE__))
+    collections["search_filters"]
   end
 
   def render_audio_player(ensemble_identifiers)

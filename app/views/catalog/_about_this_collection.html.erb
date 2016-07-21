@@ -1,0 +1,21 @@
+<div class="widget", id="about-this-collection">
+  <span class="related-resource-label">
+    <%= t('tul_ohist.document.about_this_collection') %>
+  </span>
+  <h2 id="atc-title"><%= link_to(digital_collection.name, collection_link) %></h2>
+  <div class="atc-icon">
+    <%= link_to(image_tag(digital_collection.thumbnail_url), collection_link) %>
+  </div>
+  <div id="atc-description">
+    <%= content_tag(:p, digital_collection.short_description) %>
+  </div>
+  <div class="related-resources-list">
+    <ul>
+      <li><%= t('tul_ohist.document.finding_aid') %>: <%= link_to(digital_collection.finding_aid_title, digital_collection.finding_aid_link) %></li>
+      <li><%= t('tul_ohist.document.catalog_record') %>: <%= link_to(digital_collection.catalog_record_title, digital_collection.catalog_record_link) %></li>
+    </ul>
+  </div>
+  <div class="research-helps">
+  <%= content_tag(:p, t('tul_ohist.digital_collection.research_help_html').html_safe )  %>
+  </div>
+</div>

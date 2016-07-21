@@ -68,10 +68,7 @@ $(document).ready(function(){
   </div>
 </div>
 <div class="right-column">
-  <div class="transcript related-resources">
-    <h2><%= t('tul_ohist.title.related_resources') %></h2>
-    <%= render_related_resources(document['master_identifier_ssim'].to_sentence, document) %>
-  </div>
+  <%= render_related_resources(document['master_identifier_ssim'].to_sentence, document) %>
 </div>
 <script type='text/javascript'>
     function embedPDF(){
