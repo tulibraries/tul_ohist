@@ -11,6 +11,7 @@ module TulOhist
         t.transcript_filename index_as: :stored_searchable
         t.audio_filename index_as: :stored_searchable
         t.photograph_filename index_as: :stored_searchable
+        t.ensemble_identifier index_as: :stored_searchable
       end 
 
       def self.xml_template
