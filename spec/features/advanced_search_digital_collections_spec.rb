@@ -11,7 +11,6 @@ RSpec.feature "AdvancedSearchDigitalCollections", type: :feature do
 
     it "should show Diaspora" do
       visit "/advanced"
-      binding.pry
       expect(page).to have_selector("#facet-digital_collection_sim")
     end
   end
