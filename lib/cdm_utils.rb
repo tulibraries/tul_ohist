@@ -40,7 +40,7 @@ module CDMUtils
       user = config['cdm_user']
       password = config['cdm_password']
     
-      build_xml_url = "#{config['cdm_server']}/cgi-bin/admin/exportxml.exe?CISODB=%2F#{coll}&CISOTYPE=custom&CISOPAGE=&CISOPTRLIST=&title=Title&date=Date&descri=Content_Summary&creato=Interviewer&contri=Narrator&subjec=Subject&geogra=Geographic_Subject&organi=Organization_Building&subjea=Personal_Name&descra=Notes&format=Format&type=Type&source=Physical_Description&langua=Language&origin=Original_Source_Title&origia=Original_Recording_Specifications&rights=Rights&clickt=Click_Through&reposi=Repository&reposa=Repository_Collection&digita=Digital_Collection&catalo=Digital_Publisher&digiti=Digitization_Specifications&contac=Contact&create=Created&identi=Master_Identifier&audio=Audio_Filename&transc=Transcript_Filename&photog=Photograph_Filename&transa=Transcript&docume=Document_Content&ocr=OCR_Note&ada=ADA_Note&transb=Transcript_Note&findin=Finding_Aid_Link&findia=Finding_Aid_Title&online=Online_Exhibit_Link&onlina=Online_Exhibit_Title&catala=Catalog_Record_Link&catalb=Catalog_Record_Title&condit=Condition_Note&biogra=Biographical_History_Note&collec=Collection_Description&folder=Location&weight=Weight&find=Item_URL&dmoclcno=OCLC_number&dmcreated=Date_created&dmmodified=Date_modified&dmrecord=CONTENTdm_number&cdmfile=CONTENTdm_file_name&cdmpath=CONTENTdm_file_path&CISOMODE1=rep&CISOMODE2=rep"
+      build_xml_url = "#{config['cdm_server']}/cgi-bin/admin/exportxml.exe?CISODB=%2F#{coll}&CISOTYPE=custom&CISOPAGE=&CISOPTRLIST=&title=Title&date=Date&descri=Content_Summary&creato=Interviewer&contri=Narrator&subjec=Subject&geogra=Geographic_Subject&organi=Organization_Building&subjea=Personal_Name&descra=Notes&format=Format&type=Type&source=Physical_Description&langua=Language&origin=Original_Source_Title&origia=Original_Recording_Specifications&rights=Rights&clickt=Click_Through&reposi=Repository&reposa=Repository_Collection&digita=Digital_Collection&catalo=Digital_Publisher&digiti=Digitization_Specifications&contac=Contact&create=Created&identi=Master_Identifier&audio=Audio_Filename&transc=Transcript_Filename&ensemb=Ensemble_Identifier&photog=Photograph_Filename&transa=Transcript&docume=Document_Content&ocr=OCR_Note&ada=ADA_Note&transb=Transcript_Note&findin=Finding_Aid_Link&findia=Finding_Aid_Title&online=Online_Exhibit_Link&onlina=Online_Exhibit_Title&catala=Catalog_Record_Link&catalb=Catalog_Record_Title&condit=Condition_Note&biogra=Biographical_History_Note&collec=Collection_Description&folder=Location&weight=Weight&find=Item_URL&dmoclcno=OCLC_number&dmcreated=Date_created&dmmodified=Date_modified&dmrecord=CONTENTdm_number&cdmfile=CONTENTdm_file_name&cdmpath=CONTENTdm_file_path&CISOMODE1=rep&CISOMODE2=rep"
       open(build_xml_url, :http_basic_authentication=>[user, password])
 
       cdm_url = "#{config['cdm_server']}/dmwebservices/index.php?q=dmGetCollectionList/xml"
@@ -118,7 +118,6 @@ module CDMUtils
       replace32 = replace31.gsub("<Audio_Filename/>", "<File_Name/>")
       replace33 = replace32.gsub("<Video_Filename/>", "<File_Name/>")
       replace34 = replace33.gsub("<metadata>", "<metadata>\n  <manifest>\n    <contentdm_collection_id>#{collection_file_name}</contentdm_collection_id>\n    <Rails_Root>#{Rails.root}</Rails_Root>\n    <foxml_dir>#{target_dir}</foxml_dir>\n  </manifest>")
-      
     end
 
     def self.convert_file(file_name, foxml_dir)
@@ -130,14 +129,37 @@ module CDMUtils
       File.open(file_name, "w") { |file| file.puts conformed_text }
 	
       case fname
-        #audio
         when 'p16002coll22'
           `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_oralhistory.xsl #{file_name}`
         else
           `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_noncustom.xsl #{file_name}`
       end
-        
+
+      audio_transformation(foxml_dir) 
+
       puts "XSLT transformation complete for #{fname}".green
+    end
+
+    def self.audio_transformation(foxml_dir)
+      Dir.glob("#{foxml_dir}/*.xml") do |file_name|
+        file = File.open(file_name, File::RDWR)
+        doc = Nokogiri::XML(file)
+
+        # If there's an Ensemble ID, add the audio type
+        ensemble_identifier = doc.xpath("//ensemble_identifier")
+        unless ensemble_identifier.text.empty?
+          audio_type = Nokogiri::XML::Node.new("type", doc)
+          audio_type.content = "Audio"
+
+          type = doc.at_xpath("//type")
+          type.add_next_sibling(audio_type)
+        end
+
+        # Update the FOXML file content
+        file.seek(0)
+        doc.write_xml_to(file)
+
+      end
     end
   end
 

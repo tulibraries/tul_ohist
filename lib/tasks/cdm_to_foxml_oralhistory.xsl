@@ -122,7 +122,7 @@
                 <transcript_filename><xsl:apply-templates select="Transcript_Filename"/></transcript_filename>
                 <audio_filename><xsl:apply-templates select="Audio_Filename"/></audio_filename>
                 <photograph_filename><xsl:apply-templates select="Photograph_Filename"/></photograph_filename>
-                <ensemble_identifier><xsl:apply-templates select="Ensemble_ID"/></ensemble_identifier>
+                <ensemble_identifier><xsl:apply-templates select="Ensemble_Identifier"/></ensemble_identifier>
               </fields>
             </foxml:xmlContent>
           </foxml:datastreamVersion>
