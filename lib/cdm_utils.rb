@@ -135,12 +135,12 @@ module CDMUtils
           `xsltproc #{Rails.root}/lib/tasks/cdm_to_foxml_noncustom.xsl #{file_name}`
       end
 
-      audio_transformation(foxml_dir) 
+      foxml_postprocessing(foxml_dir)
 
       puts "XSLT transformation complete for #{fname}".green
     end
 
-    def self.audio_transformation(foxml_dir)
+    def self.foxml_postprocessing(foxml_dir)
       Dir.glob("#{foxml_dir}/*.xml") do |file_name|
         file = File.open(file_name, File::RDWR)
         doc = Nokogiri::XML(file)
