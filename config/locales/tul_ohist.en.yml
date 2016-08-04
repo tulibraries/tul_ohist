@@ -45,3 +45,5 @@ en:
       backup_log:
         subject: "SUCCESS: CONTENTdm backup and reindex for TULOHIST"
         body: "Successful backup and reingest of TULOHIST collection items. Please see attached log for more information."
+    footer:
+      runner: 'maintained by <a href="mailto:scrc@temple.edu">scrc@temple.edu</a>'
