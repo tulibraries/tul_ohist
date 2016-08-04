@@ -1,4 +1,24 @@
-"All Collections" : ""
-"Feinstein Center": "Myer and Rosaline Feinstein Center for American Jewish History Oral Histories" 
-"Phillips" : "Walter Massey Phillips Oral Histories"
-"Great Migration" : "Migration from the African Diaspora"
+---
+
+search_filters:
+  "All Collections" : ""
+  "Feinstein Center": "Myer and Rosaline Feinstein Center for American Jewish History Oral Histories" 
+  "Phillips" : "Walter Massey Phillips Oral Histories"
+  "Great Migration" : "Migration from the African Diaspora"
+
+about:
+  "Myer and Rosaline Feinstein Center for American Jewish History Oral Histories":
+    cover_image: feinstein_cover.jpg
+    cover_image_alt: Photograph of tallit hanging from railing
+    cover_image_id: feinstein-thumbnail
+    description: The Feinstein Center for American Jewish History promotes the study of the of the Philadelphia Jewish community.
+  "Walter Massey Phillips Oral Histories":
+    cover_image: ohist_cover.png
+    cover_image_alt: aeriel shot of a building
+    cover_image_id: blockson-thumbnail
+    description: Walter M. Phillips initiated an oral history project, and between c. 1974 and 1980 interviewed over 150 civic and political leaders.
+  "African American Migration to Philadelphia Oral Histories":
+    cover_image: ohist_cover.png
+    cover_image_alt: Waller-Anderson-Still Collection
+    cover_image_id: waller-anderson-still-thumbnail
+    description: African American Migration to Philadelphia Oral Histories
