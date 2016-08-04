@@ -100,7 +100,8 @@ module TulOhistHelper
   # 
   ##
   def related_resources(master_identifier)
-    b = get_related_objects(master_identifier);
+    # Array accomodates future enhancements such as displaying of all related collections
+    b = [get_related_objects(master_identifier).first];
     related_resources = Array.new
     b.each do |b_obj|
       pid=b_obj.id

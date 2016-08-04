@@ -78,8 +78,8 @@ describe 'List CONTENTdm collections' do
     it "should convert a single collection file" do
       VCR.use_cassette "cdm-util-convert/should_convert_a_ContentDM_file" do
         downloaded = CDMUtils.download_one_collection(config, collection_name)
-        CDMUtils.convert_file(File.join(download_directory, collection_name + '.xml'), converted_directory)
         file_count = Dir[File.join(converted_directory, '*.xml')].count { |file| File.file?(file) }
+        CDMUtils.convert_file(File.join(download_directory, collection_name + '.xml'), converted_directory)
         xml_file_count = `grep -ic "<record>" tmp/tu_cdm/downloads/*`.to_i
         expect(file_count).to eq(xml_file_count)
         xsd = Nokogiri::XML::Schema(open(schema_url))
