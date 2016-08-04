@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do # => NameError: uninitialized constant Rails
   get "ohist/show"
   resources :transcripts
 
@@ -64,4 +64,10 @@ Rails.application.routes.draw do
   #   end
   get 'walter_massey_phillips_oral_histories' => 'high_voltage/pages#show', id: 'walter_massey_phillips_oral_histories'
   get 'feinstein_collection' => 'high_voltage/pages#show', id: 'feinstein_collection'
+  get 'african_american_migration_oral_histories' => 'high_voltage/pages#show', id: 'african_american_migration_oral_histories'
 end
+
+# ~> NameError
+# ~> uninitialized constant Rails
+# ~>
+# ~> /var/folders/29/yt3s7zlx1xz3d7hrbxzmf9k897v8g4/T/seeing_is_believing_temp_dir20160804-30096-1cn5yz4/program.rb:1:in `<main>'

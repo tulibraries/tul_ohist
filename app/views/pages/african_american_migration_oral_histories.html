@@ -1,0 +1,35 @@
+<div class="collection-landing-page" id="africanAmericanCollectionLandingPage">
+  <div class="image-ohist" id="africanAmericanMigrationCollectionImage">
+    <%= content_tag :figure do -%>
+      <%= image_tag "waller-anderson-still_cover.jpg", alt: "Waller-Anderson-Still Collection" %>
+      <%= content_tag :figcaption do -%>
+        <%= link_to("http://digital.library.temple.edu/cdm/singleitem/collection/p15037coll3/id/50742/rec/1") do %>
+          Ben Franklin Parkway, George D. McDowell Philadelphia Evening Bulletin Photographs,<br/>September 1, 1949
+        <% end -%>
+      <% end -%>
+    <% end -%>
+  </div>
+
+  <h1>African American Migration to Philadelphia Oral Histories</h1>
+
+  <div class="browse-collection" id="africanAmericanCollectionBrowse">
+    <h2>Browse the African American Migration Oral Histories</h2>
+    <ul>
+      <li><a href="<%= root_url %>catalog/facet/narrator_sim?facet.sort=index&f%5Bdigital_collection_sim%5D%5B%5D=African+American+Migration+to+Philadelphia+Oral+Histories">Browse by Narrator</a></li>
+      <li><a href="<%= root_url %>catalog/facet/subject_sim?facet.sort=index&f%5Bdigital_collection_sim%5D%5B%5D=African+American+Migration+to+Philadelphia+Oral+Histories">Browse by Subject</a></li>
+      <li><a href="<%= root_url %>?f%5Bdigital_collection_sim%5D%5B%5D=African+American+Migration+to+Philadelphia+Oral+Histories">Browse All</a></li>
+  </div>
+
+  <div class="about-collection" id="africanAmericanCollectionAbout">
+    <h2>About the Collection</h2>
+    <p>Walter M. Phillips, Sr. (1912-1985) was active in Philadelphia civic and political life for over thirty years.  He worked and volunteered in a variety of city and regional organizations.  After retiring, Phillips initiated an oral history project, and between c. 1974 and 1980 interviewed over 150 civic and political leaders on subjects related to Philadelphia city government and history between the late 1930s and the 1970s, many with whom he had worked.</p>
+  </div>
+
+  <div class="related-items" id="africanAmericanCollectionRelated">
+    <p>Finding Aid: <a href="http://library.temple.edu/scrc/walter-massey-phillips-oral">Walter Massey Phillips Oral Histories</a></p>
+    <p>Related Collection: <a href="http://library.temple.edu/scrc/walter-m-phillips-sr-papers">Walter Massey Phillips Papers</a></p>
+  </div>
+
+  <%= render partial: "/ada_note" %>
+
+</div>
