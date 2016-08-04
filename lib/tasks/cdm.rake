@@ -99,6 +99,14 @@ desc 'Verify converted downloads, backup the repo, and clean in preperation for 
     end
   end
 
+  desc "Delete existing fedora records"
+  task :clean => :environment do
+    ActiveFedora::Base.find_each({},batch_size: 2000) do |o|
+      Rails.logger.info "Deleting object #{o.pid}"
+      CDMUtils.delete_object(o)
+    end
+  end
+
   desc "test mailer functions"
   task :mail_thing => :environment do
     CdmMailer.report_download_errors.deliver
