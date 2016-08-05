@@ -1,0 +1,35 @@
+<div class="collection-landing-page" id="africanAmericanCollectionLandingPage">
+  <div class="image-ohist" id="africanAmericanMigrationCollectionImage">
+    <%= content_tag :figure do -%>
+      <%= image_tag "waller-anderson-still_cover.jpg", alt: "Waller-Anderson-Still Collection", title: "Need caption and link" %>
+      <%= content_tag :figcaption do -%>
+        <%= link_to("http://digital.library.temple.edu/cdm/singleitem/collection/p15037coll3/id/50742/rec/1") do %>
+        <%# TODO: Caption goes here %>
+        <% end -%>
+      <% end -%>
+    <% end -%>
+  </div>
+
+  <h1>African American Migration to Philadelphia Oral Histories</h1>
+
+  <div class="browse-collection" id="africanAmericanCollectionBrowse">
+    <h2>Browse the African American Migration Oral Histories</h2>
+    <ul>
+      <li><a href="<%= root_url %>catalog/facet/narrator_sim?facet.sort=index&f%5Bdigital_collection_sim%5D%5B%5D=African+American+Migration+to+Philadelphia+Oral+Histories">Browse by Narrator</a></li>
+      <li><a href="<%= root_url %>catalog/facet/subject_sim?facet.sort=index&f%5Bdigital_collection_sim%5D%5B%5D=African+American+Migration+to+Philadelphia+Oral+Histories">Browse by Subject</a></li>
+      <li><a href="<%= root_url %>?f%5Bdigital_collection_sim%5D%5B%5D=African+American+Migration+to+Philadelphia+Oral+Histories">Browse All</a></li>
+  </div>
+
+  <div class="about-collection" id="africanAmericanCollectionAbout">
+    <h2>About the Collection</h2>
+    <p> The primary purpose of the African American Migration to Philadelphia Oral Histories project    was to record and preserve the living memory of African American families who migrated to    Philadelphia from 1916 through the twentieth century. Over the span of two years, teams of    researchers conducted oral history interviews with more than two hundred people who shared    aspects of their life in the South in contrast to the North. The selected transcripts in the    collection bring to life the big events in the history they lived as well as everyday life.</p>
+  </div>
+
+  <div class="related-items" id="africanAmericanCollectionRelated">
+    <p>Finding Aid: <a href="http://library.temple.edu/scrc/walter-massey-phillips">Walter Massey Phillips Oral Histories</a></p>
+    <p>Related Collection: <a href="http://library.temple.edu/scrc/walter-m-phillips-sr-papers">Walter Massey Phillips Papers</a></p>
+  </div>
+
+  <%= render partial: "/ada_note" %>
+
+</div>
