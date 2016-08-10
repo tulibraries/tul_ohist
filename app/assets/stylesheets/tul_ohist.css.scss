@@ -156,7 +156,7 @@ h2.homepage a {
       margin-left: -80px;
     }
 
-    img#waller-anderson-still-thumbnail {
+    img#great-migration-thumbnail {
       width: 100%;
       height: 100%;
       margin-top: 0px;
@@ -261,10 +261,13 @@ h2.homepage a {
   .related-items, .ada-note {
     margin-top: 24px;
   }
-}
 
-#africanAmericanMigrationCollectionImage.image-ohist img {
-  width: 300px;
+  #africanAmericanMigrationCollectionImage.image-ohist {
+    width: 50%;
+    img {
+      width: 500px;
+    }
+  }
 }
 
 
