@@ -47,5 +47,8 @@ module TulOhist
     FileUtils.touch(File.join(Rails.root, 'log', tul_ohist_config['cron_error_log']))
     FileUtils.touch(File.join(Rails.root, 'log', tul_ohist_config['cron_log']))
     FileUtils.touch(File.join(Rails.root, 'log', tul_ohist_config['ingest_log']))
+
+    # Precompile font files
+    config.assets.precompile += %w( *.svg *.eot *.woff *.ttf )
   end
 end
