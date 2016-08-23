@@ -236,7 +236,7 @@ module TulOhistHelper
       }
 
       player_src = ensemble_plugin + '?' + player_options.to_query
-      output << content_tag(:h2, "Track #{track}")
+      output << content_tag(:h2, "#{t('tul_ohist.player.track_label')} #{track}")
       player_tag = content_tag(:script,
                               "",
                               type: "text/javascript",
