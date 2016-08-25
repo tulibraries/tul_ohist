@@ -12,13 +12,19 @@ about:
     cover_image_alt: Photograph of tallit hanging from railing
     cover_image_id: feinstein-thumbnail
     description: The Feinstein Center for American Jewish History promotes the study of the of the Philadelphia Jewish community.
+    contact_text: "Contact SCRC for the audio recording corresponding to this transcript."
+    contact_link: "mailto:scrc@temple.edu"
   "Walter Massey Phillips Oral Histories":
     cover_image: ohist_cover.png
     cover_image_alt: aeriel shot of a building
     cover_image_id: blockson-thumbnail
     description: Walter M. Phillips initiated an oral history project, and between c. 1974 and 1980 interviewed over 150 civic and political leaders.
+    contact_text: "Contact SCRC for the audio recording corresponding to this transcript."
+    contact_link: "mailto:scrc@temple.edu"
   "African American Migration to Philadelphia Oral Histories":
     cover_image: great-migration-cover.jpg
     cover_image_alt: great migration collection
     cover_image_id: great-migration-thumbnail
     description: Helen Anderson Waller Collection, Charles L. Blockson Afro-American Collection, Temple University Libraries
+    contact_text: "Contact Charles L. Blockson Afro-American Collection for the audio recording corresponding to this transcript."
+    contact_link: "mailto:blockson@temple.edu"
