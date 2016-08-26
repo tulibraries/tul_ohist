@@ -47,7 +47,7 @@ $(document).ready(function(){
         <dt class="blacklight-type_tesim">Type:</dt>
         <dd class="blacklight-type_tesim">Oral Histories</dd>
         <dt class="blacklight-contact">Contact:</dt>
-        <dd class="blacklight-contact"><%= render_contact_field(document["contact_ssm"].to_sentence) if document["contact_ssm"] %></dd>
+        <dd class="blacklight-contact"><%= render_contact_field(document['master_identifier_ssim'].to_sentence, document) %></dd>
         <dt class="blacklight-type_tesim">Transcript Identifier:</dt>
         <dd class="blacklight-type_tesim"><%= document["master_identifier_ssim"].to_sentence if document["master_identifier_ssim"] %></dd>
     </dl>
