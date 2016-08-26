@@ -14,7 +14,7 @@ module TulOhistHelper
   def render_contact_field(master_identifier, document)
     dc_solr_field = render_document_show_field_value(document,'digital_collection_tesim')
     about_fields = about_this_collection(dc_solr_field)
-    output=link_to(t(about_fields["contact_text"]), about_fields["contact_link"])
+    output=link_to(about_fields["contact_text"], about_fields["contact_link"])
     output.html_safe
   end
 
