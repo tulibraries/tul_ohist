@@ -30,7 +30,7 @@ en:
         finding_aid: "Finding aid: "
         online_exhibit: "Online exhibit: "
         catalog_record: "Catalog record: "
-        research_help: For Research Help, visit the <a href="https://library.temple.edu/scrc/research">SCRC Research Help page</a>.
+        research_help: For research help with Blockson collections contact <a href="blockson@temple.edu">blockson@temple.edu</a>.<br/>For research help with SCRC materials contact <a href="scrc@temple.edu">scrc@temple.edu</a>.
     search:
       label:
         browse_all: "Browse All"
