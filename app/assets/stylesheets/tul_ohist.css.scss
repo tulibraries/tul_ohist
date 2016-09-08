@@ -148,6 +148,7 @@ h2.homepage a {
 		width: 150px;
 		height: 150px;
 		overflow: hidden;
+		corner-radius: 4px;
 
     img#blockson-thumbnail {
       width: 160%;
@@ -169,7 +170,11 @@ h2.homepage a {
       margin-top: -90px;
       margin-left: -80px;
     }
-	}
+    .thumbnail {
+      padding: 0px;
+    }
+}
+	
 }
 
 #about-this-collection {
