@@ -5,7 +5,6 @@ $(document).ready(function(){
 
 </script>
 <div class="main-column">
-
   <div class="transcript portrait">
     <%= render_photo_local(document["master_identifier_ssim"]) %>
   </div>
@@ -21,14 +20,15 @@ $(document).ready(function(){
     <h2><%= t('tul_ohist.transcript_view.title.about_interview') %></h2>
   <%= document['content_summary_tesim'].to_sentence.html_safe if document['content_summary_tesim'] %>
   </div>   
+
+  <%= render_audio_player(document[:ensemble_identifier_tesim]) if document.key?(:ensemble_identifier_tesim) %>
+
     <div id="transcript-pdf"><object data="<%= transcript_pdf %>" type="application/pdf" width="100%" height="100%">
       <p>It appears your Web browser is not configured to display embedded PDF files.  To view this, just <a href="<%= transcript_pdf %>">click here to view the PDF file.</a></p>
     </object></div>
 <div class="download-link">
   <a target="_blank" href="<%= transcript_pdf %>"><%= t('tul_ohist.transcript_view.browse_pdf') %></a>
 </div>
-
-  <%= render_audio_player(document[:ensemble_identifier_tesim]) if document.key?(:ensemble_identifier_tesim) %>
 
   <div class="transcript biographical-history-note">
     <h2><%= t('tul_ohist.transcript_view.title.biographical') %></h2>
