@@ -253,5 +253,26 @@ module TulOhistHelper
     end
     output.html_safe
   end
+
+  def render_audio_links(ensemble_identifiers)
+    output = ''
+
+    ensemble_identifiers.first.split(';').map(&:strip).each.with_index(1) do |ensemble_identifier, track|
+
+      track_label = "#{t('tul_ohist.player.track_label')} #{track}"
+      output << content_tag(:h2, track_label)
+      output << content_tag(:div, link_to(image_tag("MediaPlayerIcon2.png",
+                                                    alt: "Play #{track_label}",
+                                                   height: "32",
+                                                   width: "325"),
+                                          "https://ensemble.temple.edu/Watch/#{ensemble_identifier}",
+                                          target: "_blank"),
+                            class: "ensembleLink",
+                            id: "ensembleLink#{ensemble_identifier}",
+                            )
+    end
+    output.html_safe
+  end
+
 end
 
