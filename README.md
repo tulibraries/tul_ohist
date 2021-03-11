@@ -28,6 +28,17 @@ Complete the installation.
     rake jetty:start
     rails s -d
 
+
+## Set up periodic housekeeping 
+
+On the production server, all queries are saved in the database.  Set up a cron 
+tob to remove saved searches older than 7 days. Log onto the TUL_Ohist server and
+edit `/etc/crontab` and add the line:
+
+```
+0 2 * * * cd /var/www/tul_ohist && RAILS_ENV=production bundle exec rake blacklight:delete_old_searches[7]
+```
+
 ## Oral History Object Architecture
 
 Oral history objects are a composite of two or more repository asset types in the
